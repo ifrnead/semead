@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @participante.nome %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @participante.email %>
+</p>
+
+<p>
+  <strong>Senha:</strong>
+  <%= @participante.senha %>
+</p>
+
+<p>
+  <strong>Documento:</strong>
+  <%= @participante.documento %>
+</p>
+
+<p>
+  <strong>Tipo participante:</strong>
+  <%= @participante.tipo_participante %>
+</p>
+
+<p>
+  <strong>Cidade:</strong>
+  <%= @participante.cidade %>
+</p>
+
+<p>
+  <strong>Pais:</strong>
+  <%= @participante.pais %>
+</p>
+
+<p>
+  <strong>Instituicao:</strong>
+  <%= @participante.instituicao %>
+</p>
+
+<p>
+  <strong>Possui necessidades especiais:</strong>
+  <%= @participante.possui_necessidades_especiais %>
+</p>
+
+<p>
+  <strong>Necessidades especiais:</strong>
+  <%= @participante.necessidades_especiais %>
+</p>
+
+<p>
+  <strong>Tipo inscricao:</strong>
+  <%= @participante.tipo_inscricao %>
+</p>
+
+<%= link_to 'Edit', edit_participante_path(@participante) %> |
+<%= link_to 'Back', participantes_path %>

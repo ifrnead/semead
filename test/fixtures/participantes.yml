@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  email: MyString
+  senha: MyString
+  documento: MyString
+  tipo_participante_id: 
+  cidade_id: 
+  pais_id: 
+  instituicao: MyString
+  possui_necessidades_especiais: false
+  necessidades_especiais: MyText
+  tipo_inscricao_id: 
+
+two:
+  nome: MyString
+  email: MyString
+  senha: MyString
+  documento: MyString
+  tipo_participante_id: 
+  cidade_id: 
+  pais_id: 
+  instituicao: MyString
+  possui_necessidades_especiais: false
+  necessidades_especiais: MyText
+  tipo_inscricao_id: 

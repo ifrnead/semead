@@ -1,0 +1,34 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    function verificar_pais() {
+      pais_id = $("#participante_pais_id").val();
+      if(pais_id != 33) {
+        $("#estado_id").attr('disabled', 'disabled');
+        $("#participante_estado_id").attr('disabled', 'disabled');
+      } else {
+
+      }
+    }
+  </script>
+<% end %>
+
+<h1>Inscrição</h1>
+
+<%= bootstrap_form_for(@participante) do |f| %>
+  <p>Os campos marcados com * são obrigatórios.</p>
+  <%= f.text_field :nome, label: 'Nome *' %>
+  <%= f.email_field :email, label: 'E-mail *' %>
+  <%= f.password_field :senha, label: 'Senha *' %>
+  <%= f.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
+  <div class="form-group">
+    <%= f.label :estado_id, 'Estado' %>
+    <%= select_tag :estado_id, options_for_select(Estado.select), prompt: 'Selecione', class: 'form-control' %>
+  </div>
+  <%= f.select :cidade_id, {}, prompt: 'Selecione um estado', label: 'Cidade' %>
+  <%= f.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
+  <%= f.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
+  <%= f.text_field :instituicao, label: 'Instituição *' %>
+  <%= f.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?' %>
+  <%= f.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
+  <%= f.submit %>
+<% end %>

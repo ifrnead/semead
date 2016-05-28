@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'font-awesome-rails'
+gem 'bootstrap_form'
+gem 'validates_cpf_cnpj'
+gem 'validates'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -44,4 +48,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
