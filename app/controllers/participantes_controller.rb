@@ -1,6 +1,4 @@
 class ParticipantesController < ApplicationController
-  layout 'publico'
-
   # GET /participantes/1
   # GET /participantes/1.json
   def show
@@ -19,7 +17,7 @@ class ParticipantesController < ApplicationController
 
     respond_to do |format|
       if @participante.save
-        format.html { redirect_to @participante, notice: 'Participante was successfully created.' }
+        format.html { redirect_to @participante }
         format.json { render :show, status: :created, location: @participante }
       else
         format.html { render :new }
@@ -32,6 +30,6 @@ class ParticipantesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participante_params
-      params.require(:participante).permit(:nome, :email, :senha, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, :tipo_inscricao_id)
+      params.require(:participante).permit(:nome, :email, :password, :password_confirmation, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais)
     end
 end

@@ -1,59 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="alert alert-success" role="alert">
+	<h4><i class="fa fa-check" aria-hidden="true"></i> Inscrição realizada com sucesso!</h4>
+</div>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @participante.nome %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @participante.email %>
-</p>
-
-<p>
-  <strong>Senha:</strong>
-  <%= @participante.senha %>
-</p>
-
-<p>
-  <strong>Documento:</strong>
-  <%= @participante.documento %>
-</p>
-
-<p>
-  <strong>Tipo participante:</strong>
-  <%= @participante.tipo_participante %>
-</p>
-
-<p>
-  <strong>Cidade:</strong>
-  <%= @participante.cidade %>
-</p>
-
-<p>
-  <strong>Pais:</strong>
-  <%= @participante.pais %>
-</p>
-
-<p>
-  <strong>Instituicao:</strong>
-  <%= @participante.instituicao %>
-</p>
-
-<p>
-  <strong>Possui necessidades especiais:</strong>
-  <%= @participante.possui_necessidades_especiais %>
-</p>
-
-<p>
-  <strong>Necessidades especiais:</strong>
-  <%= @participante.necessidades_especiais %>
-</p>
-
-<p>
-  <strong>Tipo inscricao:</strong>
-  <%= @participante.tipo_inscricao %>
-</p>
-
-<%= link_to 'Edit', edit_participante_path(@participante) %> |
-<%= link_to 'Back', participantes_path %>
+<div class="panel panel-success">
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Número de inscrição: </dt><dd>#<%= @participante.id %></dd>
+      <dt>Nome: </dt><dd><%= @participante.nome %></dd>
+      <dt>E-mail: </dt><dd><%= @participante.email %></dd>
+      <dt>CPF/Passaporte: </dt><dd><%= @participante.documento %></dd>
+      <dt>Perfil: </dt><dd><%= @participante.tipo_participante.nome %></dd>
+      <dt>Cidade/UF: </dt><dd><%= @participante.cidade.nome %>/<%= @participante.cidade.estado.sigla %></dd>
+      <dt>Instituição: </dt><dd><%= @participante.instituicao %></dd>
+      <% if @participante.possui_necessidades_especiais? %>
+        <dt>Necessidades específicas: </dt>
+        <dd><%= @participante.necessidades_especiais %></dd>
+      <% end %>
+    </dl>
+  </div>
+</div>

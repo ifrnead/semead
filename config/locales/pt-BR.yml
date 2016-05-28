@@ -1,6 +1,10 @@
 
 pt-BR:
   activerecord:
+    attributes:
+      participante:
+        password: 'senha'
+        pais: 'país'
     errors:
       models:
         participante:
