@@ -51,22 +51,13 @@ ActiveRecord::Schema.define(version: 20160526211245) do
     t.string   "instituicao",                   limit: 255
     t.boolean  "possui_necessidades_especiais"
     t.text     "necessidades_especiais",        limit: 65535
-    t.integer  "tipo_inscricao_id",             limit: 4
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
   add_index "participantes", ["pais_id"], name: "index_participantes_on_pais_id", using: :btree
-  add_index "participantes", ["tipo_inscricao_id"], name: "index_participantes_on_tipo_inscricao_id", using: :btree
   add_index "participantes", ["tipo_participante_id"], name: "index_participantes_on_tipo_participante_id", using: :btree
-
-  create_table "tipo_inscricoes", force: :cascade do |t|
-    t.string   "nome",       limit: 255
-    t.string   "slug",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "tipo_participantes", force: :cascade do |t|
     t.string   "nome",       limit: 255
@@ -78,6 +69,5 @@ ActiveRecord::Schema.define(version: 20160526211245) do
   add_foreign_key "cidades", "estados"
   add_foreign_key "participantes", "cidades"
   add_foreign_key "participantes", "paises"
-  add_foreign_key "participantes", "tipo_inscricoes"
   add_foreign_key "participantes", "tipo_participantes"
 end

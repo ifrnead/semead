@@ -14,14 +14,10 @@
  *= require_self
  *= require font-awesome
  *= require rails_bootstrap_forms
+ *= require select2
+ *= require select2-bootstrap
  */
 
 .content {
   margin-top: 1em;
-}
-
-.rounded-corners {
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	border-radius:7px;
 }

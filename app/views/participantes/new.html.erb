@@ -1,12 +1,50 @@
 <%= content_for :head do %>
   <script type="text/javascript">
+    $(document).ready(function() {
+      if(!$("#participante_possui_necessidades_especiais").is(':checked')) {
+        $("#participante_necessidades_especiais").parent().hide();
+      }
+
+      $("#participante_cidade_id").select2({
+        theme: "bootstrap",
+        language: "pt-BR",
+        ajax: {
+          url: "<%= cidades_path %>",
+          dataType: 'json',
+          delay: 250,
+          data: function(params) {
+            return {
+              q: params.term,
+              page: params.page
+            }
+          },
+          processResults: function (data) {
+            return {
+              results: $.map(data, function (item) {
+                          return {
+                            text: item.nome,
+                            id: item.id
+                          }
+                        })
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 3
+      });
+    });
+
+    function toggle_necessidades_especiais() {
+      $("#participante_necessidades_especiais").parent().toggle('blind');
+    }
+
     function verificar_pais() {
       pais_id = $("#participante_pais_id").val();
       if(pais_id != 33) {
-        $("#estado_id").attr('disabled', 'disabled');
-        $("#participante_estado_id").attr('disabled', 'disabled');
+        $("#participante_cidade_id").attr('disabled', 'disabled');
       } else {
-
+        $("#participante_cidade_id").attr('disabled', false);
       }
     }
   </script>
@@ -14,21 +52,52 @@
 
 <h1>Inscrição</h1>
 
-<%= bootstrap_form_for(@participante) do |f| %>
-  <p>Os campos marcados com * são obrigatórios.</p>
-  <%= f.text_field :nome, label: 'Nome *' %>
-  <%= f.email_field :email, label: 'E-mail *' %>
-  <%= f.password_field :senha, label: 'Senha *' %>
-  <%= f.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
-  <div class="form-group">
-    <%= f.label :estado_id, 'Estado' %>
-    <%= select_tag :estado_id, options_for_select(Estado.select), prompt: 'Selecione', class: 'form-control' %>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <%= bootstrap_form_for(@participante) do |f| %>
+      <p>Os campos marcados com * são obrigatórios.</p>
+      <%= f.text_field :nome, label: 'Nome *' %>
+      <%= f.email_field :email, label: 'E-mail *' %>
+      <%= f.password_field :senha, label: 'Senha *' %>
+      <%= f.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
+      <%= f.select :cidade_id, {}, label: 'Cidade' %>
+      <%= f.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
+      <%= f.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
+      <%= f.text_field :instituicao, label: 'Instituição *' %>
+      <%= f.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: 'toggle_necessidades_especiais()' %>
+      <%= f.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
+      <%= f.submit %>
+    <% end %>
   </div>
-  <%= f.select :cidade_id, {}, prompt: 'Selecione um estado', label: 'Cidade' %>
-  <%= f.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
-  <%= f.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
-  <%= f.text_field :instituicao, label: 'Instituição *' %>
-  <%= f.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?' %>
-  <%= f.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
-  <%= f.submit %>
-<% end %>
+  <div class="col-md-6 col-sm-12">
+    <h2>Valores</h2>
+    <table class="table table-bordered">
+      <thead>
+        <th>Perfil</th>
+        <th>Até agosto</th>
+        <th>Até outubro</th>
+        <th>Em novembro</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Estudantes</td>
+          <td>R$ 80</td>
+          <td>R$ 100</td>
+          <td>R$ 120</td>
+        </tr>
+        <tr>
+          <td>Professores da educação básica, ensino superior, pós-graduação e outros profissionais de educação</td>
+          <td>R$ 100</td>
+          <td>R$ 120</td>
+          <td>R$ 140</td>
+        </tr>
+        <tr>
+          <td>Público em geral</td>
+          <td>R$ 120</td>
+          <td>R$ 140</td>
+          <td>R$ 160</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
