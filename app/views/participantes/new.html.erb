@@ -66,7 +66,7 @@
       <%= f.text_field :instituicao, label: 'Instituição *' %>
       <%= f.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: 'toggle_necessidades_especiais()' %>
       <%= f.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
-      <%= f.submit %>
+      <%= f.submit 'Enviar' %>
     <% end %>
   </div>
   <div class="col-md-6 col-sm-12">

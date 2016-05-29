@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sessions
   resources :participantes do
     get 'confirmacao', on: :collection
   end
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
   get 'cidades' => 'cidades#index', as: :cidades
+  get 'login' => 'sessions#new', as: :login
+  get 'logout' => 'sessions#destroy', as: :logout
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

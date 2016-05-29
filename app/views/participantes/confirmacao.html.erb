@@ -10,7 +10,10 @@
       <dt>E-mail: </dt><dd><%= @participante.email %></dd>
       <dt>CPF/Passaporte: </dt><dd><%= @participante.documento %></dd>
       <dt>Perfil: </dt><dd><%= @participante.tipo_participante.nome %></dd>
-      <dt>Cidade/UF: </dt><dd><%= @participante.cidade.nome %>/<%= @participante.cidade.estado.sigla %></dd>
+			<dt>País: </dt><dd><%= @participante.pais.nome %></dd>
+			<% if @participante.pais.brasil? %>
+			  <dt>Cidade/UF: </dt><dd><%= @participante.cidade.nome %>/<%= @participante.cidade.estado.sigla %></dd>
+			<% end %>
       <dt>Instituição: </dt><dd><%= @participante.instituicao %></dd>
       <% if @participante.possui_necessidades_especiais? %>
         <dt>Necessidades específicas: </dt>
