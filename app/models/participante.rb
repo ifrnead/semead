@@ -4,26 +4,21 @@ class Participante < ActiveRecord::Base
   belongs_to :tipo_participante
   belongs_to :cidade
   belongs_to :pais
+  has_one :usuario, as: :autenticavel
 
-  validates :nome, :email, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
-  validates :email, uniqueness: true, email: true
+  validates :nome, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"
   validates :documento, cpf: true, if: "pais_id == 33"
   validates :documento, uniqueness: true
-  validates :password, length: { minimum: 4 }
   validates :necessidades_especiais, presence: true, if: :possui_necessidades_especiais?
 
-  has_secure_password
+  accepts_nested_attributes_for :usuario
 
   def possui_necessidades_especiais?
     self.possui_necessidades_especiais.present?
   end
 
-  def necessidades_especiais
-    if possui_necessidades_especiais?
-      @necessidades_especiais
-    else
-      "Não possui"
-    end
+  def email
+    self.usuario.email
   end
 end

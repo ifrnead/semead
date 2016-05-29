@@ -5,13 +5,17 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def participante_autenticado
-    @participante_autenticado ||= Participante.find(session[:participante_id]) if session[:participante_id]
+  def current_user
+    @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
   end
 
-  helper_method :participante_autenticado
+  def current_user?
+    current_user.present?
+  end
 
-  def autenticacao_participante_obrigatoria
-    redirect_to root_path, alert: 'Não autorizado!' if participante_autenticado.nil?
+  helper_method :current_user, :current_user?
+
+  def autenticacao_obrigatoria
+    redirect_to root_path, alert: 'Não autorizado!' if current_user?
   end
 end

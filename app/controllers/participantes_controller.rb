@@ -6,6 +6,7 @@ class ParticipantesController < ApplicationController
 
   def new
     @participante = Participante.new
+    @participante.usuario = Usuario.new
   end
 
   def create
@@ -26,6 +27,6 @@ class ParticipantesController < ApplicationController
   private
 
     def participante_params
-      params.require(:participante).permit(:nome, :email, :password, :password_confirmation, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais)
+      params.require(:participante).permit(:nome, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, usuario_attributes: [ :email, :password ])
     end
 end

@@ -53,20 +53,22 @@
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <h1>Inscrição</h1>
-    <%= bootstrap_form_for(@participante) do |f| %>
+    <%= bootstrap_form_for(@participante) do |participante| %>
       <p>Os campos marcados com * são obrigatórios.</p>
-      <%= f.text_field :nome, label: 'Nome completo *' %>
-      <%= f.email_field :email, label: 'E-mail *' %>
-      <%= f.password_field :password, label: 'Senha *' %>
-      <%= f.password_field :password_confirmation, label: 'Confirmação de senha *' %>
-      <%= f.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
-      <%= f.select :cidade_id, {}, label: 'Cidade' %>
-      <%= f.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
-      <%= f.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
-      <%= f.text_field :instituicao, label: 'Instituição *' %>
-      <%= f.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: 'toggle_necessidades_especiais()' %>
-      <%= f.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
-      <%= f.submit 'Enviar' %>
+      <%= participante.text_field :nome, label: 'Nome completo *' %>
+      <%= participante.fields_for :usuario do |usuario| %>
+        <%= usuario.email_field :email, label: 'E-mail *' %>
+        <%= usuario.password_field :password, label: 'Senha *' %>
+        <%= usuario.password_field :password_confirmation, label: 'Confirmação de senha *' %>
+      <% end %>
+      <%= participante.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
+      <%= participante.select :cidade_id, {}, label: 'Cidade' %>
+      <%= participante.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
+      <%= participante.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
+      <%= participante.text_field :instituicao, label: 'Instituição *' %>
+      <%= participante.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: 'toggle_necessidades_especiais()' %>
+      <%= participante.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
+      <%= participante.submit 'Enviar' %>
     <% end %>
   </div>
   <div class="col-md-6 col-sm-12">

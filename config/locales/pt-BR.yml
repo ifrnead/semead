@@ -7,7 +7,7 @@ pt-BR:
         pais: 'país'
     errors:
       models:
-        participante:
+        usuario:
           attributes:
             email:
               email: 'endereço de e-mail inválido'

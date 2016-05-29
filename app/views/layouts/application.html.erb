@@ -9,7 +9,7 @@
     <%= yield :head %>
   </head>
   <body>
-    <% if false %>
+    <% if current_user? %>
       <%= render partial: "layouts/menu" %>
     <% end %>
     <div class="container content">

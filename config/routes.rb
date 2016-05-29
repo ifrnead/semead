@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :participantes
+  end
+
   resources :sessions
   resources :participantes do
     get 'confirmacao', on: :collection
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
   get 'cidades' => 'cidades#index', as: :cidades
   get 'login' => 'sessions#new', as: :login
   get 'logout' => 'sessions#destroy', as: :logout
+  get 'admin' => 'admin#index', as: :admin
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

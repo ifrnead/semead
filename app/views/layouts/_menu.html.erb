@@ -14,14 +14,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#"><%= fa_icon 'home' %> Painel</a></li>
-        <li><a href="#"><%= fa_icon 'users' %> Participantes</a></li>
-        <li><a href="#"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
-        <li><a href="#"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
-        <li><a href="#"><%= fa_icon 'user' %> Usuários</a></li>
+        <li <%= "class=active" if request.path.eql?("/admin") %>><a href="<%= admin_path %>"><%= fa_icon 'dashboard' %> Painel</a></li>
+        <% if can? :see, Participante %>
+          <li <%= "class=active" if request.path.include?('/participantes') %>><a href="<%= admin_participantes_path %>"><%= fa_icon 'users' %> Participantes</a></li>
+        <% end %>
+        <li <%= "class=active" if request.path.include?('/trabalhos') %>><a href="#"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
+        <li <%= "class=active" if request.path.include?('/minicursos') %>><a href="#"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
+        <li <%= "class=active" if request.path.include?('/organizadores') %>><a href="#"><%= fa_icon 'user' %> Organizadores</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><%= fa_icon 'power-off' %> Sair</a></li>
+        <li><a href="<%= logout_path %>"><%= fa_icon 'power-off' %> Sair</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

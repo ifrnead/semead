@@ -25,3 +25,11 @@
 div.alert h4 {
   margin-bottom: 0px;
 }
+
+table.table tbody tr td {
+  font-weight: normal !important;
+}
+
+h1 {
+  margin-bottom: 0.5em !important;
+}

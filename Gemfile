@@ -5,6 +5,7 @@ gem 'bootstrap_form'
 gem 'validates_cpf_cnpj'
 gem 'validates'
 gem "select2-rails"
+gem 'cancancan', '~> 1.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
