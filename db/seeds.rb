@@ -8,11 +8,71 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts "Criano tipos de participantes..."
+
 TipoParticipante.create(nome: "Professor do ensino superior e pós-graduação", slug: 'professor_ensino_superior_posgraduacao')
 TipoParticipante.create(nome: "Professor da educação básica", slug: 'professor_educacao_basica')
 TipoParticipante.create(nome: "Profissional de educação", slug: 'profissional_educacao')
 TipoParticipante.create(nome: "Estudante", slug: 'estudante')
 TipoParticipante.create(nome: "Outros", slug: 'outros')
+
+puts "Criando perfis..."
+
+admin = Perfil.create(nome: 'Administrador', slug: 'administrador')
+membro_comissao_central = Perfil.create(nome: 'Membro da Comissão Central', slug: 'membro_comissao_central')
+coordenador_comissao_cientifica = Perfil.create(nome: 'Coordenador da Comissão Científica', slug: 'coordenador_comissao_cientifica')
+coordenador_linha_pesquisa = Perfil.create(nome: 'Coordenador de Linha de Pesquisa', slug: 'coordenador_linha_pesquisa')
+membro_comissao_cientifica = Perfil.create(nome: 'Membro da Comissão Científica', slug: 'membro_comissao_cientifica')
+secretario = Perfil.create(nome: 'Secretário', slug: 'secretario')
+Perfil.create(nome: 'Participante', slug: 'participante')
+
+puts "Criando usuários..."
+
+# Admin
+jalerson = Usuario.create(email: 'jalerson.lima@ifrn.edu.br', password: '321mud@r', perfil: admin)
+ana = Usuario.create(email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: admin)
+Organizador.create(nome: 'Jalerson Lima', usuario: jalerson)
+Organizador.create(nome: 'Ana Lúcia', usuario: ana)
+
+# Coordenadores de Linha de Pesquisa
+thalita = Usuario.create(email: 'thalita.motta@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+marilia = Usuario.create(email: 'marilia.silveira@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+edneide = Usuario.create(email: 'edneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+allan = Usuario.create(email: 'allan.garcia@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+fabio = Usuario.create(email: 'fabio.silva@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+
+thalita = Organizador.create(nome: 'Thalita Motta', usuario: thalita)
+marilia = Organizador.create(nome: 'Marília Silveira', usuario: marilia)
+edneide = Organizador.create(nome: 'Edneide Bezerra', usuario: edneide)
+allan = Organizador.create(nome: 'Allan Garcia', usuario: allan)
+fabio = Organizador.create(nome: 'Fabio Silva', usuario: fabio)
+
+# Comissão Central
+alex = Usuario.create(email: 'alexsandro.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+alberico = Usuario.create(email: 'alberico.canario@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+tmedeiros = Usuario.create(email: 'thiago.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+leonardo = Usuario.create(email: 'leonardo.feitoza@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+elizama = Usuario.create(email: 'elizama.lemos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+jroberto = Usuario.create(email: 'jose.santos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+kelson = Usuario.create(email: 'kelson.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+
+Organizador.create(nome: 'Alexsandro Oliveira', usuario: alex)
+Organizador.create(nome: 'Alberico Canario', usuario: alberico)
+Organizador.create(nome: 'Thiago Medeiros', usuario: tmedeiros)
+Organizador.create(nome: 'Leonardo Feitoza', usuario: leonardo)
+Organizador.create(nome: 'Elizama Lemos', usuario: elizama)
+Organizador.create(nome: 'José Roberto', usuario: jroberto)
+Organizador.create(nome: 'Kelson Medeiros', usuario: kelson)
+
+puts "Criando linhas de pesquisa..."
+
+Linha.create(nome: 'Políticas e Institucionalização da EAD', coordenador: thalita)
+Linha.create(nome: 'Modelos e Experiências pedagógicas em EaD', coordenador: marilia)
+Linha.create(nome: 'Formação Docente em EaD', coordenador: edneide)
+Linha.create(nome: 'Soluções Tecnológicas para EaD', coordenador: allan)
+Linha.create(nome: 'Produção de Materiais Didáticos para EaD', coordenador: fabio)
+
+puts "Criando países..."
 
 Pais.create(nome: "AFEGANISTÃO", name: "AFGHANISTAN")
 Pais.create(nome: "ACROTÍRI E DECELIA", name: "AKROTIRI E DEKÉLIA")
@@ -269,6 +329,8 @@ Pais.create(nome: "ZIMBABUÉ", name: "ZIMBABWE")
 
 brasil = Pais.find_by_nome('Brasil')
 
+puts "Criando estados..."
+
 Estado.create(codigo: 12, nome: "Acre", sigla: "AC", pais: brasil)
 Estado.create(codigo: 27, nome: "Alagoas", sigla: "AL", pais: brasil)
 Estado.create(codigo: 16, nome: "Amapá", sigla: "AP", pais: brasil)
@@ -296,6 +358,8 @@ Estado.create(codigo: 42, nome: "Santa Catarina", sigla: "SC", pais: brasil)
 Estado.create(codigo: 35, nome: "São Paulo", sigla: "SP", pais: brasil)
 Estado.create(codigo: 28, nome: "Sergipe", sigla: "SE", pais: brasil)
 Estado.create(codigo: 17, nome: "Tocantins", sigla: "TO", pais: brasil)
+
+puts "Criando cidades..."
 
 Cidade.create(estado_id: 9, codigo: 5200050, nome: "Abadia de Goiás")
 Cidade.create(estado_id: 13, codigo: 3100104, nome: "Abadia dos Dourados")
@@ -5862,11 +5926,3 @@ Cidade.create(estado_id: 15, codigo: 2517407, nome: "Zabelê")
 Cidade.create(estado_id: 25, codigo: 3557154, nome: "Zacarias")
 Cidade.create(estado_id: 10, codigo: 2114007, nome: "Zé Doca")
 Cidade.create(estado_id: 24, codigo: 4219853, nome: "Zortéa")
-
-Perfil.create(nome: 'Administrador', slug: 'administrador')
-Perfil.create(nome: 'Membro da Comissão Central', slug: 'membro_comissao_central')
-Perfil.create(nome: 'Coordenador da Comissão Científica', slug: 'coordenador_comissao_cientifica')
-Perfil.create(nome: 'Coordenador de Linha de Pesquisa', slug: 'coordenador_linha_pesquisa')
-Perfil.create(nome: 'Membro da Comissão Científica', slug: 'membro_comissao_cientifica')
-Perfil.create(nome: 'Secretário', slug: 'secretario')
-Perfil.create(nome: 'Participante', slug: 'participante')

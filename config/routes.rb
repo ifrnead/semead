@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :participantes
+    resources :organizadores
   end
 
   resources :sessions
-  resources :participantes do
-    get 'confirmacao', on: :collection
-  end
+  resources :participantes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', as: :login
   get 'logout' => 'sessions#destroy', as: :logout
   get 'admin' => 'admin#index', as: :admin
+  get 'participacao' => 'participantes#participacao', as: :participacao
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

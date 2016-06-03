@@ -1,7 +1,10 @@
 class ParticipantesController < ApplicationController
+  load_and_authorize_resource
+  skip_authorize_resource :only => [ :new, :create ]
 
-  def confirmacao
-    @participante = Participante.find(session[:participante_id])
+  def participacao
+    @participante = current_user.autenticavel
+    authorize! :see, @participante
   end
 
   def new
@@ -14,8 +17,8 @@ class ParticipantesController < ApplicationController
 
     respond_to do |format|
       if @participante.save
-        session[:participante_id] = @participante.id
-        format.html { redirect_to confirmacao_participantes_path }
+        session[:usuario_id] = @participante.id
+        format.html { redirect_to participacao_path, notice: 'Inscrição realizada com sucesso!' }
         format.json { render :show, status: :created, location: @participante }
       else
         format.html { render :new }
@@ -27,6 +30,6 @@ class ParticipantesController < ApplicationController
   private
 
     def participante_params
-      params.require(:participante).permit(:nome, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, usuario_attributes: [ :email, :password ])
+      params.require(:participante).permit(:nome, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, usuario_attributes: [ :email, :password, :password_confirmation ])
     end
 end

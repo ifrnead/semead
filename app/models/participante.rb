@@ -14,11 +14,17 @@ class Participante < ActiveRecord::Base
 
   accepts_nested_attributes_for :usuario
 
+  before_create :atribuir_perfil
+
   def possui_necessidades_especiais?
     self.possui_necessidades_especiais.present?
   end
 
   def email
     self.usuario.email
+  end
+
+  def atribuir_perfil
+    self.usuario.perfil = Perfil.find_by_slug('participante')
   end
 end

@@ -1,0 +1,2 @@
+module Admin::OrganizadoresHelper
+end

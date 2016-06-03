@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529195436) do
+ActiveRecord::Schema.define(version: 20160602150711) do
 
   create_table "cidades", force: :cascade do |t|
     t.integer  "codigo",     limit: 4
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 20160529195436) do
     t.string   "sigla",      limit: 255
     t.string   "regiao",     limit: 255
     t.integer  "pais_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "linhas", force: :cascade do |t|
+    t.string   "nome",           limit: 255
+    t.integer  "coordenador_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "linhas", ["coordenador_id"], name: "index_linhas_on_coordenador_id", using: :btree
+
+  create_table "organizadores", force: :cascade do |t|
+    t.string   "nome",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -76,15 +91,17 @@ ActiveRecord::Schema.define(version: 20160529195436) do
     t.string   "password_digest",   limit: 255
     t.integer  "autenticavel_id",   limit: 4
     t.string   "autenticavel_type", limit: 255
+    t.integer  "perfil_id",         limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "perfil_id",         limit: 4
   end
 
   add_index "usuarios", ["autenticavel_id"], name: "index_usuarios_on_autenticavel_id", using: :btree
+  add_index "usuarios", ["perfil_id"], name: "index_usuarios_on_perfil_id", using: :btree
 
   add_foreign_key "cidades", "estados"
   add_foreign_key "participantes", "cidades"
   add_foreign_key "participantes", "paises"
   add_foreign_key "participantes", "tipo_participantes"
+  add_foreign_key "usuarios", "perfis"
 end

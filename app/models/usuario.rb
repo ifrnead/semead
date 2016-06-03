@@ -15,7 +15,10 @@ class Usuario < ActiveRecord::Base
   end
 
   def tem_perfil?(slug)
-    self.perfil.slug == slug
+    if self.perfil.present?
+      return self.perfil.slug == slug
+    end
+    return false
   end
 
   def admin?

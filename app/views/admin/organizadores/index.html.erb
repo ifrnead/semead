@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'user' %> Organizadores</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <a href="<%= new_admin_organizador_path %>" class="btn btn-primary"><%= fa_icon 'plus' %> Novo Organizador</a>
+    </div>
+  </div>
+</div>
+
+<% if @organizadores.empty? %>
+  <p>Nenhum organizador encontrado.</p>
+<% else %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Perfil</th>
+      <th>Opções</th>
+    </thead>
+    <tbody>
+      <% @organizadores.each do |organizador| %>
+        <tr>
+          <td><%= organizador.nome %></td>
+          <td><%= organizador.email %></td>
+          <td><%= organizador.perfil.nome %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to fa_icon('eye'), admin_organizador_path(organizador), class: "btn btn-primary btn-sm" %>
+              <%= link_to fa_icon('edit'), edit_admin_organizador_path(organizador), class: "btn btn-primary btn-sm" %>
+              <% if organizador != current_user.autenticavel %>
+                <%= link_to fa_icon('trash'), admin_organizador_path(organizador), method: :delete, class: "btn btn-primary btn-sm" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

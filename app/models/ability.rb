@@ -3,21 +3,27 @@ class Ability
 
   def initialize(usuario)
 
+    usuario ||= Usuario.new
+
     if usuario.admin?
       can :manage, :all
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
       can :read, :all
+      can :manage, Organizador
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
+      # can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('coordenador_linha_pesquisa')
+      # can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('membro_comissao_cientifica')
+      # can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('secretario')
@@ -25,6 +31,9 @@ class Ability
     end
 
     if usuario.tem_perfil?('participante')
+      can :see, Participante do |participante|
+        participante.id == usuario.id
+      end
     end
 
     # Define abilities for the passed in user here. For example:

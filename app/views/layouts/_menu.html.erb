@@ -8,19 +8,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><strong>SEMEAD</a>
+      <a class="navbar-brand" href="#"><strong>SEMEAD</strong></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li <%= "class=active" if request.path.eql?("/admin") %>><a href="<%= admin_path %>"><%= fa_icon 'dashboard' %> Painel</a></li>
-        <% if can? :see, Participante %>
-          <li <%= "class=active" if request.path.include?('/participantes') %>><a href="<%= admin_participantes_path %>"><%= fa_icon 'users' %> Participantes</a></li>
+        <% if current_user.tem_perfil?('participante') %>
+          <li <%= "class=active" if request.path.include?('/participacao') %>><a href="<%= participacao_path %>"><%= fa_icon 'pencil' %> Participação</a></li>
+        <% else %>
+          <li <%= "class=active" if request.path.eql?("/admin") %>><a href="<%= admin_path %>"><%= fa_icon 'dashboard' %> Painel</a></li>
         <% end %>
-        <li <%= "class=active" if request.path.include?('/trabalhos') %>><a href="#"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
-        <li <%= "class=active" if request.path.include?('/minicursos') %>><a href="#"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
-        <li <%= "class=active" if request.path.include?('/organizadores') %>><a href="#"><%= fa_icon 'user' %> Organizadores</a></li>
+        <% if can? :manage, Participante %>
+          <li <%= "class=active" if request.path.include?('/admin/participantes') %>><a href="<%= admin_participantes_path %>"><%= fa_icon 'users' %> Participantes</a></li>
+        <% end %>
+        <% if false %>
+          <li <%= "class=active" if request.path.include?('/admin/trabalhos') %>><a href="#"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
+        <% end %>
+        <% if false %>
+          <li <%= "class=active" if request.path.include?('/admin/minicursos') %>><a href="#"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
+        <% end %>
+        <% if can? :manage, Organizador %>
+          <li <%= "class=active" if request.path.include?('/admin/organizadores') %>><a href="<%= admin_organizadores_path %>"><%= fa_icon 'user' %> Organizadores</a></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<%= logout_path %>"><%= fa_icon 'power-off' %> Sair</a></li>
