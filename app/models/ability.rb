@@ -10,30 +10,36 @@ class Ability
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
-      can :read, :all
       can :manage, Organizador
+      can :manage, Participante
+      can [ :show, :index ], Trabalho
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
-      # can :manage, Trabalho
+      can [ :index, :show ], Participante
+      can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('coordenador_linha_pesquisa')
-      # can :manage, Trabalho
+      can [ :index, :show ], Participante
+      can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('membro_comissao_cientifica')
-      # can :manage, Trabalho
+      can [ :index, :show ], Participante
+      can :manage, Trabalho
     end
 
     if usuario.tem_perfil?('secretario')
       can :manage, Participante
+      can :manage, Organizador
     end
 
     if usuario.tem_perfil?('participante')
-      can :see, Participante do |participante|
-        participante.id == usuario.id
-      end
+      can :show, Participante, id: usuario.autenticavel.id
+      can :create, Trabalho
+      can :index, Trabalho
+      can :show, Trabalho, participante_id: usuario.autenticavel.id
     end
 
     # Define abilities for the passed in user here. For example:

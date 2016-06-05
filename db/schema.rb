@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602150711) do
+ActiveRecord::Schema.define(version: 20160604165034) do
 
   create_table "cidades", force: :cascade do |t|
     t.integer  "codigo",     limit: 4
@@ -34,13 +34,22 @@ ActiveRecord::Schema.define(version: 20160602150711) do
   end
 
   create_table "linhas", force: :cascade do |t|
-    t.string   "nome",           limit: 255
-    t.integer  "coordenador_id", limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "nome",       limit: 255
+    t.string   "slug",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "linhas", ["coordenador_id"], name: "index_linhas_on_coordenador_id", using: :btree
+  create_table "membros", force: :cascade do |t|
+    t.integer  "organizador_id", limit: 4
+    t.integer  "linha_id",       limit: 4
+    t.boolean  "coordenador"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "membros", ["linha_id"], name: "index_membros_on_linha_id", using: :btree
+  add_index "membros", ["organizador_id"], name: "index_membros_on_organizador_id", using: :btree
 
   create_table "organizadores", force: :cascade do |t|
     t.string   "nome",       limit: 255
@@ -86,6 +95,31 @@ ActiveRecord::Schema.define(version: 20160602150711) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "tipo_trabalhos", force: :cascade do |t|
+    t.string   "nome",       limit: 255
+    t.string   "slug",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "trabalhos", force: :cascade do |t|
+    t.text     "titulo",               limit: 65535
+    t.text     "resumo",               limit: 65535
+    t.integer  "linha_id",             limit: 4
+    t.integer  "participante_id",      limit: 4
+    t.integer  "tipo_trabalho_id",     limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "arquivo_file_name",    limit: 255
+    t.string   "arquivo_content_type", limit: 255
+    t.integer  "arquivo_file_size",    limit: 4
+    t.datetime "arquivo_updated_at"
+  end
+
+  add_index "trabalhos", ["linha_id"], name: "index_trabalhos_on_linha_id", using: :btree
+  add_index "trabalhos", ["participante_id"], name: "index_trabalhos_on_participante_id", using: :btree
+  add_index "trabalhos", ["tipo_trabalho_id"], name: "index_trabalhos_on_tipo_trabalho_id", using: :btree
+
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",             limit: 255
     t.string   "password_digest",   limit: 255
@@ -100,8 +134,13 @@ ActiveRecord::Schema.define(version: 20160602150711) do
   add_index "usuarios", ["perfil_id"], name: "index_usuarios_on_perfil_id", using: :btree
 
   add_foreign_key "cidades", "estados"
+  add_foreign_key "membros", "linhas"
+  add_foreign_key "membros", "organizadores"
   add_foreign_key "participantes", "cidades"
   add_foreign_key "participantes", "paises"
   add_foreign_key "participantes", "tipo_participantes"
+  add_foreign_key "trabalhos", "linhas"
+  add_foreign_key "trabalhos", "participantes"
+  add_foreign_key "trabalhos", "tipo_trabalhos"
   add_foreign_key "usuarios", "perfis"
 end

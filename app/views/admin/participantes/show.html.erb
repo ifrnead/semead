@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'eye' %> Detalhar Participante</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <div class="btn-group">
+        <% if can? :update, @participante %>
+          <%= link_to fa_icon('edit') + " Editar", edit_admin_participante_path(@participante), class: "btn btn-primary" %>
+        <% end %>
+        <% if can? :delete, @participante %>
+          <%= link_to fa_icon('trash') + " Excluir", admin_participante_path(@participante), class: "btn btn-primary", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse participante?' } %>
+        <% end %>
+        <% if can? :index, Participante %>
+          <%= link_to fa_icon('undo') + " Voltar", admin_participantes_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'participantes/detalhes' %>
+
+<h2><%= fa_icon 'file-text-o' %> Trabalhos</h2>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Linha de pesquisa</th>
+      <th>Tipo de trabalho</th>
+      <th colspan="3">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @participante.trabalhos.each do |trabalho| %>
+      <tr>
+        <td><%= trabalho.titulo %></td>
+        <td><%= trabalho.linha.nome %></td>
+        <td><%= trabalho.tipo_trabalho.nome %></td>
+        <td>
+          <div class="btn-group">
+            <% if can? :show, trabalho %>
+              <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
+              <%= link_to fa_icon('eye'), trabalho, class: 'btn btn-primary btn-sm' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

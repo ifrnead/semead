@@ -29,48 +29,174 @@ Perfil.create(nome: 'Participante', slug: 'participante')
 puts "Criando usuários..."
 
 # Admin
+
 jalerson = Usuario.create(email: 'jalerson.lima@ifrn.edu.br', password: '321mud@r', perfil: admin)
+jalerson = Organizador.create(nome: 'Jalerson Lima', usuario: jalerson)
+
 ana = Usuario.create(email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: admin)
-Organizador.create(nome: 'Jalerson Lima', usuario: jalerson)
-Organizador.create(nome: 'Ana Lúcia', usuario: ana)
+ana = Organizador.create(nome: 'Ana Lúcia', usuario: ana)
 
 # Coordenadores de Linha de Pesquisa
-thalita = Usuario.create(email: 'thalita.motta@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-marilia = Usuario.create(email: 'marilia.silveira@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-edneide = Usuario.create(email: 'edneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-allan = Usuario.create(email: 'allan.garcia@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-fabio = Usuario.create(email: 'fabio.silva@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 
+thalita = Usuario.create(email: 'thalita.motta@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 thalita = Organizador.create(nome: 'Thalita Motta', usuario: thalita)
+
+marilia = Usuario.create(email: 'marilia.silveira@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 marilia = Organizador.create(nome: 'Marília Silveira', usuario: marilia)
+
+edneide = Usuario.create(email: 'edneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 edneide = Organizador.create(nome: 'Edneide Bezerra', usuario: edneide)
+
+allan = Usuario.create(email: 'allan.garcia@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 allan = Organizador.create(nome: 'Allan Garcia', usuario: allan)
+
+fabio = Usuario.create(email: 'fabio.silva@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
 fabio = Organizador.create(nome: 'Fabio Silva', usuario: fabio)
 
-# Comissão Central
-alex = Usuario.create(email: 'alexsandro.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-alberico = Usuario.create(email: 'alberico.canario@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-tmedeiros = Usuario.create(email: 'thiago.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-leonardo = Usuario.create(email: 'leonardo.feitoza@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-elizama = Usuario.create(email: 'elizama.lemos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-jroberto = Usuario.create(email: 'jose.santos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-kelson = Usuario.create(email: 'kelson.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+# Outros usuários
 
-Organizador.create(nome: 'Alexsandro Oliveira', usuario: alex)
-Organizador.create(nome: 'Alberico Canario', usuario: alberico)
-Organizador.create(nome: 'Thiago Medeiros', usuario: tmedeiros)
-Organizador.create(nome: 'Leonardo Feitoza', usuario: leonardo)
-Organizador.create(nome: 'Elizama Lemos', usuario: elizama)
-Organizador.create(nome: 'José Roberto', usuario: jroberto)
-Organizador.create(nome: 'Kelson Medeiros', usuario: kelson)
+alex = Usuario.create(email: 'alexsandro.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+alex = Organizador.create(nome: 'Alexsandro Oliveira', usuario: alex)
+
+alberico = Usuario.create(email: 'alberico.canario@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+alberico = Organizador.create(nome: 'Alberico Canario', usuario: alberico)
+
+tmedeiros = Usuario.create(email: 'thiago.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+tmedeiros = Organizador.create(nome: 'Thiago Medeiros', usuario: tmedeiros)
+
+leonardo = Usuario.create(email: 'leonardo.feitoza@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+leonardo = Organizador.create(nome: 'Leonardo Feitoza', usuario: leonardo)
+
+elizama = Usuario.create(email: 'elizama.lemos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+elizama = Organizador.create(nome: 'Elizama Lemos', usuario: elizama)
+
+jroberto = Usuario.create(email: 'jose.santos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+jroberto = Organizador.create(nome: 'José Roberto', usuario: jroberto)
+
+kelson = Usuario.create(email: 'kelson.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+kelson = Organizador.create(nome: 'Kelson Medeiros', usuario: kelson)
+
+gueidson = Usuario.create(email: 'gueidson.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+gueidson = Organizador.create(nome: 'Gueidson Lima', usuario: gueidson)
+
+ilane = Usuario.create(email: 'ilane.cavalcanti@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ilane = Organizador.create(nome: 'Ilane Cavalcanti', usuario: ilane)
+
+ernesto = Usuario.create(email: 'ernesto.tacconi@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ernesto = Organizador.create(nome: 'Ernesto Tacconi', usuario: ernesto)
+
+claudia = Usuario.create(email: 'claudia.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+claudia = Organizador.create(nome: 'Claudia Lima', usuario: claudia)
+
+wagner = Usuario.create(email: 'wagner.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+wagner = Organizador.create(nome: 'Wagner Oliveira', usuario: wagner)
+
+abigail = Usuario.create(email: 'abigail.silva@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+abigail = Organizador.create(nome: 'Abigail Silva', usuario: abigail)
+
+helenice = Usuario.create(email: 'helenice.lopes@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+helenice = Organizador.create(nome: 'Helenice Lopes', usuario: helenice)
+
+ivoneide = Usuario.create(email: 'ivoneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ivoneide = Organizador.create(nome: 'Ivoneide Bezerra', usuario: ivoneide)
+
+patricia = Usuario.create(email: 'patricia.chagas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+patricia = Organizador.create(nome: 'Patrícia Chagas', usuario: patricia)
+
+silvia = Usuario.create(email: 'silvia.mendonca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+silvia = Organizador.create(nome: 'Silvia Mendonça', usuario: silvia)
+
+maria = Usuario.create(email: 'maria.dantas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+maria = Organizador.create(nome: 'Maria do Socorro', usuario: maria)
+
+christine = Usuario.create(email: 'christine.fonseca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+christine = Organizador.create(nome: 'Christine Fonseca', usuario: christine)
+
+charles = Usuario.create(email: 'charles.freitas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+charles = Organizador.create(nome: 'Charles Freitas', usuario: charles)
+
+clauber = Usuario.create(email: 'clauber.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+clauber = Organizador.create(nome: 'Clauber Bezerra', usuario: clauber)
+
+erick = Usuario.create(email: 'erick.bergamini@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+erick = Organizador.create(nome: 'Erick Bergamini', usuario: erick)
+
+jp = Usuario.create(email: 'joao.queiroz@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+jp = Organizador.create(nome: 'João Paulo', usuario: jp)
+
+emanuel = Usuario.create(email: 'emanuel.lourenco@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+emanuel = Organizador.create(nome: 'Emanuel Lourenço', usuario: emanuel)
+
+rose = Usuario.create(email: 'rosemary.borges@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+rose = Organizador.create(nome: 'Rosemary Borges', usuario: rose)
+
+douglas = Usuario.create(email: 'douglas.costa@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+douglas = Organizador.create(nome: 'Roberto Douglas', usuario: douglas)
+
+lidiane = Usuario.create(email: 'lidiane.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+lidiane = Organizador.create(nome: 'Lidiane Medeiros', usuario: lidiane)
+
+tloureiro = Usuario.create(email: 'thiago.loureiro@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+tloureiro = Organizador.create(nome: 'Thiago Loureiro', usuario: tloureiro)
 
 puts "Criando linhas de pesquisa..."
 
-Linha.create(nome: 'Políticas e Institucionalização da EAD', coordenador: thalita)
-Linha.create(nome: 'Modelos e Experiências pedagógicas em EaD', coordenador: marilia)
-Linha.create(nome: 'Formação Docente em EaD', coordenador: edneide)
-Linha.create(nome: 'Soluções Tecnológicas para EaD', coordenador: allan)
-Linha.create(nome: 'Produção de Materiais Didáticos para EaD', coordenador: fabio)
+linha_politicas = Linha.create(nome: 'Políticas e Institucionalização da EAD', slug: 'politicas_institucionalizacao')
+linha_modelos = Linha.create(nome: 'Modelos e Experiências pedagógicas em EaD', slug: 'modelos_experiencias_pedagogicas')
+linha_formacao = Linha.create(nome: 'Formação Docente em EaD', slug: 'formacao_docente')
+linha_solucoes = Linha.create(nome: 'Soluções Tecnológicas para EaD', slug: 'solucoes_tecnologicas')
+linha_producao = Linha.create(nome: 'Produção de Materiais Didáticos para EaD', slug: 'producao_material_didatico')
+
+puts "Adicionando membros às linhas..."
+
+Membro.create(linha: linha_politicas, organizador: thalita, coordenador: true)
+Membro.create(linha: linha_politicas, organizador: alex, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: ana, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: elizama, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: gueidson, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: ilane, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: ernesto, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: claudia, coordenador: false)
+Membro.create(linha: linha_politicas, organizador: wagner, coordenador: false)
+
+Membro.create(linha: linha_modelos, organizador: marilia, coordenador: true)
+Membro.create(linha: linha_modelos, organizador: alberico, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: abigail, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: helenice, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: ivoneide, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: patricia, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: silvia, coordenador: false)
+#Membro.create(linha: linha_modelos, organizador: vania, coordenador: false)
+Membro.create(linha: linha_modelos, organizador: maria, coordenador: false)
+
+Membro.create(linha: linha_formacao, organizador: edneide, coordenador: true)
+Membro.create(linha: linha_formacao, organizador: christine, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: abigail, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: gueidson, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: jroberto, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: patricia, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: silvia, coordenador: false)
+
+Membro.create(linha: linha_solucoes, organizador: allan, coordenador: true)
+Membro.create(linha: linha_solucoes, organizador: charles, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: clauber, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: erick, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: jalerson, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: jp, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: wagner, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: emanuel, coordenador: false)
+
+Membro.create(linha: linha_producao, organizador: fabio, coordenador: true)
+Membro.create(linha: linha_producao, organizador: rose, coordenador: false)
+Membro.create(linha: linha_producao, organizador: douglas, coordenador: false)
+Membro.create(linha: linha_producao, organizador: lidiane, coordenador: false)
+Membro.create(linha: linha_producao, organizador: tloureiro, coordenador: false)
+Membro.create(linha: linha_producao, organizador: tmedeiros, coordenador: false)
+
+puts "Adicionando tipos de trabalhos"
+
+TipoTrabalho.create(nome: 'Apresentação oral', slug: 'apresentacao_oral')
+TipoTrabalho.create(nome: 'Pôster', slug: 'poster')
 
 puts "Criando países..."
 

@@ -1,6 +1,7 @@
 class Organizador < ActiveRecord::Base
   has_one :usuario, as: :autenticavel
-  has_many :linhas
+  has_many :membros
+  has_many :linhas, through: :membros
 
   validates :nome, presence: true
 

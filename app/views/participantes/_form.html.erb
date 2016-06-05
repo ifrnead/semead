@@ -33,6 +33,10 @@
         escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
         minimumInputLength: 3
       });
+
+      <% if @participante.cidade.present? %>
+        $("#participante_cidade_id").select2('data', {id: <%= @participante.cidade.id %>, text: '<%= @participante.cidade.nome %>'});
+      <% end %>
     });
 
     function toggle_necessidades_especiais() {

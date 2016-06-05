@@ -1,0 +1,16 @@
+<dl class="dl-horizontal">
+  <dt>Número de inscrição: </dt><dd>#<%= @participante.id %></dd>
+  <dt>Nome: </dt><dd><%= @participante.nome %></dd>
+  <dt>E-mail: </dt><dd><%= mail_to @participante.email, @participante.email %></dd>
+  <dt>CPF/Passaporte: </dt><dd><%= @participante.documento %></dd>
+  <dt>Perfil: </dt><dd><%= @participante.tipo_participante.nome %></dd>
+  <dt>País: </dt><dd><%= @participante.pais.nome %></dd>
+  <% if @participante.pais.brasil? %>
+    <dt>Cidade/UF: </dt><dd><%= @participante.cidade.nome %>/<%= @participante.cidade.estado.sigla %></dd>
+  <% end %>
+  <dt>Instituição: </dt><dd><%= @participante.instituicao %></dd>
+  <% if @participante.possui_necessidades_especiais? %>
+    <dt>Necessidades específicas: </dt>
+    <dd><%= @participante.necessidades_especiais %></dd>
+  <% end %>
+</dl>

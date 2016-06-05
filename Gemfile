@@ -6,6 +6,7 @@ gem 'validates_cpf_cnpj'
 gem 'validates'
 gem "select2-rails"
 gem 'cancancan', '~> 1.10'
+gem "paperclip", "~> 5.0.0.beta1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

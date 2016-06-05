@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyText
+  resumo: MyText
+  linha_id: 
+  participante_id: 
+  tipo_trabalho_id: 
+
+two:
+  titulo: MyText
+  resumo: MyText
+  linha_id: 
+  participante_id: 
+  tipo_trabalho_id: 

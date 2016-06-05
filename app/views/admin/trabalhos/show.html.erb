@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'eye' %> Detalhar Trabalho</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <% if can? :show, @trabalho %>
+        <%= link_to fa_icon('download') + " Download", @trabalho.arquivo.url, class: "btn btn-primary" %>
+      <% end %>
+      <% if can? :update, @trabalho %>
+        <%= link_to fa_icon('edit') + " Editar", edit_admin_trabalho_path(@trabalho), class: "btn btn-primary" %>
+      <% end %>
+      <% if can? :delete, @trabalho %>
+        <%= link_to fa_icon('trash') + " Excluir", admin_trabalho_path(@trabalho), class: "btn btn-primary", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse trabalho?' } %>
+      <% end %>
+      <% if can? :index, Trabalho %>
+        <%= link_to fa_icon('undo') + " Voltar", admin_trabalhos_path, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'trabalhos/detalhes' %>

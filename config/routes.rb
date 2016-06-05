@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :trabalhos
   namespace :admin do
     resources :participantes
     resources :organizadores
+    resources :trabalhos
   end
 
   resources :sessions

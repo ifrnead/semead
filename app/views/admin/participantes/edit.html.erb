@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'edit' %> Editar Participante</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <% if can? :show, @participante %>
+        <%= link_to fa_icon('eye') + " Detalhar", admin_participante_path(@participante), class: "btn btn-primary" %>
+      <% end %>
+      <% if can? :delete, @participante %>
+        <%= link_to fa_icon('trash') + " Excluir", admin_participante_path(@participante), class: "btn btn-primary", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse participante?' } %>
+      <% end %>
+      <% if can? :index, Participante %>
+        <%= link_to fa_icon('undo') + " Voltar", admin_participantes_path, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'participantes/form' %>

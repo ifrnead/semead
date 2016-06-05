@@ -29,13 +29,20 @@
           </td>
           <td>
             <div class="btn-group">
-              <a href="#" class="btn btn-primary btn-sm"><%= fa_icon 'eye' %></a>
-              <a href="#" class="btn btn-primary btn-sm"><%= fa_icon 'edit' %></a>
-              <a href="#" class="btn btn-primary btn-sm"><%= fa_icon 'trash' %></a>
+              <% if can? :show, participante %>
+                <%= link_to fa_icon('eye'), admin_participante_path(participante), class: "btn btn-primary btn-sm" %>
+              <% end %>
+              <% if can? :update, participante %>
+                <%= link_to fa_icon('edit'), edit_admin_participante_path(participante), class: "btn btn-primary btn-sm" %>
+              <% end %>
+              <% if can? :delete, participante %>
+                <%= link_to fa_icon('trash'), admin_participante_path(participante), class: "btn btn-primary btn-sm", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse participante?' } %>
+              <% end %>
             </div>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <p><%= @participantes.count %> participante(s) encontrado(s).</p>
 <% end %>

@@ -1,3 +1,10 @@
 class Linha < ActiveRecord::Base
-  belongs_to :coordenador, class_name: 'Organizador'
+  has_many :membros
+  has_many :organizadores, through: :membros
+
+  include Selectable
+
+  def coordenador
+    self.membros.where(coordenador: true)
+  end
 end
