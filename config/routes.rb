@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :admin do
+  get 'avaliacoes/index'
+  end
+
+  namespace :admin do
+  get 'avaliacoes/edit'
+  end
+
+  namespace :admin do
+  get 'avaliacoes/new'
+  end
+
   resources :trabalhos
   namespace :admin do
     resources :participantes

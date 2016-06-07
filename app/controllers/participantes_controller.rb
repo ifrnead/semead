@@ -2,7 +2,7 @@ class ParticipantesController < ApplicationController
 
   def participacao
     @participante = current_user.autenticavel
-    authorize! :see, @participante
+    authorize! :show, @participante
   end
 
   def new
@@ -15,7 +15,7 @@ class ParticipantesController < ApplicationController
 
     respond_to do |format|
       if @participante.save
-        session[:usuario_id] = @participante.id
+        session[:usuario_id] = @participante.usuario.id
         format.html { redirect_to participacao_path, notice: 'Inscrição realizada com sucesso!' }
         format.json { render :show, status: :created, location: @participante }
       else

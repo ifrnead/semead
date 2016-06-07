@@ -1,5 +1,4 @@
 class Admin::OrganizadoresController < ApplicationController
-  load_and_authorize_resource
   before_action :set_organizador, only: [:show, :edit, :update, :destroy]
 
   def show
