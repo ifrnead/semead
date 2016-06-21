@@ -21,3 +21,21 @@
 </div>
 
 <%= render partial: 'trabalhos/detalhes' %>
+
+<% if can? :manage, Avaliacao %>
+  <h2>Avaliações</h2>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th>Avaliador</th>
+      <th>Avaliação</th>
+    </thead>
+    <tbody>
+      <% @avaliacoes.each do |avaliacao| %>
+        <tr>
+          <td><%= avaliacao.organizador.nome %></td>
+          <td><%= situacao(avaliacao.situacao).html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

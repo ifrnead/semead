@@ -17,7 +17,31 @@ class Trabalho < ActiveRecord::Base
   end
 
   def definir_avaliadores
-    Avaliacao.create(trabalho: self, organizador: self.linha.proximo_avaliador)
-    Avaliacao.create(trabalho: self, organizador: self.linha.proximo_avaliador)
+    2.times {
+      Avaliacao.create(trabalho: self, organizador: self.linha.proximo_avaliador)
+    }
+  end
+
+  def situacao
+    self.avaliacoes.each do |avaliacao|
+      if avaliacao.situacao == Avaliacao::SITUACOES[:pendente]
+        return Avaliacao::SITUACOES[:pendente]
+      end
+    end
+
+    aprovadas = 0
+    reprovadas = 0
+    self.situacoes.each do |avaliacao|
+      aprovadas = aprovadas + 1 if avaliacao.situacao == Avaliacao::SITUACOES[:aprovado]
+      reprovadas = reprovadas + 1 if avaliacao.situacao == Avaliacao::SITUACOES[:reprovado]
+    end
+
+    if aprovadas > reprovadas
+      return Avaliacao::SITUACOES[:aprovado]
+    elsif reprovadas > aprovadas
+      return Avaliacao::SITUACOES[:reprovado]
+    else
+      return Avaliacao::SITUACOES[:pendente]
+    end
   end
 end

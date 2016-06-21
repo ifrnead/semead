@@ -10,6 +10,15 @@ class Admin::TrabalhosController < ApplicationController
     end
   end
 
+  def show
+    authorize! :show, @trabalho
+    if current_user.tem_perfil?('administrador') or current_user.tem_perfil?('coordenador_comissao_cientifica')
+      @avaliacoes = @trabalho.avaliacoes
+    elsif current_user.tem_perfil?('membro_comissao_cientifica')
+      @avaliacoes = @trabalho.avaliacoes.where(organizador_id: current_user.id)
+    end
+  end
+
   def edit
     authorize! :update, @trabalho
   end

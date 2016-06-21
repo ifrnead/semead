@@ -13,3 +13,8 @@
   <strong>Tipo de trabalho:</strong>
   <%= @trabalho.tipo_trabalho.nome %>
 </p>
+
+<p>
+  <strong>Avaliação:</strong>
+  <%= situacao(@trabalho.situacao).html_safe %>
+</p>

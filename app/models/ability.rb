@@ -18,16 +18,19 @@ class Ability
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
       can [ :index, :show ], Participante
       can :manage, Trabalho
+      can :manage, Avaliacao
     end
 
     if usuario.tem_perfil?('coordenador_linha_pesquisa')
       can [ :index, :show ], Participante
       can :manage, Trabalho
+      can :manage, Avaliacao
     end
 
     if usuario.tem_perfil?('membro_comissao_cientifica')
       can [ :index, :show ], Participante
       can :manage, Trabalho
+      can :manage, Avaliacao
     end
 
     if usuario.tem_perfil?('secretario')

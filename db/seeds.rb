@@ -8,7 +8,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts "Criano tipos de participantes..."
+puts "Criando tipos de participantes..."
 
 TipoParticipante.create(nome: "Professor do ensino superior e pós-graduação", slug: 'professor_ensino_superior_posgraduacao')
 TipoParticipante.create(nome: "Professor da educação básica", slug: 'professor_educacao_basica')
