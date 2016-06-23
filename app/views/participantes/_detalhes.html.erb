@@ -13,4 +13,12 @@
     <dt>Necessidades específicas: </dt>
     <dd><%= @participante.necessidades_especiais %></dd>
   <% end %>
+  <dt>Situação: </dt>
+  <dd>
+    <% if @participante.pago? %>
+      <span class="label label-primary">Pagamento confirmado</span>
+    <% else %>
+      <span class="label label-danger">Pagamento pendente</span><br>
+    <% end %>
+  </dd>
 </dl>

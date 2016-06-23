@@ -9,6 +9,7 @@ class CreateParticipantes < ActiveRecord::Migration
       t.string :instituicao
       t.boolean :possui_necessidades_especiais
       t.text :necessidades_especiais
+      t.boolean :pago
 
       t.timestamps null: false
     end

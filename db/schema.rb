@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607140510) do
+ActiveRecord::Schema.define(version: 20160622142806) do
 
   create_table "avaliacoes", force: :cascade do |t|
-    t.integer  "situacao"
+    t.integer  "situacao",       limit: 4
     t.integer  "trabalho_id",    limit: 4
     t.integer  "organizador_id", limit: 4
     t.datetime "created_at",               null: false
@@ -68,6 +68,19 @@ ActiveRecord::Schema.define(version: 20160607140510) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "pagamentos", force: :cascade do |t|
+    t.integer  "participante_id", limit: 4
+    t.text :json
+    t.date :expira_em
+    t.string :mercado_pago_id
+    t.text :init_point
+    t.text :sandbox_init_point
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "pagamentos", ["participante_id"], name: "index_pagamentos_on_participante_id", using: :btree
+
   create_table "paises", force: :cascade do |t|
     t.string   "nome",       limit: 255
     t.string   "name",       limit: 255
@@ -86,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160607140510) do
     t.text     "necessidades_especiais",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.boolean  "pago"
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
@@ -100,10 +114,11 @@ ActiveRecord::Schema.define(version: 20160607140510) do
   end
 
   create_table "tipo_participantes", force: :cascade do |t|
-    t.string   "nome",       limit: 255
-    t.string   "slug",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "nome",           limit: 255
+    t.string   "slug",           limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "tipo_inscricao", limit: 45
   end
 
   create_table "tipo_trabalhos", force: :cascade do |t|
@@ -149,6 +164,7 @@ ActiveRecord::Schema.define(version: 20160607140510) do
   add_foreign_key "cidades", "estados"
   add_foreign_key "membros", "linhas"
   add_foreign_key "membros", "organizadores"
+  add_foreign_key "pagamentos", "participantes"
   add_foreign_key "participantes", "cidades"
   add_foreign_key "participantes", "paises"
   add_foreign_key "participantes", "tipo_participantes"

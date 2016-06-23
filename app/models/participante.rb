@@ -15,7 +15,7 @@ class Participante < ActiveRecord::Base
 
   accepts_nested_attributes_for :usuario
 
-  before_create :atribuir_perfil
+  before_create :atribuir_perfil, :definir_pagamento_pendente
 
   def possui_necessidades_especiais?
     self.possui_necessidades_especiais.present?
@@ -27,5 +27,13 @@ class Participante < ActiveRecord::Base
 
   def atribuir_perfil
     self.usuario.perfil = Perfil.find_by_slug('participante')
+  end
+
+  def definir_pagamento_pendente
+    self.pago = false
+  end
+
+  def tipo?(tipo)
+    return self.tipo_participante.slug == tipo
   end
 end

@@ -3,7 +3,6 @@ class CreateTipoParticipantes < ActiveRecord::Migration
     create_table :tipo_participantes do |t|
       t.string :nome
       t.string :slug
-      t.string :tipo_inscricao
 
       t.timestamps null: false
     end

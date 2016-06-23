@@ -5,6 +5,15 @@ class ParticipantesController < ApplicationController
     authorize! :show, @participante
   end
 
+  def pagar
+    pagamento = Pagamento.gerar(Participante.find(params[:participante_id]))
+    if Rails.env.development?
+      redirect_to pagamento.sandbox_init_point
+    else
+      redirect_to pagamento.init_point
+    end
+  end
+
   def new
     @participante = Participante.new
     @participante.usuario = Usuario.new
