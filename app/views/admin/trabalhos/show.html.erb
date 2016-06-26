@@ -16,13 +16,18 @@
       <% if can? :index, Trabalho %>
         <%= link_to fa_icon('undo') + " Voltar", admin_trabalhos_path, class: "btn btn-primary" %>
       <% end %>
+      <% if can? :edit, AvaliacaoTrabalho %>
+        <% if avaliador?(current_user.autenticavel, @trabalho) %>
+          <%= link_to fa_icon('gavel') + " Avaliar", edit_admin_trabalho_path, class: "btn btn-success" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
 
 <%= render partial: 'trabalhos/detalhes' %>
 
-<% if can? :manage, Avaliacao %>
+<% if can? :index, AvaliacaoTrabalho %>
   <h2>Avaliações</h2>
   <table class="table table-bordered table-hover">
     <thead>

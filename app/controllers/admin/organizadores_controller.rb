@@ -60,6 +60,6 @@ class Admin::OrganizadoresController < ApplicationController
     end
 
     def organizador_params
-      params.require(:organizador).permit(:nome, usuario_attributes: [ :email, :password, :password_confirmation ])
+      params.require(:organizador).permit(:nome, usuario_attributes: [ :email, :perfil_id, :password, :password_confirmation ])
     end
 end

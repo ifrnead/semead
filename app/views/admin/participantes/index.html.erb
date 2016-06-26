@@ -1,3 +1,6 @@
+<%= content_for :footer do %>
+  <%= render "layouts/datatables" %>
+<% end %>
 
 <div class="row">
   <div class="col-md-6">
@@ -8,7 +11,7 @@
 <% if @participantes.empty? %>
   <p>Nenhum participante encontrado.</p>
 <% else %>
-  <table class="table table-bordered table-hover">
+  <table id="datatable" class="table table-bordered table-hover">
     <thead>
       <th>Nome</th>
       <th>CPF/Passaporte</th>

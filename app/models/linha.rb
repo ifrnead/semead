@@ -12,11 +12,11 @@ class Linha < ActiveRecord::Base
     if self.organizadores.empty?
       raise RuntimeError, 'Não há avaliadores para essa linha de pesquisa'
     end
-    avaliacoes = self.organizadores.first.avaliacoes.size
+    avaliacoes = self.organizadores.first.avaliacoes_trabalhos.size
     avaliador = self.organizadores.first
     self.organizadores.each do |organizador|
-      if organizador.avaliacoes.size < avaliacoes
-        avaliacoes = organizador.avaliacoes.size
+      if organizador.avaliacoes_trabalhos.size < avaliacoes
+        avaliacoes = organizador.avaliacoes_trabalhos.size
         avaliador = organizador
       end
     end

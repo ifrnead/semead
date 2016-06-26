@@ -4,8 +4,8 @@ class Participante < ActiveRecord::Base
   belongs_to :tipo_participante
   belongs_to :cidade
   belongs_to :pais
-  has_one :usuario, as: :autenticavel
-  has_many :trabalhos
+  has_one :usuario, as: :autenticavel, dependent: :destroy
+  has_many :trabalhos, dependent: :destroy
 
   validates :nome, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"
@@ -15,7 +15,7 @@ class Participante < ActiveRecord::Base
 
   accepts_nested_attributes_for :usuario
 
-  before_create :atribuir_perfil, :definir_pagamento_pendente
+  before_create :atribuir_perfil
 
   def possui_necessidades_especiais?
     self.possui_necessidades_especiais.present?
@@ -27,10 +27,6 @@ class Participante < ActiveRecord::Base
 
   def atribuir_perfil
     self.usuario.perfil = Perfil.find_by_slug('participante')
-  end
-
-  def definir_pagamento_pendente
-    self.pago = false
   end
 
   def tipo?(tipo)

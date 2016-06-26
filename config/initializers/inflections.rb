@@ -59,4 +59,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   # Irregulares
   inflect.irregular "pais", "paises"
   inflect.irregular "session", "sessions"
+  inflect.irregular "avaliacao_trabalho", "avaliacoes_trabalhos"
 end

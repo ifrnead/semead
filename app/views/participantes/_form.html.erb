@@ -59,8 +59,8 @@
   <%= participante.text_field :nome, label: 'Nome completo *' %>
   <%= participante.fields_for :usuario do |usuario| %>
     <%= usuario.email_field :email, label: 'E-mail *' %>
-    <%= usuario.password_field :password, label: 'Senha *' %>
-    <%= usuario.password_field :password_confirmation, label: 'Confirmação de senha *' %>
+    <%= usuario.password_field :password, placeholder: 'Mínimo de 4 caracteres', label: 'Senha *' %>
+    <%= usuario.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha *' %>
   <% end %>
   <%= participante.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
   <%= participante.select :cidade_id, {}, label: 'Cidade' %>

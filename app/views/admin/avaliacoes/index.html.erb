@@ -1,2 +1,35 @@
-<h1>Admin::Avaliacoes#index</h1>
-<p>Find me in app/views/admin/avaliacoes/index.html.erb</p>
+<%= content_for :footer do %>
+  <%= render "layouts/datatables" %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'gavel' %> Avaliações</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <a href="<%= admin_trabalho_path(@trabalho) %>" class="btn btn-primary"><%= fa_icon 'undo' %> Voltar</a>
+    </div>
+  </div>
+</div>
+
+<% if @avaliacoes.empty? %>
+  <p>Nenhuma avaliação encontrada.</p>
+<% else %>
+  <table id="datatable" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Avaliador</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @avaliacoes.each do |avaliacao| %>
+        <tr>
+          <td><%= avaliacao.organizador.nome %></td>
+          <td><%= situacao(avaliacao.situacao).html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

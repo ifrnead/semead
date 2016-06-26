@@ -1,3 +1,7 @@
+<% content_for :footer do %>
+  <%= render partial: "layouts/datatables" %>
+<% end %>
+
 <div class="row">
   <div class="col-md-6">
     <h1><%= fa_icon 'file-text-o' %> Trabalhos</h1>
@@ -5,17 +9,18 @@
 </div>
 
 <% if @trabalhos.empty? %>
-  <p>Nenhum trabalho enviado até o momento.</p>
+  <p>Nenhum trabalho a ser avaliado por você até o momento.</p>
 <% else %>
-  <table class="table table-bordered table-hover">
+  <table id="datatable" class="table table-bordered table-hover">
     <thead>
       <tr>
         <th width="20%">Titulo</th>
-        <th width="20%">Autor</th>
-        <th width="15%">Linha de pesquisa</th>
-        <th width="15%">Tipo de trabalho</th>
-        <th width="10%">Avaliação</th>
-        <th width="15%" colspan="3">Opções</th>
+        <th width="15%">Autor</th>
+        <th width="10%">Linha de pesquisa</th>
+        <th width="10%">Tipo de trabalho</th>
+        <th width="10%">Sua Avaliação</th>
+        <th width="10%">Avaliação Geral</th>
+        <th width="20%">Opções</th>
       </tr>
     </thead>
     <tbody>
@@ -25,11 +30,17 @@
           <td><%= trabalho.participante.nome %></td>
           <td><%= trabalho.linha.nome %></td>
           <td><%= trabalho.tipo_trabalho.nome %></td>
+          <td><%= situacao(trabalho.minha_avaliacao(current_user.autenticavel).situacao).html_safe %></td>
           <td><%= situacao(trabalho.situacao).html_safe %></td>
           <td>
             <div class="btn-group">
               <% if can? :show, trabalho %>
                 <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
+              <% end %>
+              <% if can? :edit, AvaliacaoTrabalho %>
+                <%= link_to fa_icon('gavel'), edit_admin_trabalho_path(trabalho), class: 'btn btn-primary btn-sm' %>
+              <% end %>
+              <% if can? :show, trabalho %>
                 <%= link_to fa_icon('eye'), admin_trabalho_path(trabalho), class: 'btn btn-primary btn-sm' %>
               <% end %>
               <% if can? :update, trabalho %>

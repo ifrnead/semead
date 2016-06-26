@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :notify
 
   rescue_from CanCan::AccessDenied do |exception|
     if Rails.env.development?
@@ -11,6 +12,21 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def notify
+    if flash.alert.present?
+      @notify_icon = 'fa fa-exclamation-triangle'
+      @notify_title = 'Erro'
+      @notify_message = alert
+      @notify_type = 'danger'
+    end
+    if flash.notice.present?
+      @notify_icon = 'fa fa-info'
+      @notify_title = 'Info'
+      @notify_message = notice
+      @notify_type = 'info'
+    end
+  end
 
   def auth_required
     raise CanCan::AccessDenied unless current_user?

@@ -21,7 +21,6 @@ class ParticipantesController < ApplicationController
 
   def create
     @participante = Participante.new(participante_params)
-
     respond_to do |format|
       if @participante.save
         session[:usuario_id] = @participante.usuario.id

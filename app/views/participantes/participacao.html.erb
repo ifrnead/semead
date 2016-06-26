@@ -4,7 +4,9 @@
   </div>
   <div class="col-md-6">
     <div class="btn-group pull-right">
-      <a class="btn btn-primary" href="<%= participante_pagar_path(participante_id: @participante.id) %>">Pagar inscrição</a>
+      <% unless @participante.pago? %>
+        <a class="btn btn-primary" href="<%= participante_pagar_path(participante_id: @participante.id) %>"><%= fa_icon 'usd' %> Pagar inscrição</a>
+      <% end %>
     </div>
   </div>
 </div>

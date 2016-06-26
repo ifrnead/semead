@@ -33,7 +33,12 @@ puts "Criando usuários..."
 jalerson = Usuario.create(email: 'jalerson.lima@ifrn.edu.br', password: '321mud@r', perfil: admin)
 jalerson = Organizador.create(nome: 'Jalerson Lima', usuario: jalerson)
 
-ana = Usuario.create(email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: admin)
+jp = Usuario.create(email: 'joao.queiroz@ifrn.edu.br', password: '321mud@r', perfil: admin)
+jp = Organizador.create(nome: 'João Paulo', usuario: jp)
+
+# Coordenador da Comissão Científica
+
+ana = Usuario.create(email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: coordenador_comissao_cientifica)
 ana = Organizador.create(nome: 'Ana Lúcia', usuario: ana)
 
 # Coordenadores de Linha de Pesquisa
@@ -120,9 +125,6 @@ clauber = Organizador.create(nome: 'Clauber Bezerra', usuario: clauber)
 
 erick = Usuario.create(email: 'erick.bergamini@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
 erick = Organizador.create(nome: 'Erick Bergamini', usuario: erick)
-
-jp = Usuario.create(email: 'joao.queiroz@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-jp = Organizador.create(nome: 'João Paulo', usuario: jp)
 
 emanuel = Usuario.create(email: 'emanuel.lourenco@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
 emanuel = Organizador.create(nome: 'Emanuel Lourenço', usuario: emanuel)

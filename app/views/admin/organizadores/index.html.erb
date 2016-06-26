@@ -1,3 +1,7 @@
+<%= content_for :footer do %>
+  <%= render "layouts/datatables" %>
+<% end %>
+
 <div class="row">
   <div class="col-md-6">
     <h1><%= fa_icon 'user' %> Organizadores</h1>
@@ -12,12 +16,14 @@
 <% if @organizadores.empty? %>
   <p>Nenhum organizador encontrado.</p>
 <% else %>
-  <table class="table table-bordered table-hover">
+  <table id="datatable" class="table table-bordered table-hover">
     <thead>
-      <th>Nome</th>
-      <th>E-mail</th>
-      <th>Perfil</th>
-      <th>Opções</th>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+        <th>Opções</th>
+      </tr>
     </thead>
     <tbody>
       <% @organizadores.each do |organizador| %>

@@ -1,0 +1,17 @@
+<% if alert.present? or notice.present? %>
+  <%= javascript_include_tag "bootstrap-notify.min", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "animate.css", media: "all", "data-turbolinks-track" => true %>
+
+  <script type="text/javascript">
+    $(function() {
+      $.notify({
+        icon: '<%= @notify_icon %>',
+        title: '<strong><%= @notify_title %>:</strong>',
+        message: "<%= @notify_message %>"
+      },{
+        type: '<%= @notify_type %>',
+        placement: { from: 'top', align: 'center' }
+      });
+    });
+  </script>
+<% end %>

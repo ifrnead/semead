@@ -1,7 +1,8 @@
 class Admin::AvaliacoesController < ApplicationController
-  before_filter :set_avaliacao, only: [:show, :edit, :update, :destroy]
-
   def index
+    can? :index, AvaliacaoTrabalho
+    @trabalho = Trabalho.includes(:avaliacoes).find(params[:trabalho_id])
+    @avaliacoes = @trabalho.avaliacoes
   end
 
   def edit
@@ -16,15 +17,5 @@ class Admin::AvaliacoesController < ApplicationController
 
   def create
     #code
-  end
-
-  private
-
-  def set_avaliacao
-    @avaliacao = Avaliacao.find(params[:id])
-  end
-
-  def avaliacao_params
-    params.require(:avaliacao).permit(:aprovado)
   end
 end

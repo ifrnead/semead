@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :participantes
     resources :organizadores
-    resources :trabalhos
-    resources :avaliacoes
+    resources :trabalhos do
+      resources :avaliacoes
+    end
   end
 
   resources :sessions

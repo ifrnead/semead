@@ -13,16 +13,27 @@
 
 ActiveRecord::Schema.define(version: 20160622142806) do
 
-  create_table "avaliacoes", force: :cascade do |t|
-    t.integer  "situacao",       limit: 4
-    t.integer  "trabalho_id",    limit: 4
-    t.integer  "organizador_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "avaliacoes_trabalhos", force: :cascade do |t|
+    t.integer  "situacao",        limit: 4
+    t.boolean  "atende_normas"
+    t.boolean  "tematica_evento"
+    t.integer  "tematica_linha",  limit: 4
+    t.integer  "relevancia",      limit: 4
+    t.integer  "adequacao",       limit: 4
+    t.integer  "consistencia",    limit: 4
+    t.integer  "interlocucao",    limit: 4
+    t.integer  "originalidade",   limit: 4
+    t.string   "parecer",         limit: 255
+    t.integer  "linha_id",        limit: 4
+    t.integer  "trabalho_id",     limit: 4
+    t.integer  "organizador_id",  limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "avaliacoes", ["organizador_id"], name: "index_avaliacoes_on_organizador_id", using: :btree
-  add_index "avaliacoes", ["trabalho_id"], name: "index_avaliacoes_on_trabalho_id", using: :btree
+  add_index "avaliacoes_trabalhos", ["linha_id"], name: "index_avaliacoes_trabalhos_on_linha_id", using: :btree
+  add_index "avaliacoes_trabalhos", ["organizador_id"], name: "index_avaliacoes_trabalhos_on_organizador_id", using: :btree
+  add_index "avaliacoes_trabalhos", ["trabalho_id"], name: "index_avaliacoes_trabalhos_on_trabalho_id", using: :btree
 
   create_table "cidades", force: :cascade do |t|
     t.integer  "codigo",     limit: 4
@@ -69,14 +80,14 @@ ActiveRecord::Schema.define(version: 20160622142806) do
   end
 
   create_table "pagamentos", force: :cascade do |t|
-    t.integer  "participante_id", limit: 4
-    t.text :json
-    t.date :expira_em
-    t.string :mercado_pago_id
-    t.text :init_point
-    t.text :sandbox_init_point
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "participante_id",    limit: 4
+    t.text     "json",               limit: 65535
+    t.date     "expira_em"
+    t.string   "mercado_pago_id",    limit: 255
+    t.text     "init_point",         limit: 65535
+    t.text     "sandbox_init_point", limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "pagamentos", ["participante_id"], name: "index_pagamentos_on_participante_id", using: :btree
@@ -97,9 +108,9 @@ ActiveRecord::Schema.define(version: 20160622142806) do
     t.string   "instituicao",                   limit: 255
     t.boolean  "possui_necessidades_especiais"
     t.text     "necessidades_especiais",        limit: 65535
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.boolean  "pago"
+    t.boolean  "pago",                                        default: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
@@ -114,11 +125,10 @@ ActiveRecord::Schema.define(version: 20160622142806) do
   end
 
   create_table "tipo_participantes", force: :cascade do |t|
-    t.string   "nome",           limit: 255
-    t.string   "slug",           limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "tipo_inscricao", limit: 45
+    t.string   "nome",       limit: 255
+    t.string   "slug",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "tipo_trabalhos", force: :cascade do |t|
@@ -159,8 +169,9 @@ ActiveRecord::Schema.define(version: 20160622142806) do
   add_index "usuarios", ["autenticavel_id"], name: "index_usuarios_on_autenticavel_id", using: :btree
   add_index "usuarios", ["perfil_id"], name: "index_usuarios_on_perfil_id", using: :btree
 
-  add_foreign_key "avaliacoes", "organizadores"
-  add_foreign_key "avaliacoes", "trabalhos"
+  add_foreign_key "avaliacoes_trabalhos", "linhas"
+  add_foreign_key "avaliacoes_trabalhos", "organizadores"
+  add_foreign_key "avaliacoes_trabalhos", "trabalhos"
   add_foreign_key "cidades", "estados"
   add_foreign_key "membros", "linhas"
   add_foreign_key "membros", "organizadores"
