@@ -31,8 +31,8 @@
           <td><%= situacao(trabalho.situacao).html_safe %></td>
           <td>
             <div class="btn-group">
-              <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
-              <%= link_to fa_icon('eye'), trabalho, class: 'btn btn-primary btn-sm' %>
+              <%= link_to fa_icon('download'), trabalho.arquivo.url, title: 'Download', class: 'btn btn-primary btn-sm' %>
+              <%= link_to fa_icon('eye'), trabalho, title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
             </div>
           </td>
         </tr>

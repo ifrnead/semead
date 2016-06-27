@@ -15,6 +15,7 @@ class Admin::TrabalhosController < ApplicationController
     if can? :index, AvaliacaoTrabalho
       @avaliacoes = @trabalho.avaliacoes
     end
+    @avaliacao = @trabalho.minha_avaliacao(current_user.autenticavel)
   end
 
   def edit
@@ -22,11 +23,32 @@ class Admin::TrabalhosController < ApplicationController
   end
 
   def update
-    #code
+    authorize! :update, @trabalho
+    respond_to do |format|
+      if @trabalho.update(trabalho_params)
+        format.html { redirect_to @trabalho, notice: 'Trabalho atualizado com sucesso!' }
+        format.json { render :show, status: :ok, location: @trabalho }
+      else
+        format.html { render :edit }
+        format.json { render json: @trabalho.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-    #code
+    authorize! :destroy, @trabalho
+    @trabalho.destroy
+    respond_to do |format|
+      format.html { redirect_to trabalhos_url, notice: 'Trabalho excluído com sucesso!' }
+      format.json { head :no_content }
+    end
+  end
+
+  def avaliar
+    trabalho = Trabalho.find(params[:trabalho_id])
+    authorize! :show, trabalho
+    avaliacao = trabalho.minha_avaliacao(current_user.autenticavel)
+    redirect_to edit_admin_trabalho_avaliacao_path(trabalho, avaliacao)
   end
 
   private

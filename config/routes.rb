@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     resources :participantes
     resources :organizadores
     resources :trabalhos do
-      resources :avaliacoes
+      get 'avaliar'
+      resources :avaliacoes, controller: 'avaliacoes_trabalhos'
+    end
+    resources :minicursos do
+      resources :avaliacoes, controller: 'avaliacoes_minicursos'
     end
   end
 

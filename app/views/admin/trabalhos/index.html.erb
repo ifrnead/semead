@@ -35,19 +35,19 @@
           <td>
             <div class="btn-group">
               <% if can? :show, trabalho %>
-                <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
+                <%= link_to fa_icon('download'), trabalho.arquivo.url, title: 'Download', class: 'btn btn-primary btn-sm' %>
               <% end %>
-              <% if can? :edit, AvaliacaoTrabalho %>
-                <%= link_to fa_icon('gavel'), edit_admin_trabalho_path(trabalho), class: 'btn btn-primary btn-sm' %>
+              <% if can? :edit, trabalho.minha_avaliacao(current_user.autenticavel) %>
+                <%= link_to fa_icon('gavel'), admin_trabalho_avaliar_path(trabalho), title: 'Avaliar', class: 'btn btn-primary btn-sm' %>
               <% end %>
               <% if can? :show, trabalho %>
-                <%= link_to fa_icon('eye'), admin_trabalho_path(trabalho), class: 'btn btn-primary btn-sm' %>
+                <%= link_to fa_icon('eye'), admin_trabalho_path(trabalho), title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
               <% end %>
               <% if can? :update, trabalho %>
-                <%= link_to fa_icon('edit'), edit_admin_trabalho_path(trabalho), class: 'btn btn-primary btn-sm' %>
+                <%= link_to fa_icon('edit'), edit_admin_trabalho_path(trabalho), title: 'Editar', class: 'btn btn-primary btn-sm' %>
               <% end %>
               <% if can? :delete, trabalho %>
-                <%= link_to fa_icon('trash'), admin_trabalho_path(trabalho), class: "btn btn-primary btn-sm", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse trabalho?' } %>
+                <%= link_to fa_icon('trash'), admin_trabalho_path(trabalho), title: 'Excluir', class: "btn btn-primary btn-sm", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse trabalho?' } %>
               <% end %>
             </div>
           </td>

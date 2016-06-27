@@ -33,10 +33,10 @@
           <td><%= organizador.perfil.nome %></td>
           <td>
             <div class="btn-group">
-              <%= link_to fa_icon('eye'), admin_organizador_path(organizador), class: "btn btn-primary btn-sm" %>
-              <%= link_to fa_icon('edit'), edit_admin_organizador_path(organizador), class: "btn btn-primary btn-sm" %>
+              <%= link_to fa_icon('eye'), admin_organizador_path(organizador), title: 'Detalhar', class: "btn btn-primary btn-sm" %>
+              <%= link_to fa_icon('edit'), edit_admin_organizador_path(organizador), title: 'Editar', class: "btn btn-primary btn-sm" %>
               <% if organizador != current_user.autenticavel %>
-                <%= link_to fa_icon('trash'), admin_organizador_path(organizador), method: :delete, class: "btn btn-primary btn-sm" %>
+                <%= link_to fa_icon('trash'), admin_organizador_path(organizador), title: 'Excluir', method: :delete, class: "btn btn-primary btn-sm" %>
               <% end %>
             </div>
           </td>

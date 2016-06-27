@@ -7,6 +7,9 @@
       <% if can? :show, @trabalho %>
         <%= link_to fa_icon('download') + " Download", @trabalho.arquivo.url, class: "btn btn-primary" %>
       <% end %>
+      <% if @avaliacao.present? and can? :edit, @avaliacao %>
+        <%= link_to fa_icon('gavel') + " Avaliar", admin_trabalho_avaliar_path(@trabalho), class: "btn btn-primary" %>
+      <% end %>
       <% if can? :update, @trabalho %>
         <%= link_to fa_icon('edit') + " Editar", edit_admin_trabalho_path(@trabalho), class: "btn btn-primary" %>
       <% end %>
@@ -16,11 +19,6 @@
       <% if can? :index, Trabalho %>
         <%= link_to fa_icon('undo') + " Voltar", admin_trabalhos_path, class: "btn btn-primary" %>
       <% end %>
-      <% if can? :edit, AvaliacaoTrabalho %>
-        <% if avaliador?(current_user.autenticavel, @trabalho) %>
-          <%= link_to fa_icon('gavel') + " Avaliar", edit_admin_trabalho_path, class: "btn btn-success" %>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>
@@ -28,7 +26,7 @@
 <%= render partial: 'trabalhos/detalhes' %>
 
 <% if can? :index, AvaliacaoTrabalho %>
-  <h2>Avaliações</h2>
+  <h2><%= fa_icon 'gavel' %> Avaliações</h2>
   <table class="table table-bordered table-hover">
     <thead>
       <th>Avaliador</th>

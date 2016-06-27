@@ -50,7 +50,7 @@ class TrabalhosController < ApplicationController
     authorize! :update, @trabalho
     respond_to do |format|
       if @trabalho.update(trabalho_params)
-        format.html { redirect_to @trabalho, notice: 'Trabalho was successfully updated.' }
+        format.html { redirect_to @trabalho, notice: 'Trabalho atualizado com sucesso!' }
         format.json { render :show, status: :ok, location: @trabalho }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class TrabalhosController < ApplicationController
     authorize! :destroy, @trabalho
     @trabalho.destroy
     respond_to do |format|
-      format.html { redirect_to trabalhos_url, notice: 'Trabalho was successfully destroyed.' }
+      format.html { redirect_to trabalhos_url, notice: 'Trabalho excluído com sucesso!' }
       format.json { head :no_content }
     end
   end

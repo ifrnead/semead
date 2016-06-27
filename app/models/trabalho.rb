@@ -35,15 +35,19 @@ class Trabalho < ActiveRecord::Base
 
     aprovadas = 0
     reprovadas = 0
+    outra_linha = 0
     self.situacoes.each do |avaliacao|
       aprovadas = aprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
       reprovadas = reprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:reprovado]
+      outra_linha = outra_linha + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:outra_linha]
     end
 
-    if aprovadas > reprovadas
+    if aprovadas > reprovadas and aprovadas > outra_linha
       return AvaliacaoTrabalho::SITUACOES[:aprovado]
-    elsif reprovadas > aprovadas
+    elsif reprovadas > aprovadas and reprovadas > outra_linha
       return AvaliacaoTrabalho::SITUACOES[:reprovado]
+    elsif outra_linha > aprovadas and outra_linha > reprovadas
+      return AvaliacaoTrabalho::SITUACOES[:outra_linha]
     else
       return AvaliacaoTrabalho::SITUACOES[:pendente]
     end

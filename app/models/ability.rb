@@ -11,37 +11,37 @@ class Ability
 
     if usuario.tem_perfil?('membro_comissao_central')
       can :manage, Organizador
-      can :manage, Participante
+      can [ :show, :index, :edit, :update ], Participante
       can [ :show, :index ], Trabalho
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
       can [ :index, :show ], Participante
-      can :manage, Trabalho
+      can [ :show, :index, :edit, :update ], Trabalho
       can :manage, AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('coordenador_linha_pesquisa')
       can [ :index, :show ], Participante
-      can :manage, Trabalho
-      can :manage, AvaliacaoTrabalho
+      can [ :show, :index, :edit, :update ], Trabalho
+      can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('membro_comissao_cientifica')
       can [ :index, :show ], Participante
-      can [ :index, :show, :edit, :update ], Trabalho
-      can :manage, AvaliacaoTrabalho
+      can [ :index, :show ], Trabalho
+      can [ :index, :show ], AvaliacaoTrabalho
+      can [ :edit, :update ], AvaliacaoTrabalho, organizador_id: usuario.autenticavel.id
     end
 
     if usuario.tem_perfil?('secretario')
-      can :manage, Participante
-      can :manage, Organizador
+      can [ :show, :index, :edit, :update ], Participante
+      can [ :show, :index, :edit, :update ], Organizador
     end
 
     if usuario.tem_perfil?('participante')
       can :show, Participante, id: usuario.autenticavel.id
-      can :create, Trabalho
-      can :index, Trabalho
+      can [ :create, :index ], Trabalho
       can :show, Trabalho, participante_id: usuario.autenticavel.id
     end
 
