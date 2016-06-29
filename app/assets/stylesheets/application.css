@@ -33,3 +33,11 @@ table.table tbody tr td {
 h1 {
   margin-bottom: 0.5em !important;
 }
+
+.campo_obrigatorio {
+  color: #ff4136;
+}
+
+.control-label {
+  font-weight: bold !important;
+}

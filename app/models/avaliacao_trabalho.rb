@@ -5,7 +5,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
 
   before_create :definir_situacao
 
-  validates :situacao, :atende_normas, :tematica_evento, :tematica_linha, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true
+  validates :situacao, :atende_normas, :tematica_evento, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true
   validates :parecer, presence: true, if: :reprovado?
   validates :linha_id, presence: true, if: :outra_linha?
 
@@ -26,12 +26,6 @@ class AvaliacaoTrabalho < ActiveRecord::Base
     nao: 0
   }
 
-  TEMATICA_LINHA = {
-    sim: 1,
-    outra_linha: 0,
-    nao: -1
-  }
-
   ITENS = {
     atende: 1,
     parcialmente: 0,
@@ -48,6 +42,10 @@ class AvaliacaoTrabalho < ActiveRecord::Base
 
   def outra_linha?
     self.situacao == SITUACOES[:outra_linha]
+  end
+
+  def pendente?
+    self.situacao == SITUACOES[:pendente]
   end
 
   def definir_situacao

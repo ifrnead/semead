@@ -2,9 +2,8 @@ class CreateAvaliacoesTrabalhos < ActiveRecord::Migration
   def change
     create_table :avaliacoes_trabalhos do |t|
       t.integer :situacao
-      t.boolean :atende_normas
-      t.boolean :tematica_evento
-      t.integer :tematica_linha
+      t.integer :atende_normas
+      t.integer :tematica_evento
       t.integer :relevancia
       t.integer :adequacao
       t.integer :consistencia

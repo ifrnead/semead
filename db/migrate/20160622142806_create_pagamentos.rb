@@ -7,6 +7,7 @@ class CreatePagamentos < ActiveRecord::Migration
       t.string :mercado_pago_id
       t.text :init_point
       t.text :sandbox_init_point
+      t.string :situacao
 
       t.timestamps null: false
     end

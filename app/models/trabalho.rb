@@ -22,7 +22,8 @@ class Trabalho < ActiveRecord::Base
 
   def definir_avaliadores
     2.times {
-      AvaliacaoTrabalho.create(trabalho: self, organizador: self.linha.proximo_avaliador)
+      avaliacao = AvaliacaoTrabalho.new(trabalho: self, organizador: self.linha.proximo_avaliador)
+      avaliacao.save(validate: false)
     }
   end
 
@@ -36,7 +37,7 @@ class Trabalho < ActiveRecord::Base
     aprovadas = 0
     reprovadas = 0
     outra_linha = 0
-    self.situacoes.each do |avaliacao|
+    self.avaliacoes.each do |avaliacao|
       aprovadas = aprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
       reprovadas = reprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:reprovado]
       outra_linha = outra_linha + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:outra_linha]

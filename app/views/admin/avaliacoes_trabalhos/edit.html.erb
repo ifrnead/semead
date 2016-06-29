@@ -1,15 +1,53 @@
-<%= content_for :head do %>
+<%= content_for :footer do %>
   <script type="text/javascript">
     $(function() {
-      $("#linha").hide();
-      $("#parecer").hide();
+      $(".oculto").hide();
+
+      <% if @avaliacao.errors.present? %>
+        <% @avaliacao.errors.messages.each_pair do |field, message| %>
+          $("label[for='avaliacao_trabalho_<%= field %>']").addClass('campo_obrigatorio');
+          $("span#campo_<%= field %>").show();
+        <% end %>
+
+        <% if @avaliacao.errors.messages.include?(:linha_id) or @avaliacao.outra_linha? %>
+          $("#linha").show();
+        <% end %>
+
+        <% if @avaliacao.errors.messages.include?(:parecer) or @avaliacao.reprovado? %>
+          $("#parecer").show();
+        <% end %>
+      <% end %>
     });
+
+    function avaliacao(situacao) {
+      if(situacao == 'aprovado') {
+        $("#linha").hide('blind');
+        $("#parecer").hide('blind');
+      } else if(situacao == 'outra_linha') {
+        $("#linha").show('blind');
+        $("#parecer").hide('blind');
+      } else if(situacao == 'reprovado') {
+        $("#linha").hide('blind');
+        $("#parecer").show('blind');
+      }
+    }
+
+    function validar() {
+      validacao = true;
+
+      if($("input[name='avaliacao_trabalho[situacao]']:checked").val() == undefined) {
+        $("label[for='avaliacao_trabalho_situacao']").parent().addClass('has-error');
+        validacao = false;
+      }
+
+      return validacao;
+    }
   </script>
 <% end %>
 
 <div class="row">
   <div class="col-md-6">
-    <h1><%= fa_icon 'gavel' %> Avaliar</h1>
+    <h1><%= fa_icon 'gavel' %> Avaliar Trabalho</h1>
   </div>
   <div class="col-md-6">
     <div class="btn-group pull-right">
@@ -18,23 +56,31 @@
   </div>
 </div>
 
-<p>Todos os campos são obrigatórios.</p>
-
 <%= bootstrap_form_for(@avaliacao, url: admin_trabalho_avaliacao_path(@avaliacao.trabalho, @avaliacao)) do |f| %>
-  <%= f.form_group :atende_normas, label: { text: 'Atende às normas da Holos?' } do %>
-    <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:sim], label: 'Sim' %>
-    <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:nao], label: 'Não/recusado' %>
-  <% end %>
-  <%= f.form_group :tematica_evento, label: { text: 'O tema está inserido na temática do evento?' } do %>
-    <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:sim], label: 'Sim' %>
-    <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:nao], label: 'Não/recusado' %>
-  <% end %>
-  <%= f.form_group :tematica_linha, label: { text: 'O tema está inserido na linha temática a que foi submetido?' } do %>
-    <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:sim], label: 'Sim', onchange: "$('#linha').hide('blind')" %>
-    <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:nao], label: 'Não/recusado', onchange: "$('#linha').show('blind')" %>
-  <% end %>
-  <div id="linha">
-    <%= f.select :linha_id, Linha.select, prompt: 'Selecione', label: 'Linha a qual o trabalho deve ser submetido' %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <%= f.form_group :atende_normas, label: { text: 'Atende às normas da Holos? *' } do %>
+        <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:sim], label: 'Sim' %>
+        <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:nao], label: 'Não/recusado' %>
+      <% end %>
+      <%= f.form_group :tematica_evento, label: { text: 'O tema está inserido na temática do evento? *' } do %>
+        <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:sim], label: 'Sim' %>
+        <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:nao], label: 'Não/recusado' %>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">Instruções de preenchimento</div>
+        <div class="panel-body">
+          <ul>
+            <li>Os campos marcados com * são obrigatórios</li>
+            <li>O campo 'Linha a qual o trabalho deve ser submetido' deve ser preenchido quando a avaliação final julgar que o trabalho deve ser submetido para outra linha de pesquisa</li>
+            <li>O campo 'Parecer' deve ser preenchido quando o trabalho não for aceito</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <table class="table table-bordered table-hover">
@@ -48,31 +94,46 @@
     </thead>
     <tbody>
       <tr>
-        <td>1. Relevância e pertinência do trabalho para a linha temática a que foi submetido</td>
+        <td>
+          <%= f.label :relevancia, '1. Relevância e pertinência do trabalho para a linha temática a que foi submetido *', class: 'control-label' %>
+          <span id="campo_relevancia" class="oculto campo_obrigatorio"><br>campo obrigatório</span>
+        </td>
         <td><%= f.radio_button :relevancia, AvaliacaoTrabalho::ITENS[:atende] %></td>
         <td><%= f.radio_button :relevancia, AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
         <td><%= f.radio_button :relevancia, AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
       </tr>
       <tr>
-        <td>2. Adequação conceitual na formulação dos problemas</td>
+        <td>
+          <%= f.label :adequacao, '2. Adequação conceitual na formulação dos problemas *', class: 'control-label' %>
+          <span id="campo_adequacao" class="oculto campo_obrigatorio"><br>campo obrigatório</span>
+        </td>
         <td><%= f.radio_button :adequacao, AvaliacaoTrabalho::ITENS[:atende] %></td>
         <td><%= f.radio_button :adequacao, AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
         <td><%= f.radio_button :adequacao, AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
       </tr>
       <tr>
-        <td>3. Consistência e rigor na abordagem teórico-metodológica e na argumentação</td>
+        <td>
+          <%= f.label :consistencia, '3. Consistência e rigor na abordagem teórico-metodológica e na argumentação *', class: 'control-label' %>
+          <span id="campo_consistencia" class="oculto campo_obrigatorio"><br>campo obrigatório</span>
+        </td>
         <td><%= f.radio_button :consistencia, AvaliacaoTrabalho::ITENS[:atende] %></td>
         <td><%= f.radio_button :consistencia, AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
         <td><%= f.radio_button :consistencia, AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
       </tr>
       <tr>
-        <td>4. Interlocução com a produção da área da educação a distância, em particular com os temas propostos pela linha temática a que o trabalho foi submetido</td>
+        <td>
+          <%= f.label :interlocucao, '4. Interlocução com a produção da área da educação a distância, em particular com os temas propostos pela linha temática a que o trabalho foi submetido *', class: 'control-label' %>
+          <span id="campo_interlocucao" class="oculto campo_obrigatorio"><br>campo obrigatório</span>
+        </td>
         <td><%= f.radio_button :interlocucao, AvaliacaoTrabalho::ITENS[:atende] %></td>
         <td><%= f.radio_button :interlocucao, AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
         <td><%= f.radio_button :interlocucao, AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
       </tr>
       <tr>
-        <td>5. Originalidade e contribuição para o avanço do conhecimento na área do evento especialmente para a linha temática a que foi submetido</td>
+        <td>
+          <%= f.label :originalidade, '5. Originalidade e contribuição para o avanço do conhecimento na área do evento especialmente para a linha temática a que foi submetido *', class: 'control-label'%>
+          <span id="campo_originalidade" class="oculto campo_obrigatorio"><br>campo obrigatório</span>
+        </td>
         <td><%= f.radio_button :originalidade, AvaliacaoTrabalho::ITENS[:atende] %></td>
         <td><%= f.radio_button :originalidade, AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
         <td><%= f.radio_button :originalidade, AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
@@ -80,15 +141,22 @@
     </tbody>
   </table>
 
-  <%= f.form_group :situacao, label: { text: 'Qual a sua avaliação final sobre esse trabalho?' } do %>
-    <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:aprovado], label: 'Aprovado', onchange: "$('#parecer').hide('blind')" %>
-    <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:outra_linha], label: 'Submeter para outra linha de pesquisa', onchange: "$('#parecer').hide('blind')" %>
-    <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:reprovado], label: 'Não aceito', onchange: "$('#parecer').show('blind')" %>
-  <% end %>
-
-  <div id="parecer">
-    <%= f.text_area :parecer, class: "form-control" %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= f.form_group :situacao, label: { text: 'Qual a sua avaliação final sobre esse trabalho? *' } do %>
+        <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:aprovado], label: 'Aprovado', onchange: "avaliacao('aprovado')" %>
+        <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:outra_linha], label: 'Submeter para outra linha de pesquisa', onchange: "avaliacao('outra_linha')" %>
+        <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:reprovado], label: 'Não aceito', onchange: "avaliacao('reprovado')" %>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <div id="linha" class="oculto">
+        <%= f.select :linha_id, Linha.select, { prompt: 'Selecione', label: 'Linha a qual o trabalho deve ser submetido' } %>
+      </div>
+      <div id="parecer" class="oculto">
+        <%= f.text_area :parecer, class: "form-control", label: 'Parecer', placeholder: 'Justifique a sua avaliação' %>
+      </div>
+    </div>
   </div>
-
-  <%= f.submit "Enviar", class: 'btn btn-primary' %>
+  <%= f.submit "Enviar", class: 'btn btn-primary', onclick: 'return validar()' %>
 <% end %>

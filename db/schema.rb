@@ -15,9 +15,8 @@ ActiveRecord::Schema.define(version: 20160622142806) do
 
   create_table "avaliacoes_trabalhos", force: :cascade do |t|
     t.integer  "situacao",        limit: 4
-    t.boolean  "atende_normas"
-    t.boolean  "tematica_evento"
-    t.integer  "tematica_linha",  limit: 4
+    t.integer  "atende_normas",   limit: 4
+    t.integer  "tematica_evento", limit: 4
     t.integer  "relevancia",      limit: 4
     t.integer  "adequacao",       limit: 4
     t.integer  "consistencia",    limit: 4
@@ -86,6 +85,7 @@ ActiveRecord::Schema.define(version: 20160622142806) do
     t.string   "mercado_pago_id",    limit: 255
     t.text     "init_point",         limit: 65535
     t.text     "sandbox_init_point", limit: 65535
+    t.string   "situacao"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end

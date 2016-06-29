@@ -3,6 +3,19 @@ class Pagamento < ActiveRecord::Base
 
   validates :participante, presence: true
 
+  before_create :definir_situacao
+
+  SITUACOES = {
+    :pending => 'Pendente',
+    :approved => 'Aprovado',
+    :in_process => 'Em processamento',
+    :in_mediation => 'Em mediação',
+    :rejected => 'Negado',
+    :cancelled => 'Cancelado',
+    :refunded  => 'Reembolsado',
+    :charged_back => 'Chargeback'
+  }
+
   def self.gerar(participante)
     mp_client = MercadoPago::Client.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
     mp_client.sandbox_mode(true) if Rails.env.development?
@@ -30,7 +43,6 @@ class Pagamento < ActiveRecord::Base
         success: "http://ead.ifrn.edu.br/semead/pagamento-aprovado",
         failure: "http://ead.ifrn.edu.br/semead/pagamento-falhou"
       },
-      notification_url: "http://ead.ifrn.edu.br/semead-app/#{pagamento.id}/notificar",
       expires: true,
       expiration_date_to: "#{pagamento.prazo.to_s}T23:59:59.999-03:00"
     }
@@ -39,6 +51,10 @@ class Pagamento < ActiveRecord::Base
     pagamento.update_attributes(json: payment_response, expira_em: pagamento.prazo, mercado_pago_id: payment_response['id'], init_point: payment_response['init_point'], sandbox_init_point: payment_response['sandbox_init_point'])
 
     return pagamento
+  end
+
+  def definir_situacao
+    self.situacao = 'pending'
   end
 
   def prazo

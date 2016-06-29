@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pagamentos/notificar'
+
   resources :trabalhos
   namespace :admin do
     resources :participantes
