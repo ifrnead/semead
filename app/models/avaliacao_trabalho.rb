@@ -4,6 +4,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
   belongs_to :linha
 
   before_create :definir_situacao
+  after_update :verificar_discrepancia
 
   validates :situacao, :atende_normas, :tematica_evento, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true
   validates :parecer, presence: true, if: :reprovado?
@@ -31,6 +32,21 @@ class AvaliacaoTrabalho < ActiveRecord::Base
     parcialmente: 0,
     nao_atende: -1
   }
+
+  def verificar_discrepancia
+    if self.trabalho.avaliacoes.where(situacao: SITUACOES[:pendente]) > 0
+      return
+    end
+
+    if self.trabalho.avaliacoes.size == 2
+      avaliacao1 = self.trabalho.avaliacoes.first
+      avaliacao2 = self.trabalho.avaliacoes.last
+
+      if avaliacao1.situacao != avaliacao2.situacao
+        self.trabalho.atribuir_avaliador
+      end
+    end
+  end
 
   def reprovado?
     self.situacao == SITUACOES[:reprovado]

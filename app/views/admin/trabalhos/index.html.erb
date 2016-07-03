@@ -30,7 +30,13 @@
           <td><%= trabalho.participante.nome %></td>
           <td><%= trabalho.linha.nome %></td>
           <td><%= trabalho.tipo_trabalho.nome %></td>
-          <td><%= situacao(trabalho.minha_avaliacao(current_user.autenticavel).situacao).html_safe %></td>
+          <td>
+            <% if trabalho.minha_avaliacao(current_user.autenticavel).present? %>
+              <%= situacao(trabalho.minha_avaliacao(current_user.autenticavel).situacao).html_safe %>
+            <% else %>
+              -
+            <% end %>
+          </td>
           <td><%= situacao(trabalho.situacao).html_safe %></td>
           <td>
             <div class="btn-group">

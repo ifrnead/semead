@@ -17,9 +17,14 @@ class TrabalhosController < ApplicationController
 
   # GET /trabalhos/new
   def new
-    @trabalho = Trabalho.new
-    @trabalho.participante = current_user.autenticavel
-    authorize! :create, @trabalho
+    if Config.permitir_submissao_trabalhos?
+      @trabalho = Trabalho.new
+      @trabalho.participante = current_user.autenticavel
+      authorize! :create, @trabalho
+    else
+      redirect_to prazo_encerrado_trabalhos_path
+    end
+
   end
 
   # GET /trabalhos/1/edit
@@ -68,6 +73,9 @@ class TrabalhosController < ApplicationController
       format.html { redirect_to trabalhos_url, notice: 'Trabalho excluído com sucesso!' }
       format.json { head :no_content }
     end
+  end
+
+  def prazo_encerrado
   end
 
   private

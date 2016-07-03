@@ -6,7 +6,7 @@ class Participante < ActiveRecord::Base
   belongs_to :pais
   has_one :usuario, as: :autenticavel, dependent: :destroy
   has_many :trabalhos, dependent: :destroy
-  has_many :pagamentos
+  has_many :pagamentos, dependent: :destroy
 
   validates :nome, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'pagamentos/notificar'
 
-  resources :trabalhos
+  resources :trabalhos do
+    get 'prazo_encerrado', on: :collection
+  end
   namespace :admin do
     resources :participantes
     resources :organizadores
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', as: :logout
   get 'admin' => 'admin#index', as: :admin
   get 'participacao' => 'participantes#participacao', as: :participacao
+  get 'inscricoes_encerradas' => 'participantes#inscricoes_encerradas', as: :inscricoes_encerradas
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

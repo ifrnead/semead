@@ -12,13 +12,13 @@ class Pagamento < ActiveRecord::Base
     :in_mediation => 'Em mediação',
     :rejected => 'Negado',
     :cancelled => 'Cancelado',
-    :refunded  => 'Reembolsado',
-    :charged_back => 'Chargeback'
+    :refunded  => 'Devolvido',
+    :charged_back => 'Devolvido'
   }
 
   def self.gerar(participante)
     mp_client = MercadoPago::Client.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
-    mp_client.sandbox_mode(true) if Rails.env.development?
+    mp_client.sandbox_mode(true) if Config.dev?
 
     pagamento = Pagamento.create(participante: participante)
 
@@ -39,9 +39,9 @@ class Pagamento < ActiveRecord::Base
         email: pagamento.participante.email
       },
       back_urls: {
-        pending: "http://ead.ifrn.edu.br/semead/pagamento-pendente",
-        success: "http://ead.ifrn.edu.br/semead/pagamento-aprovado",
-        failure: "http://ead.ifrn.edu.br/semead/pagamento-falhou"
+        pending: "http://eventos.ifrn.edu.br/semead/pagamentos/processamento",
+        success: "http://eventos.ifrn.edu.br/semead/pagamento/aprovado",
+        failure: "http://eventos.ifrn.edu.br/semead/pagamento/falhou"
       },
       expires: true,
       expiration_date_to: "#{pagamento.prazo.to_s}T23:59:59.999-03:00"

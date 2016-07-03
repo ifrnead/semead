@@ -21,10 +21,12 @@ class Trabalho < ActiveRecord::Base
   end
 
   def definir_avaliadores
-    2.times {
-      avaliacao = AvaliacaoTrabalho.new(trabalho: self, organizador: self.linha.proximo_avaliador)
-      avaliacao.save(validate: false)
-    }
+    2.times { self.atribuir_avaliador }
+  end
+
+  def atribuir_avaliador
+    avaliacao = AvaliacaoTrabalho.new(trabalho: self, organizador: self.linha.proximo_avaliador)
+    avaliacao.save(validate: false)
   end
 
   def situacao
