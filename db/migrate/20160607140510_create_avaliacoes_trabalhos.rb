@@ -4,6 +4,8 @@ class CreateAvaliacoesTrabalhos < ActiveRecord::Migration
       t.integer :situacao
       t.integer :atende_normas
       t.integer :tematica_evento
+      t.integer :linha_tematica
+      t.integer :linha_id
       t.integer :relevancia
       t.integer :adequacao
       t.integer :consistencia

@@ -17,13 +17,14 @@ ActiveRecord::Schema.define(version: 20160622142806) do
     t.integer  "situacao",        limit: 4
     t.integer  "atende_normas",   limit: 4
     t.integer  "tematica_evento", limit: 4
+    t.integer  "linha_tematica",  limit: 4
+    t.integer  "linha_id",        limit: 4
     t.integer  "relevancia",      limit: 4
     t.integer  "adequacao",       limit: 4
     t.integer  "consistencia",    limit: 4
     t.integer  "interlocucao",    limit: 4
     t.integer  "originalidade",   limit: 4
     t.string   "parecer",         limit: 255
-    t.integer  "linha_id",        limit: 4
     t.integer  "trabalho_id",     limit: 4
     t.integer  "organizador_id",  limit: 4
     t.datetime "created_at",                  null: false
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 20160622142806) do
     t.string   "mercado_pago_id",    limit: 255
     t.text     "init_point",         limit: 65535
     t.text     "sandbox_init_point", limit: 65535
-    t.string   "situacao"
+    t.string   "situacao",           limit: 255
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end

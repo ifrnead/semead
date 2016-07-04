@@ -6,7 +6,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
   before_create :definir_situacao
   after_update :verificar_discrepancia
 
-  validates :situacao, :atende_normas, :tematica_evento, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true
+  validates :situacao, :atende_normas, :tematica_evento, :tematica_linha, :linha_id, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true, on: :update
   validates :parecer, presence: true, if: :reprovado?
   validates :linha_id, presence: true, if: :outra_linha?
 
@@ -23,6 +23,11 @@ class AvaliacaoTrabalho < ActiveRecord::Base
   }
 
   TEMATICA_EVENTO = {
+    sim: 1,
+    nao: 0
+  }
+
+  TEMATICA_LINHA = {
     sim: 1,
     nao: 0
   }

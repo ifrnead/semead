@@ -2,7 +2,7 @@ class Trabalho < ActiveRecord::Base
   belongs_to :linha
   belongs_to :participante
   belongs_to :tipo_trabalho
-  has_many :avaliacoes, class_name: 'AvaliacaoTrabalho'
+  has_many :avaliacoes, class_name: 'AvaliacaoTrabalho', dependent: :destroy
 
   before_destroy :apagar_arquivo
   after_create :definir_avaliadores
@@ -24,9 +24,32 @@ class Trabalho < ActiveRecord::Base
     2.times { self.atribuir_avaliador }
   end
 
+  def avaliadores
+    avaliadores = Array.new
+    self.avaliacoes.each do |avaliacao|
+      avaliadores << avaliacao.organizador
+    end
+    return avaliadores
+  end
+
   def atribuir_avaliador
-    avaliacao = AvaliacaoTrabalho.new(trabalho: self, organizador: self.linha.proximo_avaliador)
-    avaliacao.save(validate: false)
+    avaliadores_candidatos = (self.linha.organizadores - self.avaliadores)
+    byebug
+    if avaliadores_candidatos.empty?
+      raise RuntimeError, 'Não há avaliadores suficientes para atribuir!'
+    end
+
+    avaliacoes = avaliadores_candidatos.first.avaliacoes_trabalhos.size
+    avaliador = avaliadores_candidatos.first
+
+    avaliadores_candidatos.each do |candidato|
+      if candidato.avaliacoes_trabalhos.size < avaliacoes
+        avaliacoes = candidato.avaliacoes_trabalhos.size
+        avaliador = candidato
+      end
+    end
+
+    self.avaliacoes << AvaliacaoTrabalho.new(trabalho: self, organizador: avaliador)
   end
 
   def situacao

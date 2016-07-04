@@ -60,6 +60,10 @@
 
   <div class="row">
     <div class="col-md-5">
+      <%= f.form_group :tematica_linha, label: { text: 'O tema está inserido na linha temática a que foi submetido? *' } do %>
+        <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:sim], label: 'Sim' %>
+        <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:nao], label: 'Não', checked: true %>
+      <% end %>
       <%= f.form_group :atende_normas, label: { text: 'Atende às normas da Holos? *' } do %>
         <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:sim], label: 'Sim' %>
         <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:nao], label: 'Não/recusado' %>
