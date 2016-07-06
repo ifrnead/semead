@@ -3,6 +3,12 @@
     $(function() {
       $(".oculto").hide();
 
+      <% if @avaliacao.outra_linha? %>
+        $(".avaliacao").hide();
+        $("#parecer").show();
+        $("#linha").show();
+      <% end %>
+
       <% if @avaliacao.errors.present? %>
         <% @avaliacao.errors.messages.each_pair do |field, message| %>
           $("label[for='avaliacao_trabalho_<%= field %>']").addClass('campo_obrigatorio');
@@ -19,28 +25,20 @@
       <% end %>
     });
 
+    function toggle_avaliacao() {
+      $(".avaliacao").toggle('blind');
+      $("#parecer").toggle('blind');
+      $("#linha").toggle('blind');
+    }
+
     function avaliacao(situacao) {
       if(situacao == 'aprovado') {
         $("#linha").hide('blind');
-        $("#parecer").hide('blind');
-      } else if(situacao == 'outra_linha') {
-        $("#linha").show('blind');
         $("#parecer").hide('blind');
       } else if(situacao == 'reprovado') {
         $("#linha").hide('blind');
         $("#parecer").show('blind');
       }
-    }
-
-    function validar() {
-      validacao = true;
-
-      if($("input[name='avaliacao_trabalho[situacao]']:checked").val() == undefined) {
-        $("label[for='avaliacao_trabalho_situacao']").parent().addClass('has-error');
-        validacao = false;
-      }
-
-      return validacao;
     }
   </script>
 <% end %>
@@ -59,35 +57,26 @@
 <%= bootstrap_form_for(@avaliacao, url: admin_trabalho_avaliacao_path(@avaliacao.trabalho, @avaliacao)) do |f| %>
 
   <div class="row">
-    <div class="col-md-5">
-      <%= f.form_group :tematica_linha, label: { text: 'O tema está inserido na linha temática a que foi submetido? *' } do %>
-        <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:sim], label: 'Sim' %>
-        <%= f.radio_button :tematica_linha, AvaliacaoTrabalho::TEMATICA_LINHA[:nao], label: 'Não', checked: true %>
+    <div class="col-md-12">
+      <%= f.form_group :linha_tematica, label: { text: 'O tema está inserido na linha temática a que foi submetido? *' } do %>
+        <%= f.radio_button :linha_tematica, AvaliacaoTrabalho::LINHA_TEMATICA[:sim], label: 'Sim', checked: true, onchange: 'toggle_avaliacao()' %>
+        <%= f.radio_button :linha_tematica, AvaliacaoTrabalho::LINHA_TEMATICA[:nao], label: 'Não', onchange: 'toggle_avaliacao()' %>
       <% end %>
-      <%= f.form_group :atende_normas, label: { text: 'Atende às normas da Holos? *' } do %>
+      <div id="linha" class="oculto">
+        <%= f.select :linha_id, Linha.select, { prompt: 'Selecione', label: 'Linha a qual o trabalho deve ser submetido' } %>
+      </div>
+      <%= f.form_group :atende_normas, class: 'avaliacao', label: { text: 'Atende às normas da Holos? *' } do %>
         <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:sim], label: 'Sim' %>
         <%= f.radio_button :atende_normas, AvaliacaoTrabalho::ATENDE_NORMAS[:nao], label: 'Não/recusado' %>
       <% end %>
-      <%= f.form_group :tematica_evento, label: { text: 'O tema está inserido na temática do evento? *' } do %>
+      <%= f.form_group :tematica_evento, class: 'avaliacao', label: { text: 'O tema está inserido na temática do evento? *' } do %>
         <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:sim], label: 'Sim' %>
         <%= f.radio_button :tematica_evento, AvaliacaoTrabalho::TEMATICA_EVENTO[:nao], label: 'Não/recusado' %>
       <% end %>
     </div>
-    <div class="col-md-7">
-      <div class="panel panel-default">
-        <div class="panel-heading">Instruções de preenchimento</div>
-        <div class="panel-body">
-          <ul>
-            <li>Os campos marcados com * são obrigatórios</li>
-            <li>O campo 'Linha a qual o trabalho deve ser submetido' deve ser preenchido quando a avaliação final julgar que o trabalho deve ser submetido para outra linha de pesquisa</li>
-            <li>O campo 'Parecer' deve ser preenchido quando o trabalho não for aceito</li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover avaliacao">
     <thead>
       <tr>
         <th>Itens</th>
@@ -146,21 +135,15 @@
   </table>
 
   <div class="row">
-    <div class="col-md-5">
-      <%= f.form_group :situacao, label: { text: 'Qual a sua avaliação final sobre esse trabalho? *' } do %>
+    <div class="col-md-12">
+      <%= f.form_group :situacao, class: 'avaliacao', label: { text: 'Qual a sua avaliação final sobre esse trabalho? *' } do %>
         <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:aprovado], label: 'Aprovado', onchange: "avaliacao('aprovado')" %>
-        <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:outra_linha], label: 'Submeter para outra linha de pesquisa', onchange: "avaliacao('outra_linha')" %>
         <%= f.radio_button :situacao, AvaliacaoTrabalho::SITUACOES[:reprovado], label: 'Não aceito', onchange: "avaliacao('reprovado')" %>
       <% end %>
-    </div>
-    <div class="col-md-7">
-      <div id="linha" class="oculto">
-        <%= f.select :linha_id, Linha.select, { prompt: 'Selecione', label: 'Linha a qual o trabalho deve ser submetido' } %>
-      </div>
       <div id="parecer" class="oculto">
         <%= f.text_area :parecer, class: "form-control", label: 'Parecer', placeholder: 'Justifique a sua avaliação' %>
       </div>
     </div>
   </div>
-  <%= f.submit "Enviar", class: 'btn btn-primary', onclick: 'return validar()' %>
+  <%= f.submit "Enviar", class: 'btn btn-primary' %>
 <% end %>

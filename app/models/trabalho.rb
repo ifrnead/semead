@@ -24,17 +24,27 @@ class Trabalho < ActiveRecord::Base
     2.times { self.atribuir_avaliador }
   end
 
-  def avaliadores
+  def avaliacoes_linha_atual
+    avaliadores = self.avaliadores(self.linha)
+    return self.avaliacoes.where("organizador_id in (#{avaliadores.map(&:id).join(',')})")
+  end
+
+  def avaliadores(linha = nil)
     avaliadores = Array.new
     self.avaliacoes.each do |avaliacao|
-      avaliadores << avaliacao.organizador
+      if linha.present?
+        if avaliacao.organizador.linhas.include?(linha)
+          avaliadores << avaliacao.organizador
+        end
+      else
+        avaliadores << avaliacao.organizador
+      end
     end
     return avaliadores
   end
 
   def atribuir_avaliador
     avaliadores_candidatos = (self.linha.organizadores - self.avaliadores)
-    byebug
     if avaliadores_candidatos.empty?
       raise RuntimeError, 'Não há avaliadores suficientes para atribuir!'
     end
@@ -53,7 +63,8 @@ class Trabalho < ActiveRecord::Base
   end
 
   def situacao
-    self.avaliacoes.each do |avaliacao|
+    avaliacoes = self.avaliacoes_linha_atual
+    avaliacoes.each do |avaliacao|
       if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:pendente]
         return AvaliacaoTrabalho::SITUACOES[:pendente]
       end
@@ -62,7 +73,7 @@ class Trabalho < ActiveRecord::Base
     aprovadas = 0
     reprovadas = 0
     outra_linha = 0
-    self.avaliacoes.each do |avaliacao|
+    avaliacoes.each do |avaliacao|
       aprovadas = aprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
       reprovadas = reprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:reprovado]
       outra_linha = outra_linha + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:outra_linha]

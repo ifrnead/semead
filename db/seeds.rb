@@ -143,7 +143,7 @@ tloureiro = Organizador.create(nome: 'Thiago Loureiro', usuario: tloureiro)
 
 puts "Criando linhas de pesquisa..."
 
-linha_politicas = Linha.create(nome: 'Políticas e Institucionalização da EAD', slug: 'politicas_institucionalizacao')
+linha_politicas = Linha.create(nome: 'Políticas e Institucionalização da EaD', slug: 'politicas_institucionalizacao')
 linha_modelos = Linha.create(nome: 'Modelos e Experiências pedagógicas em EaD', slug: 'modelos_experiencias_pedagogicas')
 linha_formacao = Linha.create(nome: 'Formação Docente em EaD', slug: 'formacao_docente')
 linha_solucoes = Linha.create(nome: 'Soluções Tecnológicas para EaD', slug: 'solucoes_tecnologicas')

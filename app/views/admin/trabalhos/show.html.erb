@@ -31,12 +31,14 @@
     <thead>
       <th>Avaliador</th>
       <th>Avaliação</th>
+      <th>Opções</th>
     </thead>
     <tbody>
       <% @avaliacoes.each do |avaliacao| %>
         <tr>
           <td><%= avaliacao.organizador.nome %></td>
           <td><%= situacao(avaliacao.situacao).html_safe %></td>
+          <td><%= link_to fa_icon('eye'), admin_trabalho_avaliacao_path(avaliacao.trabalho, avaliacao), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>

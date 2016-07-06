@@ -5,5 +5,5 @@
   <%= f.file_field :arquivo, label: 'Arquivo (pdf)' %>
   <%= f.select :linha_id, Linha.select, prompt: 'Selecione' %>
   <%= f.select :tipo_trabalho_id, TipoTrabalho.select, prompt: 'Selecione' %>
-  <%= f.submit 'Enviar' %>
+  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
 <% end %>

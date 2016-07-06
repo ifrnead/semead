@@ -43,7 +43,7 @@
               <% if can? :show, trabalho %>
                 <%= link_to fa_icon('download'), trabalho.arquivo.url, title: 'Download', class: 'btn btn-primary btn-sm' %>
               <% end %>
-              <% if can? :edit, trabalho.minha_avaliacao(current_user.autenticavel) %>
+              <% if trabalho.minha_avaliacao(current_user.autenticavel).present? %>
                 <%= link_to fa_icon('gavel'), admin_trabalho_avaliar_path(trabalho), title: 'Avaliar', class: 'btn btn-primary btn-sm' %>
               <% end %>
               <% if can? :show, trabalho %>

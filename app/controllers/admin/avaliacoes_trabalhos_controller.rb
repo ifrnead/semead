@@ -46,6 +46,6 @@ class Admin::AvaliacoesTrabalhosController < ApplicationController
   end
 
   def avaliacao_params
-    params.require(:avaliacao_trabalho).permit(:atende_normas, :tematica_evento, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, :situacao, :parecer, :linha_id)
+    params.require(:avaliacao_trabalho).permit(:atende_normas, :tematica_evento, :linha_tematica, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, :situacao, :parecer, :linha_id)
   end
 end

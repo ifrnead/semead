@@ -48,7 +48,11 @@ class Admin::TrabalhosController < ApplicationController
     trabalho = Trabalho.find(params[:trabalho_id])
     authorize! :show, trabalho
     avaliacao = trabalho.minha_avaliacao(current_user.autenticavel)
-    redirect_to edit_admin_trabalho_avaliacao_path(trabalho, avaliacao)
+    if avaliacao.present?
+      redirect_to edit_admin_trabalho_avaliacao_path(trabalho, avaliacao)
+    else
+      redirect_to admin_trabalhos_path, alert: 'Você não é avaliador desse trabalho!'
+    end
   end
 
   private

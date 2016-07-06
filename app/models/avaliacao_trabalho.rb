@@ -4,11 +4,12 @@ class AvaliacaoTrabalho < ActiveRecord::Base
   belongs_to :linha
 
   before_create :definir_situacao
+  before_update :verificar_situacao
   after_update :verificar_discrepancia
 
-  validates :situacao, :atende_normas, :tematica_evento, :tematica_linha, :linha_id, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true, on: :update
+  validates :situacao, :atende_normas, :tematica_evento, :linha_tematica, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true, on: :update, unless: :outra_linha?
   validates :parecer, presence: true, if: :reprovado?
-  validates :linha_id, presence: true, if: :outra_linha?
+  validates :linha_id, :parecer, presence: true, if: :outra_linha?
 
   SITUACOES = {
     reprovado: -1,
@@ -27,7 +28,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
     nao: 0
   }
 
-  TEMATICA_LINHA = {
+  LINHA_TEMATICA = {
     sim: 1,
     nao: 0
   }
@@ -38,17 +39,33 @@ class AvaliacaoTrabalho < ActiveRecord::Base
     nao_atende: -1
   }
 
+  def verificar_situacao
+    if self.outra_linha?
+      self.situacao = SITUACOES[:outra_linha]
+    end
+  end
+
   def verificar_discrepancia
-    if self.trabalho.avaliacoes.where(situacao: SITUACOES[:pendente]) > 0
+    if self.trabalho.avaliacoes_linha_atual.where(situacao: SITUACOES[:pendente]).size > 0
       return
     end
 
-    if self.trabalho.avaliacoes.size == 2
-      avaliacao1 = self.trabalho.avaliacoes.first
-      avaliacao2 = self.trabalho.avaliacoes.last
+    avaliacoes = self.trabalho.avaliacoes_linha_atual
+    if avaliacoes.size == 2
+      avaliacao1 = avaliacoes.first
+      avaliacao2 = avaliacoes.last
 
       if avaliacao1.situacao != avaliacao2.situacao
         self.trabalho.atribuir_avaliador
+      end
+
+      if avaliacao1.outra_linha? and avaliacao2.outra_linha?
+        if avaliacao1.linha.id == avaliacao2.linha.id
+          self.trabalho.update_attributes(linha: avaliacao1.linha)
+          self.trabalho.definir_avaliadores
+        else
+          self.trabalho.atribuir_avaliador
+        end
       end
     end
   end
@@ -62,7 +79,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
   end
 
   def outra_linha?
-    self.situacao == SITUACOES[:outra_linha]
+    self.linha_tematica == LINHA_TEMATICA[:nao]
   end
 
   def pendente?
