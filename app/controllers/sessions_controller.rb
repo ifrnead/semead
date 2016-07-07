@@ -14,13 +14,12 @@ class SessionsController < ApplicationController
         redirect_to admin_path
       end
     else
-      flash.alert = 'E-mail e/ou senha inválido(s)!'
-      render 'new'
+      redirect_to new_session_path, alert: 'E-mail e/ou senha inválido(s)!'
     end
   end
 
   def destroy
     session[:usuario_id] = nil
-    redirect_to root_path, notice: 'Saiu do sistema.'
+    redirect_to "http://ead.ifrn.edu.br/semead"
   end
 end

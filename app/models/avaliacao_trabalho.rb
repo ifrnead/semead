@@ -67,6 +67,32 @@ class AvaliacaoTrabalho < ActiveRecord::Base
           self.trabalho.atribuir_avaliador
         end
       end
+    elsif avaliacoes.size == 3
+      aprovadas = 0
+      reprovadas = 0
+      outra_linha = 0
+      avaliacoes.each do |avaliacao|
+        aprovadas = aprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
+        reprovadas = reprovadas + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:reprovado]
+        outra_linha = outra_linha + 1 if avaliacao.situacao == AvaliacaoTrabalho::SITUACOES[:outra_linha]
+      end
+
+      if outra_linha > aprovadas and outra_linha > reprovadas
+        avaliacao1 = avaliacoes[0]
+        avaliacao2 = avaliacoes[1]
+        avaliacao3 = avaliacoes[2]
+
+        if avaliacao1.linha_id == avaliacao2.linha_id
+          self.trabalho.update_attributes(linha: avaliacao1.linha)
+          self.trabalho.definir_avaliadores
+        elsif avaliacao1.linha_id == avaliacao3.linha_id
+          self.trabalho.update_attributes(linha: avaliacao1.linha)
+          self.trabalho.definir_avaliadores
+        elsif avaliacao2.linha_id == avaliacao3.linha_id
+          self.trabalho.update_attributes(linha: avaliacao2.linha)
+          self.trabalho.definir_avaliadores
+        end
+      end
     end
   end
 
