@@ -9,34 +9,86 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <% if @avaliacao.outra_linha? %>
-      <p>
-        <strong>O tema está inserido na linha temática a que foi submetido?</strong>
-        <% if @avaliacao.linha_tematica == AvaliacaoTrabalho::LINHA_TEMATICA[:sim] %>
-          Sim
-        <% else %>
-          Não, o trabalho deve ser submetido para <%= @avaliacao.linha.nome %>.
-        <% end %>
-      </p>
+<p>
+  <strong>Avaliador(a):</strong> <%= @avaliacao.organizador.nome %><br>
+</p>
+
+<% if @avaliacao.outra_linha? %>
+  <p>
+    <strong>O tema está inserido na linha temática a que foi submetido?</strong><br>
+    Não, o trabalho deve ser submetido para <%= @avaliacao.linha.nome %>.
+  </p>
+  <p>
+    <strong>Parecer</strong><br>
+    <%= @avaliacao.parecer %>
+  </p>
+<% else %>
+  <p>
+    <strong>Atende às normas da Holos?</strong>
+    <% if @avaliacao.atende_normas == AvaliacaoTrabalho::ATENDE_NORMAS[:sim] %>
+      Sim
     <% else %>
-      <p>
-        <strong>Atende às normas da Holos?</strong>
-        <% if @avaliacao.atende_normas == AvaliacaoTrabalho::ATENDE_NORMAS[:sim] %>
-          Sim
-        <% else %>
-          Não/recusado
-        <% end %>
-      </p>
-      <p>
-        <strong>O tema está inserido na temática do evento?</strong>
-        <% if @avaliacao.tematica_evento == AvaliacaoTrabalho::TEMATICA_EVENTO[:sim] %>
-          Sim
-        <% else %>
-          Não/recusado
-        <% end %>
-      </p>
+      Não/recusado
     <% end %>
-  </div>
-</div>
+  </p>
+  <p>
+    <strong>O tema está inserido na temática do evento?</strong>
+    <% if @avaliacao.tematica_evento == AvaliacaoTrabalho::TEMATICA_EVENTO[:sim] %>
+      Sim
+    <% else %>
+      Não/recusado
+    <% end %>
+  </p>
+
+  <table class="table table-bordered table-hover avaliacao">
+    <thead>
+      <tr>
+        <th>Itens</th>
+        <th>Atende</th>
+        <th>Parcialmente</th>
+        <th>Não atende</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1. Relevância e pertinência do trabalho para a linha temática a que foi submetido</td>
+        <td><%= fa_icon('check') if @avaliacao.relevancia == AvaliacaoTrabalho::ITENS[:atende] %></td>
+        <td><%= fa_icon('check') if @avaliacao.relevancia == AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
+        <td><%= fa_icon('check') if @avaliacao.relevancia == AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
+      </tr>
+      <tr>
+        <td>2. Adequação conceitual na formulação dos problemas</td>
+        <td><%= fa_icon('check') if @avaliacao.adequacao == AvaliacaoTrabalho::ITENS[:atende] %></td>
+        <td><%= fa_icon('check') if @avaliacao.adequacao == AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
+        <td><%= fa_icon('check') if @avaliacao.adequacao == AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
+      </tr>
+      <tr>
+        <td>3. Consistência e rigor na abordagem teórico-metodológica e na argumentação</td>
+        <td><%= fa_icon('check') if @avaliacao.consistencia == AvaliacaoTrabalho::ITENS[:atende] %></td>
+        <td><%= fa_icon('check') if @avaliacao.consistencia == AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
+        <td><%= fa_icon('check') if @avaliacao.consistencia == AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
+      </tr>
+      <tr>
+        <td>4. Interlocução com a produção da área da educação a distância, em particular com os temas propostos pela linha temática a que o trabalho foi submetido</td>
+        <td><%= fa_icon('check') if @avaliacao.interlocucao == AvaliacaoTrabalho::ITENS[:atende] %></td>
+        <td><%= fa_icon('check') if @avaliacao.interlocucao == AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
+        <td><%= fa_icon('check') if @avaliacao.interlocucao == AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
+      </tr>
+      <tr>
+        <td>5. Originalidade e contribuição para o avanço do conhecimento na área do evento especialmente para a linha temática a que foi submetido</td>
+        <td><%= fa_icon('check') if @avaliacao.originalidade == AvaliacaoTrabalho::ITENS[:atende] %></td>
+        <td><%= fa_icon('check') if @avaliacao.originalidade == AvaliacaoTrabalho::ITENS[:parcialmente] %></td>
+        <td><%= fa_icon('check') if @avaliacao.originalidade == AvaliacaoTrabalho::ITENS[:nao_atende] %></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>Avaliação final:</strong> <%= situacao(@avaliacao.situacao).html_safe %>
+  </p>
+  <% if @avaliacao.reprovado? %>
+    <p>
+      <strong>Parecer</strong><br>
+      <%= @avaliacao.parecer %>
+    </p>
+  <% end %>
+<% end %>

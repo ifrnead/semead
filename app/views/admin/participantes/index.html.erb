@@ -16,6 +16,7 @@
       <th>Nome</th>
       <th>CPF/Passaporte</th>
       <th>País/Cidade</th>
+      <th>Observações</th>
       <th>Opções</th>
     </thead>
     <tbody>
@@ -29,6 +30,9 @@
             <% else %>
               <%= participante.pais.nome %>
             <% end %>
+          </td>
+          <td>
+            <%= icons_listagem_participante(participante).html_safe %>
           </td>
           <td>
             <div class="btn-group">

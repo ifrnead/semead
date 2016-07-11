@@ -7,11 +7,12 @@ class Ability
 
     if usuario.admin?
       can :manage, :all
+      can :aprovar_nota_empenho, Participante
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
       can :manage, Organizador
-      can [ :show, :index, :edit, :update ], Participante
+      can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
       can [ :show, :index ], Trabalho
     end
 
@@ -35,8 +36,7 @@ class Ability
     end
 
     if usuario.tem_perfil?('secretario')
-      can [ :show, :index, :edit, :update ], Participante
-      can [ :show, :index, :edit, :update ], Organizador
+      can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
     end
 
     if usuario.tem_perfil?('participante')

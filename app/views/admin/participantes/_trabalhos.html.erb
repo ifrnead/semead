@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Linha de pesquisa</th>
+      <th>Tipo de trabalho</th>
+      <th colspan="3">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @participante.trabalhos.each do |trabalho| %>
+      <tr>
+        <td><%= trabalho.titulo %></td>
+        <td><%= trabalho.linha.nome %></td>
+        <td><%= trabalho.tipo_trabalho.nome %></td>
+        <td>
+          <div class="btn-group">
+            <% if can? :show, trabalho %>
+              <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
+              <%= link_to fa_icon('eye'), trabalho, class: 'btn btn-primary btn-sm' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

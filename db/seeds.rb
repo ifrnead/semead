@@ -141,6 +141,11 @@ lidiane = Organizador.create(nome: 'Lidiane Medeiros', usuario: lidiane)
 tloureiro = Usuario.create(email: 'thiago.loureiro@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
 tloureiro = Organizador.create(nome: 'Thiago Loureiro', usuario: tloureiro)
 
+# Secretaria
+
+isaac = Usuario.create(email: 'isaac.ribeiro@ifrn.edu.br', password: '321mud@r', perfil: secretario)
+Organizador.create(nome: 'Isaac Newton', usuario: isaac)
+
 puts "Criando linhas de pesquisa..."
 
 linha_politicas = Linha.create(nome: 'Políticas e Institucionalização da EaD', slug: 'politicas_institucionalizacao')

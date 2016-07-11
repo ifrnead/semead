@@ -18,7 +18,15 @@
     <% if @participante.pago? %>
       <span class="label label-primary">Pagamento confirmado</span>
     <% else %>
-      <span class="label label-danger">Pagamento pendente</span><br>
+      <% if @participante.pagamento_por_empenho? %>
+        <span class="label label-warning">Verificação da nota de empenho</span>
+      <% else %>
+        <span class="label label-danger">Pagamento pendente</span>
+      <% end %>
     <% end %>
   </dd>
+  <% if @participante.pagamento_por_empenho? %>
+    <dt>Nota de empenho: </dt>
+    <dd><%= link_to fa_icon('download'), @participante.nota_empenho.url %></dd>
+  <% end %>
 </dl>

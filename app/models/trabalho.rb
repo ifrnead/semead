@@ -89,4 +89,16 @@ class Trabalho < ActiveRecord::Base
       return AvaliacaoTrabalho::SITUACOES[:pendente]
     end
   end
+
+  def aprovado?
+    return self.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
+  end
+
+  def reprovado?
+    return self.situacao == AvaliacaoTrabalho::SITUACOES[:reprovado]
+  end
+
+  def outra_linha?
+    return self.situacao == AvaliacaoTrabalho::SITUACOES[:outra_linha]
+  end
 end

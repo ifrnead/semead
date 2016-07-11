@@ -1,3 +1,13 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    function aprovar_nota_empenho() {
+      if(confirm("Tem certeza que deseja aprovar o pagamento por nota de empenho?")) {
+        redirect("<%= admin_participante_aprovar_nota_empenho_path(@participante) %>");
+      }
+    }
+  </script>
+<% end %>
+
 <div class="row">
   <div class="col-md-6">
     <h1><%= fa_icon 'eye' %> Detalhar Participante</h1>
@@ -5,6 +15,9 @@
   <div class="col-md-6">
     <div class="btn-group pull-right">
       <div class="btn-group">
+        <% if can? :aprovar_nota_empenho, @participante and @participante.pagamento_por_empenho? and !(@participante.pago?) %>
+          <%= link_to fa_icon('money') + " Aprovar nota de empenho", "javascript:void(0)", onclick: "aprovar_nota_empenho()", class: "btn btn-primary" %>
+        <% end %>
         <% if can? :update, @participante %>
           <%= link_to fa_icon('edit') + " Editar", edit_admin_participante_path(@participante), class: "btn btn-primary" %>
         <% end %>
@@ -23,30 +36,8 @@
 
 <h2><%= fa_icon 'file-text-o' %> Trabalhos</h2>
 
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Titulo</th>
-      <th>Linha de pesquisa</th>
-      <th>Tipo de trabalho</th>
-      <th colspan="3">Opções</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @participante.trabalhos.each do |trabalho| %>
-      <tr>
-        <td><%= trabalho.titulo %></td>
-        <td><%= trabalho.linha.nome %></td>
-        <td><%= trabalho.tipo_trabalho.nome %></td>
-        <td>
-          <div class="btn-group">
-            <% if can? :show, trabalho %>
-              <%= link_to fa_icon('download'), trabalho.arquivo.url, class: 'btn btn-primary btn-sm' %>
-              <%= link_to fa_icon('eye'), trabalho, class: 'btn btn-primary btn-sm' %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @participante.trabalhos.size > 0 %>
+  <%= render partial: 'trabalhos' %>
+<% else %>
+  <p>Nenhum trabalho submetido até o momento.</p>
+<% end %>

@@ -41,3 +41,7 @@ h1 {
 .control-label {
   font-weight: bold !important;
 }
+
+i.fa-disabled {
+  color: #ccc;
+}

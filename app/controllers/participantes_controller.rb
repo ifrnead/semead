@@ -55,6 +55,6 @@ class ParticipantesController < ApplicationController
   private
 
     def participante_params
-      params.require(:participante).permit(:nome, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, usuario_attributes: [ :email, :password, :password_confirmation ])
+      params.require(:participante).permit(:nome, :documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, :pagamento_por_empenho, :nota_empenho, usuario_attributes: [ :email, :password, :password_confirmation ])
     end
 end

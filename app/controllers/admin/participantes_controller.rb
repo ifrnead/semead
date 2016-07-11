@@ -9,6 +9,13 @@ class Admin::ParticipantesController < ApplicationController
     authorize! :update, @participante
   end
 
+  def aprovar_nota_empenho
+    authorize! :aprovar_nota_empenho, Participante
+    @participante = Participante.find(params[:participante_id])
+    @participante.update_attributes(pago: true)
+    redirect_to admin_participante_path(@participante), notice: 'Pagamento por nota de empenho aprovada!'
+  end
+
   def new
     @participante = Participante.new
     @participante.usuario = Usuario.new

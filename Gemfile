@@ -6,7 +6,7 @@ gem 'validates_cpf_cnpj'
 gem 'validates'
 gem "select2-rails"
 gem 'cancancan', '~> 1.10'
-gem "paperclip", "~> 5.0.0.beta1"
+gem "paperclip", "~> 5.0.0"
 gem 'mercadopago'
 gem 'rake', '11.2.2'
 

@@ -19,18 +19,20 @@
         <% else %>
           <li <%= "class=active" if request.path.eql?("/admin") %>><a href="<%= admin_path %>"><%= fa_icon 'dashboard' %> Painel</a></li>
         <% end %>
-        <% if can? :manage, Participante %>
+        <% if can? :index, Participante %>
           <li <%= "class=active" if request.path.include?('/participantes') %>><a href="<%= admin_participantes_path %>"><%= fa_icon 'users' %> Participantes</a></li>
         <% end %>
         <% if current_user.tem_perfil?('participante') %>
           <li <%= "class=active" if request.path.include?('/trabalhos') %>><a href="<%= trabalhos_path %>"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
         <% else %>
-          <li <%= "class=active" if request.path.include?('/trabalhos') %>><a href="<%= admin_trabalhos_path %>"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
+          <% if can? :index, Trabalho %>
+            <li <%= "class=active" if request.path.include?('/trabalhos') %>><a href="<%= admin_trabalhos_path %>"><%= fa_icon 'file-text-o' %> Trabalhos</a></li>
+          <% end %>
         <% end %>
         <% if false %>
           <li <%= "class=active" if request.path.include?('/minicursos') %>><a href="#"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
         <% end %>
-        <% if can? :manage, Organizador %>
+        <% if can? :index, Organizador %>
           <li <%= "class=active" if request.path.include?('/organizadores') %>><a href="<%= admin_organizadores_path %>"><%= fa_icon 'user' %> Organizadores</a></li>
         <% end %>
       </ul>

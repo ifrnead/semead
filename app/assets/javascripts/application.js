@@ -16,3 +16,7 @@
 //= require select2-full
 //= require select2_locale_pt-BR
 //= require_tree .
+
+function redirect(url) {
+  location.href = url;
+}

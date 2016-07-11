@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     get 'prazo_encerrado', on: :collection
   end
   namespace :admin do
-    resources :participantes
+    resources :participantes do
+      get 'aprovar_nota_empenho'
+    end
     resources :organizadores
     resources :trabalhos do
       get 'avaliar'

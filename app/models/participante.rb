@@ -8,11 +8,14 @@ class Participante < ActiveRecord::Base
   has_many :trabalhos, dependent: :destroy
   has_many :pagamentos, dependent: :destroy
 
+  has_attached_file :nota_empenho
+
   validates :nome, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"
   validates :documento, cpf: true, if: "pais_id == 33"
   validates :documento, uniqueness: true
   validates :necessidades_especiais, presence: true, if: :possui_necessidades_especiais?
+  validates_attachment :nota_empenho, presence: true, content_type: { content_type: "application/pdf" }, if: :pagamento_por_empenho?
 
   accepts_nested_attributes_for :usuario
 
@@ -32,5 +35,9 @@ class Participante < ActiveRecord::Base
 
   def tipo?(tipo)
     return self.tipo_participante.slug == tipo
+  end
+
+  def pagamento_por_empenho?
+    return self.pagamento_por_empenho
   end
 end

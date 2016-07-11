@@ -11,6 +11,10 @@ pt-BR:
           attributes:
             email:
               email: 'endereço de e-mail inválido'
+        participante:
+          attributes:
+            nota_empenho:
+              spoofed_media_type: 'arquivo proibido'
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:

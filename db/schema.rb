@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622142806) do
+ActiveRecord::Schema.define(version: 20160710162403) do
 
   create_table "avaliacoes_trabalhos", force: :cascade do |t|
     t.integer  "situacao",        limit: 4
@@ -112,6 +112,11 @@ ActiveRecord::Schema.define(version: 20160622142806) do
     t.boolean  "pago",                                        default: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
+    t.boolean  "pagamento_por_empenho",                       default: false
+    t.string   "nota_empenho_file_name",        limit: 255
+    t.string   "nota_empenho_content_type",     limit: 255
+    t.integer  "nota_empenho_file_size",        limit: 4
+    t.datetime "nota_empenho_updated_at"
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
