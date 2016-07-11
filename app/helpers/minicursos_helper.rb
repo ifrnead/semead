@@ -1,0 +1,2 @@
+module MinicursosHelper
+end

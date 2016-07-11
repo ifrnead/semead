@@ -1,0 +1,17 @@
+<%= bootstrap_form_for(@minicurso) do |f| %>
+  <p>Todos os campos são obrigatórios.</p>
+  <%= f.text_field :titulo, label: 'Título' %>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <%= f.text_area :justificativa, rows: 5 %>
+      <%= f.text_area :objetivos, rows: 5 %>
+      <%= f.text_area :metodologia, rows: 5 %>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <%= f.text_area :programacao, rows: 5, label: 'Programação' %>
+      <%= f.text_area :material, rows: 5, label: 'Material necessário' %>
+      <%= f.text_area :referencias, rows: 5, label: 'Referências' %>
+    </div>
+  </div>
+  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+<% end %>

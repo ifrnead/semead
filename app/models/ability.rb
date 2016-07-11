@@ -13,12 +13,14 @@ class Ability
     if usuario.tem_perfil?('membro_comissao_central')
       can :manage, Organizador
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
+      can [ :show, :index, :edit, :update ], Minicurso
       can [ :show, :index ], Trabalho
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
       can [ :index, :show ], Participante
       can [ :show, :index, :edit, :update ], Trabalho
+      can [ :show, :index, :edit, :update ], Minicurso
       can :manage, AvaliacaoTrabalho
     end
 
@@ -42,6 +44,7 @@ class Ability
     if usuario.tem_perfil?('participante')
       can :show, Participante, id: usuario.autenticavel.id
       can [ :create, :index ], Trabalho
+      can [ :new, :create, :show, :index ], Minicurso
       can :show, Trabalho, participante_id: usuario.autenticavel.id
     end
 

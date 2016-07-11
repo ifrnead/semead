@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   resources :trabalhos do
     get 'prazo_encerrado', on: :collection
   end
+  resources :minicursos
   namespace :admin do
     resources :participantes do
       get 'aprovar_nota_empenho'
     end
     resources :organizadores
+    resources :minicursos
     resources :trabalhos do
       get 'avaliar'
       resources :avaliacoes, controller: 'avaliacoes_trabalhos'

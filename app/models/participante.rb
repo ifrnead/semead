@@ -7,6 +7,7 @@ class Participante < ActiveRecord::Base
   has_one :usuario, as: :autenticavel, dependent: :destroy
   has_many :trabalhos, dependent: :destroy
   has_many :pagamentos, dependent: :destroy
+  has_many :minicursos, dependent: :destroy
 
   has_attached_file :nota_empenho
 

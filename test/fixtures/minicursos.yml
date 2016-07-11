@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyText
+  justificativa: MyText
+  objetivos: MyText
+  metodologia: MyText
+  programacao: MyText
+  material: MyText
+  referencias: MyText
+  participante_id: 
+
+two:
+  titulo: MyText
+  justificativa: MyText
+  objetivos: MyText
+  metodologia: MyText
+  programacao: MyText
+  material: MyText
+  referencias: MyText
+  participante_id: 
