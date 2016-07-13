@@ -1,4 +1,6 @@
 class PagamentosController < ApplicationController
+  layout 'publico'
+
   def notificar
     mp_client = MercadoPago::Client.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
     mp_client.sandbox_mode(true) if Config.dev?
@@ -23,5 +25,14 @@ class PagamentosController < ApplicationController
     end
 
     render status: 200
+  end
+
+  def processando
+  end
+
+  def aprovado
+  end
+
+  def falhou
   end
 end

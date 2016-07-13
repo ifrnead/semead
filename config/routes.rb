@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'pagamentos/notificar'
+  get 'pagamentos/processando'
+  get 'pagamentos/aprovado'
+  get 'pagamentos/falhou'
 
   resources :trabalhos do
     get 'prazo_encerrado', on: :collection
@@ -41,6 +44,8 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#index', as: :admin
   get 'participacao' => 'participantes#participacao', as: :participacao
   get 'inscricoes_encerradas' => 'participantes#inscricoes_encerradas', as: :inscricoes_encerradas
+
+  get "test_exception_notification" => "application#test_exception_notification"
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

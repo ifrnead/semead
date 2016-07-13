@@ -9,6 +9,7 @@ class CreateMinicursos < ActiveRecord::Migration
       t.text :material
       t.text :referencias
       t.references :participante, index: true, foreign_key: true
+      t.integer :avaliacao
 
       t.timestamps null: false
     end

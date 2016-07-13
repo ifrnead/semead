@@ -9,6 +9,7 @@ gem 'cancancan', '~> 1.10'
 gem "paperclip", "~> 5.0.0"
 gem 'mercadopago'
 gem 'rake', '11.2.2'
+gem 'exception_notification'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

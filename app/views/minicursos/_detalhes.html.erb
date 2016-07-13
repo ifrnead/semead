@@ -1,0 +1,16 @@
+<p><strong>Avaliação:</strong> <%= avaliacao_minicurso(@minicurso.avaliacao).html_safe %></p>
+
+<dl>
+  <dt>Justificativa</dt>
+  <dd><%= @minicurso.justificativa %></dd>
+  <dt>Objetivos</dt>
+  <dd><%= @minicurso.objetivos %></dd>
+  <dt>Metodologia</dt>
+  <dd><%= @minicurso.metodologia %></dd>
+  <dt>Programação</dt>
+  <dd><%= @minicurso.programacao %></dd>
+  <dt>Material necessário</dt>
+  <dd><%= @minicurso.material %></dd>
+  <dt>Referências</dt>
+  <dd><%= @minicurso.referencias %></dd>
+</dl>

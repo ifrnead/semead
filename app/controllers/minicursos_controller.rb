@@ -33,7 +33,7 @@ class MinicursosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def minicurso_params
-      params.require(:minicurso).permit(:titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias)
+      params.require(:minicurso).permit(:titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias, :participante_id)
     end
 
     def set_participante

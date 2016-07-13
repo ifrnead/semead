@@ -68,6 +68,8 @@ class Pagamento < ActiveRecord::Base
   end
 
   def valor
+    return 1 if Config.dev?
+    
     if self.prazo == Date.new(2016, 8, 30)
       if self.participante.tipo?('estudante')
         return 80

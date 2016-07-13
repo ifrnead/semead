@@ -26,10 +26,12 @@
       <% @minicursos.each do |minicurso| %>
         <tr>
           <td><%= minicurso.titulo %></td>
-          <td>-</td>
+          <td><%= avaliacao_minicurso(minicurso.avaliacao).html_safe %></td>
           <td>
             <div class="btn-group">
-              <%= link_to fa_icon('eye'), minicurso, title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
+              <% if can? :show, minicurso %>
+                <%= link_to fa_icon('eye'), minicurso, title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
+              <% end %>
             </div>
           </td>
         </tr>

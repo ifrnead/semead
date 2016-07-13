@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160711172739) do
     t.text     "material",        limit: 65535
     t.text     "referencias",     limit: 65535
     t.integer  "participante_id", limit: 4
+    t.integer  "avaliacao", limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end

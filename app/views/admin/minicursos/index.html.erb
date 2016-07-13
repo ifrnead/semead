@@ -1,2 +1,38 @@
-<h1>Admin::Minicursos#index</h1>
-<p>Find me in app/views/admin/minicursos/index.html.erb</p>
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'graduation-cap' %> Minicursos</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+    </div>
+  </div>
+</div>
+
+<% if @minicursos.empty? %>
+  <p>Nenhum minicurso proposto até o momento.</p>
+<% else %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Avaliação</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @minicursos.each do |minicurso| %>
+        <tr>
+          <td><%= minicurso.titulo %></td>
+          <td><%= avaliacao_minicurso(minicurso.avaliacao).html_safe %></td>
+          <td>
+            <div class="btn-group">
+              <% if can? :show, minicurso %>
+                <%= link_to fa_icon('eye'), admin_minicurso_path(minicurso), title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

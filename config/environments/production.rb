@@ -92,3 +92,10 @@ Rails.application.configure do
     openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
 end
+
+Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[SEMEAD] ",
+    :sender_address => %{"III SEMEAD" <semead@ifrn.edu.br>},
+    :exception_recipients => %w{jalerson.lima@ifrn.edu.br}
+  }

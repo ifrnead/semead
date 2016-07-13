@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, :alert => "Não autorizado!"
   end
 
+  def test_exception_notification
+    raise 'Testando Exception Notification...'
+  end
+
   private
 
   def notify

@@ -44,7 +44,8 @@ class Ability
     if usuario.tem_perfil?('participante')
       can :show, Participante, id: usuario.autenticavel.id
       can [ :create, :index ], Trabalho
-      can [ :new, :create, :show, :index ], Minicurso
+      can [ :new, :create, :index ], Minicurso
+      can :show, Minicurso, participante_id: usuario.autenticavel.id
       can :show, Trabalho, participante_id: usuario.autenticavel.id
     end
 

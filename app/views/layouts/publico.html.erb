@@ -9,6 +9,9 @@
     <%= yield :head %>
   </head>
   <body>
+    <div class="text-center">
+      <%= image_tag 'semead3.png' %>
+    </div>
     <div class="container content">
       <%= render partial: "layouts/notify" %>
       <%= yield %>
