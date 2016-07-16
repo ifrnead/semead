@@ -11,7 +11,8 @@ class Config
       :data_inicio_submissao_minicursos => Date.new(2016, 7, 1),
       :data_termino_submissao_minicursos => Date.new(2016, 8, 1),
       :data_inicio_inscricoes_minicursos => Date.new(2016, 7, 1),
-      :data_termino_inscricoes_minicursos => Date.new(2016, 8, 1)
+      :data_termino_inscricoes_minicursos => Date.new(2016, 8, 1),
+      :prazo_redefinir_senha => 1 # dia
     }
   end
 

@@ -3,8 +3,9 @@ class Usuario < ActiveRecord::Base
   belongs_to :autenticavel, polymorphic: true
   belongs_to :perfil
 
+  validates :nome, presence: true
   validates :email, presence: true, uniqueness: true, email: true
-  validates :password, length: { minimum: 4 }, confirmation: true
+  validates :password, length: { minimum: 4 }, confirmation: true, on: :create
 
   def self.autenticar(email, senha)
     usuario = self.find_by_email(email)
@@ -23,6 +24,13 @@ class Usuario < ActiveRecord::Base
 
   def admin?
     self.tem_perfil?('administrador')
+  end
+
+  def gerar_codigo_recuperacao_senha
+    self.codigo_recuperar_senha = SecureRandom.hex
+    self.prazo_recuperacao_senha = DateTime.now + Config.instance.get(:prazo_redefinir_senha)
+    self.save(validate: false)
+    UsuarioMailer.recuperar_senha(self).deliver_now
   end
 
 end

@@ -60,8 +60,8 @@
 
 <%= bootstrap_form_for(@participante) do |participante| %>
   <p>Os campos marcados com * são obrigatórios.</p>
-  <%= participante.text_field :nome, label: 'Nome completo *' %>
   <%= participante.fields_for :usuario do |usuario| %>
+    <%= usuario.text_field :nome, label: 'Nome completo *' %>
     <%= usuario.email_field :email, label: 'E-mail *' %>
     <%= usuario.password_field :password, placeholder: 'Mínimo de 4 caracteres', label: 'Senha *' %>
     <%= usuario.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha *' %>

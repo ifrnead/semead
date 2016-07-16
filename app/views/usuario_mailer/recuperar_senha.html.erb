@@ -1,0 +1,15 @@
+<p>Caro(a) <%= @usuario.autenticavel.nome %>,</p>
+
+<p>Uma solicitação de recuperação de senha foi feita em sua conta.</p>
+
+<p>
+  <%= link_to "Clique aqui", "http://eventos.ifrn.edu.br/semead/redefinir_senha?codigo=#{@usuario.codigo_recuperar_senha}&email=#{@usuario.email}" %> para redefinir a senha de sua conta.
+</p>
+
+<p>Caso você não tenha solicitado a recuperação de sua senha, basta ignorar essa mensagem.</p>
+
+<p>
+  Atenciosamente,<br>
+  Comissão Organizadora Central da III SEMEAD/IFRN-EaD<br>
+  <a href="mailto:semead@ifrn.edu.br">semead@ifrn.edu.br</a>
+</p>

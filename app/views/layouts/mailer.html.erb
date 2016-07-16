@@ -4,6 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
+    <% if Config.dev? %>
+      <p style="color: red;font-weight: bold">ATENÇÃO: Essa é uma mensagem de teste do sistema da III SEMEAD. Por favor ignore.</p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

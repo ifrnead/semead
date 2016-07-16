@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711172739) do
+ActiveRecord::Schema.define(version: 20160715140326) do
 
   create_table "avaliacoes_trabalhos", force: :cascade do |t|
     t.integer  "situacao",        limit: 4
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160711172739) do
     t.text     "material",        limit: 65535
     t.text     "referencias",     limit: 65535
     t.integer  "participante_id", limit: 4
-    t.integer  "avaliacao", limit: 4
+    t.integer  "avaliacao",       limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
@@ -90,9 +90,8 @@ ActiveRecord::Schema.define(version: 20160711172739) do
   add_index "minicursos", ["participante_id"], name: "index_minicursos_on_participante_id", using: :btree
 
   create_table "organizadores", force: :cascade do |t|
-    t.string   "nome",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pagamentos", force: :cascade do |t|
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 20160711172739) do
   end
 
   create_table "participantes", force: :cascade do |t|
-    t.string   "nome",                          limit: 255
     t.string   "documento",                     limit: 255
     t.integer  "tipo_participante_id",          limit: 4
     t.integer  "cidade_id",                     limit: 4
@@ -179,13 +177,16 @@ ActiveRecord::Schema.define(version: 20160711172739) do
   add_index "trabalhos", ["tipo_trabalho_id"], name: "index_trabalhos_on_tipo_trabalho_id", using: :btree
 
   create_table "usuarios", force: :cascade do |t|
-    t.string   "email",             limit: 255
-    t.string   "password_digest",   limit: 255
-    t.integer  "autenticavel_id",   limit: 4
-    t.string   "autenticavel_type", limit: 255
-    t.integer  "perfil_id",         limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "nome",                    limit: 255
+    t.string   "email",                   limit: 255
+    t.string   "password_digest",         limit: 255
+    t.integer  "autenticavel_id",         limit: 4
+    t.string   "autenticavel_type",       limit: 255
+    t.integer  "perfil_id",               limit: 4
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "codigo_recuperar_senha",  limit: 255
+    t.datetime "prazo_recuperacao_senha"
   end
 
   add_index "usuarios", ["autenticavel_id"], name: "index_usuarios_on_autenticavel_id", using: :btree

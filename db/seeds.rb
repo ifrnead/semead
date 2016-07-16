@@ -30,121 +30,121 @@ puts "Criando usuários..."
 
 # Admin
 
-jalerson = Usuario.create(email: 'jalerson.lima@ifrn.edu.br', password: '321mud@r', perfil: admin)
-jalerson = Organizador.create(nome: 'Jalerson Lima', usuario: jalerson)
+jalerson = Usuario.create(nome: 'Jalerson Lima', email: 'jalerson.lima@ifrn.edu.br', password: '321mud@r', perfil: admin)
+jalerson = Organizador.create(usuario: jalerson)
 
-jp = Usuario.create(email: 'joao.queiroz@ifrn.edu.br', password: '321mud@r', perfil: admin)
-jp = Organizador.create(nome: 'João Paulo', usuario: jp)
+jp = Usuario.create(nome: 'João Paulo', email: 'joao.queiroz@ifrn.edu.br', password: '321mud@r', perfil: admin)
+jp = Organizador.create(usuario: jp)
 
 # Coordenador da Comissão Científica
 
-ana = Usuario.create(email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: coordenador_comissao_cientifica)
-ana = Organizador.create(nome: 'Ana Lúcia', usuario: ana)
+ana = Usuario.create(nome: 'Ana Lúcia', email: 'ana.henrique@ifrn.edu.br', password: '321mud@r', perfil: coordenador_comissao_cientifica)
+ana = Organizador.create(usuario: ana)
 
 # Coordenadores de Linha de Pesquisa
 
-thalita = Usuario.create(email: 'thalita.motta@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-thalita = Organizador.create(nome: 'Thalita Motta', usuario: thalita)
+thalita = Usuario.create(nome: 'Thalita Motta', email: 'thalita.motta@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+thalita = Organizador.create(usuario: thalita)
 
-marilia = Usuario.create(email: 'marilia.silveira@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-marilia = Organizador.create(nome: 'Marília Silveira', usuario: marilia)
+marilia = Usuario.create(nome: 'Marília Silveira', email: 'marilia.silveira@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+marilia = Organizador.create(usuario: marilia)
 
-edneide = Usuario.create(email: 'edneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-edneide = Organizador.create(nome: 'Edneide Bezerra', usuario: edneide)
+edneide = Usuario.create(nome: 'Edneide Bezerra', email: 'edneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+edneide = Organizador.create(usuario: edneide)
 
-allan = Usuario.create(email: 'allan.garcia@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-allan = Organizador.create(nome: 'Allan Garcia', usuario: allan)
+allan = Usuario.create(nome: 'Allan Garcia', email: 'allan.garcia@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+allan = Organizador.create(usuario: allan)
 
-fabio = Usuario.create(email: 'fabio.silva@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
-fabio = Organizador.create(nome: 'Fabio Silva', usuario: fabio)
+fabio = Usuario.create(nome: 'Fabio Silva', email: 'fabio.silva@ifrn.edu.br', password: '321mud@r', perfil: coordenador_linha_pesquisa)
+fabio = Organizador.create(usuario: fabio)
 
 # Outros usuários
 
-alex = Usuario.create(email: 'alexsandro.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-alex = Organizador.create(nome: 'Alexsandro Oliveira', usuario: alex)
+alex = Usuario.create(nome: 'Alexsandro Oliveira', email: 'alexsandro.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+alex = Organizador.create(usuario: alex)
 
-alberico = Usuario.create(email: 'alberico.canario@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-alberico = Organizador.create(nome: 'Alberico Canario', usuario: alberico)
+alberico = Usuario.create(nome: 'Alberico Canario', email: 'alberico.canario@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+alberico = Organizador.create(usuario: alberico)
 
-tmedeiros = Usuario.create(email: 'thiago.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-tmedeiros = Organizador.create(nome: 'Thiago Medeiros', usuario: tmedeiros)
+tmedeiros = Usuario.create(nome: 'Thiago Medeiros', email: 'thiago.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+tmedeiros = Organizador.create(usuario: tmedeiros)
 
-leonardo = Usuario.create(email: 'leonardo.feitoza@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-leonardo = Organizador.create(nome: 'Leonardo Feitoza', usuario: leonardo)
+leonardo = Usuario.create(nome: 'Leonardo Feitoza', email: 'leonardo.feitoza@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+leonardo = Organizador.create(usuario: leonardo)
 
-elizama = Usuario.create(email: 'elizama.lemos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-elizama = Organizador.create(nome: 'Elizama Lemos', usuario: elizama)
+elizama = Usuario.create(nome: 'Elizama Lemos', email: 'elizama.lemos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+elizama = Organizador.create(usuario: elizama)
 
-jroberto = Usuario.create(email: 'jose.santos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-jroberto = Organizador.create(nome: 'José Roberto', usuario: jroberto)
+jroberto = Usuario.create(nome: 'José Roberto', email: 'jose.santos@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+jroberto = Organizador.create(usuario: jroberto)
 
-kelson = Usuario.create(email: 'kelson.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
-kelson = Organizador.create(nome: 'Kelson Medeiros', usuario: kelson)
+kelson = Usuario.create(nome: 'Kelson Medeiros', email: 'kelson.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_central)
+kelson = Organizador.create(usuario: kelson)
 
-gueidson = Usuario.create(email: 'gueidson.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-gueidson = Organizador.create(nome: 'Gueidson Lima', usuario: gueidson)
+gueidson = Usuario.create(nome: 'Gueidson Lima', email: 'gueidson.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+gueidson = Organizador.create(usuario: gueidson)
 
-ilane = Usuario.create(email: 'ilane.cavalcanti@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-ilane = Organizador.create(nome: 'Ilane Cavalcanti', usuario: ilane)
+ilane = Usuario.create(nome: 'Ilane Cavalcanti', email: 'ilane.cavalcanti@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ilane = Organizador.create(usuario: ilane)
 
-ernesto = Usuario.create(email: 'ernesto.tacconi@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-ernesto = Organizador.create(nome: 'Ernesto Tacconi', usuario: ernesto)
+ernesto = Usuario.create(nome: 'Ernesto Tacconi', email: 'ernesto.tacconi@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ernesto = Organizador.create(usuario: ernesto)
 
-claudia = Usuario.create(email: 'claudia.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-claudia = Organizador.create(nome: 'Claudia Lima', usuario: claudia)
+claudia = Usuario.create(nome: 'Claudia Lima', email: 'claudia.lima@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+claudia = Organizador.create(usuario: claudia)
 
-wagner = Usuario.create(email: 'wagner.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-wagner = Organizador.create(nome: 'Wagner Oliveira', usuario: wagner)
+wagner = Usuario.create(nome: 'Wagner Oliveira', email: 'wagner.oliveira@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+wagner = Organizador.create(usuario: wagner)
 
-abigail = Usuario.create(email: 'abigail.silva@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-abigail = Organizador.create(nome: 'Abigail Silva', usuario: abigail)
+abigail = Usuario.create(nome: 'Abigail Silva', email: 'abigail.silva@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+abigail = Organizador.create(usuario: abigail)
 
-helenice = Usuario.create(email: 'helenice.lopes@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-helenice = Organizador.create(nome: 'Helenice Lopes', usuario: helenice)
+helenice = Usuario.create(nome: 'Helenice Lopes', email: 'helenice.lopes@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+helenice = Organizador.create(usuario: helenice)
 
-ivoneide = Usuario.create(email: 'ivoneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-ivoneide = Organizador.create(nome: 'Ivoneide Bezerra', usuario: ivoneide)
+ivoneide = Usuario.create(nome: 'Ivoneide Bezerra', email: 'ivoneide.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+ivoneide = Organizador.create(usuario: ivoneide)
 
-patricia = Usuario.create(email: 'patricia.chagas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-patricia = Organizador.create(nome: 'Patrícia Chagas', usuario: patricia)
+patricia = Usuario.create(nome: 'Patrícia Chagas', email: 'patricia.chagas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+patricia = Organizador.create(usuario: patricia)
 
-silvia = Usuario.create(email: 'silvia.mendonca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-silvia = Organizador.create(nome: 'Silvia Mendonça', usuario: silvia)
+silvia = Usuario.create(nome: 'Silvia Mendonça', email: 'silvia.mendonca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+silvia = Organizador.create(usuario: silvia)
 
-maria = Usuario.create(email: 'maria.dantas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-maria = Organizador.create(nome: 'Maria do Socorro', usuario: maria)
+maria = Usuario.create(nome: 'Maria do Socorro', email: 'maria.dantas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+maria = Organizador.create(usuario: maria)
 
-christine = Usuario.create(email: 'christine.fonseca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-christine = Organizador.create(nome: 'Christine Fonseca', usuario: christine)
+christine = Usuario.create(nome: 'Christine Fonseca', email: 'christine.fonseca@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+christine = Organizador.create(usuario: christine)
 
-charles = Usuario.create(email: 'charles.freitas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-charles = Organizador.create(nome: 'Charles Freitas', usuario: charles)
+charles = Usuario.create(nome: 'Charles Freitas', email: 'charles.freitas@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+charles = Organizador.create(usuario: charles)
 
-clauber = Usuario.create(email: 'clauber.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-clauber = Organizador.create(nome: 'Clauber Bezerra', usuario: clauber)
+clauber = Usuario.create(nome: 'Clauber Bezerra', email: 'clauber.bezerra@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+clauber = Organizador.create(usuario: clauber)
 
-erick = Usuario.create(email: 'erick.bergamini@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-erick = Organizador.create(nome: 'Erick Bergamini', usuario: erick)
+erick = Usuario.create(nome: 'Erick Bergamini', email: 'erick.bergamini@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+erick = Organizador.create(usuario: erick)
 
-emanuel = Usuario.create(email: 'emanuel.lourenco@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-emanuel = Organizador.create(nome: 'Emanuel Lourenço', usuario: emanuel)
+emanuel = Usuario.create(nome: 'Emanuel Lourenço', email: 'emanuel.lourenco@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+emanuel = Organizador.create(usuario: emanuel)
 
-rose = Usuario.create(email: 'rosemary.borges@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-rose = Organizador.create(nome: 'Rosemary Borges', usuario: rose)
+rose = Usuario.create(nome: 'Rosemary Borges', email: 'rosemary.borges@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+rose = Organizador.create(usuario: rose)
 
-douglas = Usuario.create(email: 'douglas.costa@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-douglas = Organizador.create(nome: 'Roberto Douglas', usuario: douglas)
+douglas = Usuario.create(nome: 'Roberto Douglas', email: 'douglas.costa@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+douglas = Organizador.create(usuario: douglas)
 
-lidiane = Usuario.create(email: 'lidiane.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-lidiane = Organizador.create(nome: 'Lidiane Medeiros', usuario: lidiane)
+lidiane = Usuario.create(nome: 'Lidiane Medeiros', email: 'lidiane.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+lidiane = Organizador.create(usuario: lidiane)
 
-tloureiro = Usuario.create(email: 'thiago.loureiro@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-tloureiro = Organizador.create(nome: 'Thiago Loureiro', usuario: tloureiro)
+tloureiro = Usuario.create(nome: 'Thiago Loureiro', email: 'thiago.loureiro@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+tloureiro = Organizador.create(usuario: tloureiro)
 
 # Secretaria
 
-isaac = Usuario.create(email: 'isaac.ribeiro@ifrn.edu.br', password: '321mud@r', perfil: secretario)
-Organizador.create(nome: 'Isaac Newton', usuario: isaac)
+isaac = Usuario.create(nome: 'Isaac Newton', email: 'isaac.ribeiro@ifrn.edu.br', password: '321mud@r', perfil: secretario)
+Organizador.create(usuario: isaac)
 
 puts "Criando linhas de pesquisa..."
 

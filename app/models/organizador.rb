@@ -5,12 +5,14 @@ class Organizador < ActiveRecord::Base
   has_many :avaliacoes_trabalhos
   has_many :trabalhos, through: :avaliacoes_trabalhos
 
-  validates :nome, presence: true
-
   accepts_nested_attributes_for :usuario
 
   def email
     self.usuario.email
+  end
+
+  def nome
+    self.usuario.nome
   end
 
   def perfil

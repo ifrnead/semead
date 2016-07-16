@@ -8,7 +8,8 @@
         <%= bootstrap_form_tag(url: sessions_path) do |f| %>
           <%= f.text_field :email %>
           <%= f.password_field :password, label: 'Senha' %>
-          <%= f.submit 'Enviar' %>
+          <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+          <a class="btn btn-default pull-right" href="<%= recuperar_senha_path %>">Esqueceu sua senha?</a>
         <% end %>
       </div>
     </div>

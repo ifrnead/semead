@@ -44,6 +44,12 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#index', as: :admin
   get 'participacao' => 'participantes#participacao', as: :participacao
   get 'inscricoes_encerradas' => 'participantes#inscricoes_encerradas', as: :inscricoes_encerradas
+  get 'conta' => 'usuarios#conta', as: :conta
+  patch 'atualizar' => 'usuarios#atualizar', as: :atualizar_conta
+  get 'recuperar_senha' => 'usuarios#recuperar_senha', as: :recuperar_senha
+  post 'recuperacao_senha' => 'usuarios#recuperacao_senha', as: :recuperacao_senha
+  get 'redefinir_senha' => 'usuarios#redefinir_senha', as: :redefinir_senha
+  patch 'atualizar_senha' => 'usuarios#atualizar_senha', as: :atualizar_senha
 
   get "test_exception_notification" => "application#test_exception_notification"
 

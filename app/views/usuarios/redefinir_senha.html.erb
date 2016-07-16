@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= fa_icon 'key' %> Recuperar Senha</h3>
+      </div>
+      <div class="panel-body">
+        <%= bootstrap_form_tag(url: atualizar_senha_path, method: :patch) do |f| %>
+          <%= f.password_field :password, placeholder: 'Mínimo de 4 caracteres', label: 'Senha *' %>
+          <%= f.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha *' %>
+          <%= f.hidden_field :email, value: @usuario.email %>
+          <%= f.hidden_field :codigo, value: @usuario.codigo_recuperar_senha %>
+          <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

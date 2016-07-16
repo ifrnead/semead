@@ -30,6 +30,10 @@ class Participante < ActiveRecord::Base
     self.usuario.email
   end
 
+  def nome
+    self.usuario.nome
+  end
+
   def atribuir_perfil
     self.usuario.perfil = Perfil.find_by_slug('participante')
   end

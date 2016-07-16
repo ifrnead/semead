@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'cog' %> Sua Conta</h1>
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>
+
+<%= bootstrap_form_for(@usuario, url: atualizar_conta_path, method: :patch) do |usuario| %>
+  <% if @usuario.tem_perfil?('participante') %>
+    <%= usuario.fields_for :autenticavel, @usuario.autenticavel do |participante| %>
+      <%= participante.text_field :nome, label: 'Nome completo', class: "form-control" %>
+    <% end %>
+    <%= usuario.email_field :email, class: "form-control" %>
+  <% end %>
+  <%= usuario.password_field :password, placeholder: 'Mínimo de 4 caracteres', label: 'Senha' %>
+  <%= usuario.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha' %>
+  <%= usuario.submit 'Enviar', class: 'btn btn-primary' %>
+<% end %>
