@@ -14,7 +14,7 @@ class ParticipantesController < ApplicationController
         break
       end
     end
-    if pagamento.nil?
+    if pagamento.nil? or Config.dev?
       pagamento = Pagamento.gerar(participante)
     end
     if Config.dev?
