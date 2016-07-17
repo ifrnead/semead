@@ -22,6 +22,12 @@ class Pagamento < ActiveRecord::Base
 
     pagamento = Pagamento.create(participante: participante)
 
+    if Config.dev?
+      base_url = "http://200.137.2.164"
+    else
+      base_url = "http://eventos.ifrn.edu.br/semead"
+    end
+
     payment_request = {
       external_reference: pagamento.id,
       items: [
@@ -39,12 +45,13 @@ class Pagamento < ActiveRecord::Base
         email: pagamento.participante.email
       },
       back_urls: {
-        pending: "http://eventos.ifrn.edu.br/semead/pagamentos/processamento",
-        success: "http://eventos.ifrn.edu.br/semead/pagamento/aprovado",
-        failure: "http://eventos.ifrn.edu.br/semead/pagamento/falhou"
+        pending: (base_url + "/pagamentos/processamento"),
+        success: (base_url + "/pagamentos/aprovado"),
+        failure: (base_url + "/pagamentos/falhou")
       },
       expires: true,
-      expiration_date_to: "#{pagamento.prazo.to_s}T23:59:59.999-03:00"
+      expiration_date_to: "#{pagamento.prazo.to_s}T23:59:59.999-03:00",
+      notification_url: (base_url + "/pagamentos/notificar")
     }
 
     payment_response = mp_client.create_preference(payment_request)
@@ -69,7 +76,7 @@ class Pagamento < ActiveRecord::Base
 
   def valor
     return 1 if Config.dev?
-    
+
     if self.prazo == Date.new(2016, 8, 30)
       if self.participante.tipo?('estudante')
         return 80

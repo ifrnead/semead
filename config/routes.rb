@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'pagamentos/notificar'
+  post 'pagamentos/notificar'
   get 'pagamentos/processando'
   get 'pagamentos/aprovado'
   get 'pagamentos/falhou'
