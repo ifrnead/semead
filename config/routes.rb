@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  post 'pagamentos/notificar'
-  get 'pagamentos/processando'
-  get 'pagamentos/aprovado'
-  get 'pagamentos/falhou'
-
   resources :trabalhos do
     get 'prazo_encerrado', on: :collection
   end
@@ -50,8 +45,11 @@ Rails.application.routes.draw do
   post 'recuperacao_senha' => 'usuarios#recuperacao_senha', as: :recuperacao_senha
   get 'redefinir_senha' => 'usuarios#redefinir_senha', as: :redefinir_senha
   patch 'atualizar_senha' => 'usuarios#atualizar_senha', as: :atualizar_senha
-
   get "test_exception_notification" => "application#test_exception_notification"
+  post 'pagamentos/:pagamento_id/notificar' => 'pagamentos#notificar', as: :notificar_pagamento
+  get 'pagamentos/processando'
+  get 'pagamentos/aprovado'
+  get 'pagamentos/falhou'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

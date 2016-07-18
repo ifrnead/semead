@@ -7,7 +7,7 @@ gem 'validates'
 gem "select2-rails"
 gem 'cancancan', '~> 1.10'
 gem "paperclip", "~> 5.0.0"
-gem 'mercadopago'
+gem 'mercadopago-sdk'
 gem 'rake', '11.2.2'
 gem 'exception_notification'
 gem 'whenever', :require => false
@@ -46,6 +46,7 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'ultrahook'
 end
 
 group :development do

@@ -1,3 +1,5 @@
+require 'mercadopago.rb'
+
 class Pagamento < ActiveRecord::Base
   belongs_to :participante
 
@@ -17,18 +19,18 @@ class Pagamento < ActiveRecord::Base
   }
 
   def self.gerar(participante)
-    mp_client = MercadoPago::Client.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
-    mp_client.sandbox_mode(true) if Config.dev?
+    mp = MercadoPago.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
+    mp.sandbox_mode(true) if Config.dev?
 
     pagamento = Pagamento.create(participante: participante)
 
     if Config.dev?
-      base_url = "http://200.137.2.164"
+      base_url = "http://mercadopago.jalerson.ultrahook.com"
     else
       base_url = "http://eventos.ifrn.edu.br/semead"
     end
 
-    payment_request = {
+    preference_data = {
       external_reference: pagamento.id,
       items: [
         {
@@ -45,17 +47,17 @@ class Pagamento < ActiveRecord::Base
         email: pagamento.participante.email
       },
       back_urls: {
-        pending: (base_url + "/pagamentos/processamento"),
+        pending: (base_url + "/pagamentos/processando"),
         success: (base_url + "/pagamentos/aprovado"),
         failure: (base_url + "/pagamentos/falhou")
       },
       expires: true,
       expiration_date_to: "#{pagamento.prazo.to_s}T23:59:59.999-03:00",
-      notification_url: (base_url + "/pagamentos/notificar")
+      notification_url: (base_url + "/pagamentos/#{pagamento.id}/notificar")
     }
 
-    payment_response = mp_client.create_preference(payment_request)
-    pagamento.update_attributes(json: payment_response, expira_em: pagamento.prazo, mercado_pago_id: payment_response['id'], init_point: payment_response['init_point'], sandbox_init_point: payment_response['sandbox_init_point'])
+    preference = mp.create_preference(preference_data)
+    pagamento.update_attributes(json: preference, expira_em: pagamento.prazo, mercado_pago_id: preference['response']['id'], init_point: preference['response']['init_point'], sandbox_init_point: preference['response']['sandbox_init_point'])
 
     return pagamento
   end
