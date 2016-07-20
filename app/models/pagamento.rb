@@ -25,7 +25,7 @@ class Pagamento < ActiveRecord::Base
     pagamento = Pagamento.create(participante: participante)
 
     if Config.dev?
-      base_url = "http://mercadopago.jalerson.ultrahook.com"
+      base_url = "http://200.137.2.164"
     else
       base_url = "http://eventos.ifrn.edu.br/semead"
     end
