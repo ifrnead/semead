@@ -45,4 +45,8 @@ class Participante < ActiveRecord::Base
   def pagamento_por_empenho?
     return self.pagamento_por_empenho
   end
+
+  def pago?
+    return self.pago
+  end
 end

@@ -6,13 +6,12 @@ class PagamentosController < ApplicationController
 
   def notificar
     mp = MercadoPago.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
-    mp.sandbox_mode(true) if Config.dev?
 
     if params[:id] != '12345'
-      if params[:type] == 'payment'
+      if params[:topic] == 'payment'
         pagamento = Pagamento.find(params[:pagamento_id])
-        pagamento.update_attribute(:situacao, Pagamento::SITUACOES[:approved])
-        pagamento.participante.update_attribute(:pago, true)
+        notification = mp.get("/collections/notifications/#{params[:id]}")
+        pagamento.atualizar_situacao(notification['response']['collection']['status'])
       end
     end
 

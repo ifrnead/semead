@@ -20,7 +20,6 @@ class Pagamento < ActiveRecord::Base
 
   def self.gerar(participante)
     mp = MercadoPago.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)
-    mp.sandbox_mode(true) if Config.dev?
 
     pagamento = Pagamento.create(participante: participante)
 
@@ -62,6 +61,28 @@ class Pagamento < ActiveRecord::Base
     return pagamento
   end
 
+  def atualizar_situacao(situacao)
+    case situacao
+      when 'pending'
+        PagamentoMailer.pendente(self.participante).deliver_now
+      when 'approved'
+        self.participante.update_attribute(:pago, true)
+        PagamentoMailer.aprovado(self.participante).deliver_now
+      when 'in_process'
+        PagamentoMailer.em_processamento(self.participante).deliver_now
+      when 'in_mediation'
+        # PagamentoMailer.em_medicacao(self.participante).deliver_now
+      when 'rejected'
+        PagamentoMailer.rejeitado(self.participante).deliver_now
+      when 'cancelled'
+        PagamentoMailer.cancelado(self.participante).deliver_now
+      when 'refunded'
+        PagamentoMailer.devolvido(self.participante).deliver_now
+      when 'charged_back'
+        PagamentoMailer.devolvido(self.participante).deliver_now
+    end
+  end
+
   def definir_situacao
     self.situacao = 'pending'
   end
@@ -77,7 +98,6 @@ class Pagamento < ActiveRecord::Base
   end
 
   def valor
-    return 1 if Config.dev?
 
     if self.prazo == Date.new(2016, 8, 30)
       if self.participante.tipo?('estudante')

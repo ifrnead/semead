@@ -17,8 +17,9 @@ class ParticipantesController < ApplicationController
     if pagamento.nil? or Config.dev?
       pagamento = Pagamento.gerar(participante)
     end
-    if Config.dev?
-      redirect_to pagamento.sandbox_init_point
+
+    if participante.pago?
+      redirect_to participacao_path
     else
       redirect_to pagamento.init_point
     end
