@@ -1,0 +1,5 @@
+<p>Caro(a) <%= @trabalho.participante.nome %>,</p>
+
+<p>Infelizmente o seu trabalho, intitulado <strong><%= @trabalho.titulo %></strong>, não foi aceito para ser apresentado na III SEMEAD.</p>
+
+<%= render partial: 'trabalhos/pareceres' %>

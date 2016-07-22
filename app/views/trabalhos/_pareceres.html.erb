@@ -1,0 +1,11 @@
+<h2>Pareceres dos avaliadores</h2>
+
+<% @trabalho.avaliacoes_linha_atual.each_with_index do |avaliacao, index| %>
+  <% if avaliacao.reprovado? %>
+    <p>
+      <strong>Avaliador <%= (index) %></strong><br>
+      <%= avaliacao.parecer %>
+    </p>
+    <% index += 1 %>
+  <% end %>
+<% end %>

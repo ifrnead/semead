@@ -1,0 +1,18 @@
+<p>Caro(a) <%= @avaliador.nome %>,</p>
+
+<p>A avaliação de um trabalho foi atribuída para você.</p>
+
+<h1>Dados do trabalho</h1>
+
+<p><strong>Título:</strong> <%= @trabalho.titulo %></p>
+
+<p><strong>Linha de pesquisa:</strong> <%= @trabalho.linha.nome %></p>
+
+<p>
+  <strong>Resumo:</strong><br>
+  <%= @trabalho.resumo %>
+</p>
+
+<p>
+  <strong>Download:</strong> <%= link_to "Clique aqui", @download %>
+</p>

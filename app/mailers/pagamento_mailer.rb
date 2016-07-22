@@ -10,6 +10,11 @@ class PagamentoMailer < ApplicationMailer
     mail(to: participante.email, subject: '[SEMEAD] Pagamento da taxa de inscrição em processamento')
   end
 
+  def em_mediacao(participante)
+    @participante = participante
+    mail(to: participante.email, subject: '[SEMEAD] Pagamento da taxa de inscrição em mediação')
+  end
+
   def pendente(participante)
     @participante = participante
     @url_pagamento = url_pagamento(participante)

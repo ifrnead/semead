@@ -5,7 +5,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
 
   before_create :definir_situacao
   before_update :verificar_situacao
-  after_update :verificar_discrepancia
+  after_update :verificar_discrepancia, :notificar_autor
 
   validates :situacao, :atende_normas, :tematica_evento, :linha_tematica, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true, on: :update, unless: :outra_linha?
   validates :parecer, presence: true, if: :reprovado?
@@ -93,6 +93,14 @@ class AvaliacaoTrabalho < ActiveRecord::Base
           self.trabalho.definir_avaliadores
         end
       end
+    end
+  end
+
+  def notificar_autor
+    if self.trabalho.aprovado?
+      AvaliacaoMailer.trabalho_aprovado(self.trabalho).deliver_now
+    elsif self.trabalho.reprovado?
+      AvaliacaoMailer.trabalho_reprovado(self.trabalho).deliver_now
     end
   end
 

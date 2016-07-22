@@ -23,8 +23,8 @@ class Pagamento < ActiveRecord::Base
 
     pagamento = Pagamento.create(participante: participante)
 
-    if Config.dev?
-      base_url = "http://200.137.2.164"
+    if Rails.env.development?
+      base_url = "http://localhost:3000"
     else
       base_url = "http://eventos.ifrn.edu.br/semead"
     end
@@ -71,7 +71,7 @@ class Pagamento < ActiveRecord::Base
       when 'in_process'
         PagamentoMailer.em_processamento(self.participante).deliver_now
       when 'in_mediation'
-        # PagamentoMailer.em_medicacao(self.participante).deliver_now
+        PagamentoMailer.em_medicacao(self.participante).deliver_now
       when 'rejected'
         PagamentoMailer.rejeitado(self.participante).deliver_now
       when 'cancelled'

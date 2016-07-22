@@ -1,0 +1,11 @@
+<p>Caro(a) <%= @participante.nome %>,</p>
+
+<p>Seu trabalho para a III SEMEAD foi submetido com sucesso e será avaliado pelo nosso Corpo Editorial.</p>
+
+<p>
+  Você será notificado via e-mail caso o seu trabalho seja aprovado ou não, contudo, pode acompanhar a atual situação da avaliação através do endereço <%= link_to "http://eventos.ifrn.edu.br/semead/login", "http://eventos.ifrn.edu.br/semead/login" %>, clicando na aba 'Trabalhos', e, em seguida, selecionando o trabalho que deseja verificar a avaliação.
+</p>
+
+<% unless @participante.pago? %>
+  <%= render partial: 'pagamento_inscricao' %>
+<% end %>

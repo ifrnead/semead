@@ -11,3 +11,7 @@
 </div>
 
 <%= render partial: 'detalhes' %>
+
+<% if @trabalho.reprovado? %>
+  <%= render partial: 'pareceres' %>
+<% end %>

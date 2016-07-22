@@ -59,6 +59,7 @@ class Trabalho < ActiveRecord::Base
       end
     end
 
+    AvaliacaoMailer.avaliacao_atribuida(avaliador, self).deliver_now
     self.avaliacoes << AvaliacaoTrabalho.new(trabalho: self, organizador: avaliador)
   end
 

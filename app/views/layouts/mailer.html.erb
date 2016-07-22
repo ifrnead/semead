@@ -7,6 +7,15 @@
     <% if Config.dev? %>
       <p style="color: red;font-weight: bold">ATENÇÃO: Essa é uma mensagem de teste do sistema da III SEMEAD. Por favor ignore.</p>
     <% end %>
+
     <%= yield %>
+
+    <p>Ficamos a disposição caso tenha problemas ou dúvidas.</p>
+    
+    <p>
+      Atenciosamente,<br>
+      Comissão Organizadora Central da III SEMEAD/IFRN-EaD<br>
+      <a href="mailto:semead@ifrn.edu.br">semead@ifrn.edu.br</a>
+    </p>
   </body>
 </html>

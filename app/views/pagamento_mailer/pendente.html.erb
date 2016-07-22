@@ -2,18 +2,6 @@
 
 <p>A sua inscrição para a III SEMEAD foi realizada, contudo, ainda é necessário realizar o pagamento da sua taxa de inscrição. A sua inscrição no evento só estará confirmada e garantida após a confirmação de pagamento da taxa de inscrição.</p>
 
-<h2>Como pagar a inscrição?</h2>
+<%= render partial: 'participante_mailer/pagamento_inscricao' %>
 
-<p><a href="<%= @url_pagamento %>" target="_blank">Clique aqui</a> pagar a sua taxa de inscrição</p>
-
-<h2>Deseja submeter trabalhos?</h2>
-
-<p>Para submeter trabalhos, entre no endereço <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a>, preencha e envie suas credenciais, clique na aba 'Trabalhos' e clique no botão 'Enviar Trabalho' (disponível até <%= Config.instance.get(:data_termino_submissao_trabalhos).strftime("%d/%m/%Y") %>).</p>
-
-<p>Ficamos a disposição caso tenha problemas ou dúvidas.</p>
-
-<p>
-  Atenciosamente,<br>
-  Comissão Organizadora Central da III SEMEAD/IFRN-EaD<br>
-  <a href="mailto:semead@ifrn.edu.br">semead@ifrn.edu.br</a>
-</p>
+<%= render partial: 'participante_mailer/submissao_trabalho' %>

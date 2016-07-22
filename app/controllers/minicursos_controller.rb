@@ -18,6 +18,7 @@ class MinicursosController < ApplicationController
 
     respond_to do |format|
       if @minicurso.save
+        ParticipanteMailer.minicurso_proposto(@minicurso.participante, @minicurso).deliver_now
         format.html { redirect_to minicursos_path, notice: 'Minicurso proposto com sucesso!' }
       else
         format.html { render :new }
