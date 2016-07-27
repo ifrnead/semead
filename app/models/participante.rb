@@ -11,7 +11,7 @@ class Participante < ActiveRecord::Base
 
   has_attached_file :nota_empenho
 
-  validates :nome, :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
+  validates :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"
   validates :documento, cpf: true, if: "pais_id == 33"
   validates :documento, uniqueness: true
