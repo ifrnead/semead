@@ -8,6 +8,7 @@ class Ability
     if usuario.admin?
       can :manage, :all
       can :aprovar_nota_empenho, Participante
+      can [ :show, :index ], Pagamento
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
@@ -15,6 +16,7 @@ class Ability
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
       can [ :show, :index, :edit, :update ], Minicurso
       can [ :show, :index ], Trabalho
+      can [ :show, :index ], Pagamento
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
@@ -39,6 +41,7 @@ class Ability
 
     if usuario.tem_perfil?('secretario')
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
+      can [ :show, :index ], Pagamento
     end
 
     if usuario.tem_perfil?('participante')

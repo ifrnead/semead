@@ -9,7 +9,7 @@ class ParticipantesController < ApplicationController
     participante = Participante.find(params[:participante_id])
     pagamento = nil
     participante.pagamentos.each do |pgto|
-      if Date.today <= pgto.expira_em
+      if Date.today <= pgto.prazo
         pagamento = pgto
         break
       end
@@ -21,7 +21,7 @@ class ParticipantesController < ApplicationController
     if participante.pago?
       redirect_to participacao_path
     else
-      redirect_to pagamento.init_point
+      redirect_to pagamento.mp_init_point
     end
   end
 

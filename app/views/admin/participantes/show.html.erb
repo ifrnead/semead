@@ -36,8 +36,17 @@
 
 <h2><%= fa_icon 'file-text-o' %> Trabalhos</h2>
 
-<% if @participante.trabalhos.size > 0 %>
-  <%= render partial: 'trabalhos' %>
-<% else %>
+<% if @participante.trabalhos.empty? %>
   <p>Nenhum trabalho submetido até o momento.</p>
+<% else %>
+  <%= render partial: 'trabalhos' %>
+<% end %>
+
+<% if can? :show, Pagamento %>
+  <h2><%= fa_icon 'usd' %> Pagamentos</h2>
+  <% if @participante.pagamentos.empty? %>
+    <p>Nenhum pagamento realizado até o momento.</p>
+  <% else %>
+    <%= render partial: 'pagamentos' %>
+  <% end %>
 <% end %>

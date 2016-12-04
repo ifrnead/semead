@@ -39,14 +39,4 @@ class PagamentoMailer < ApplicationMailer
     mail(to: participante.email, subject: '[SEMEAD] Pagamento da taxa de inscrição devolvido')
   end
 
-  private
-
-  def url_pagamento(participante)
-    if Rails.env.development?
-      return "http://localhost:3000/participantes/#{participante.id}/pagar"
-    else
-      return "http://eventos.ifrn.edu.br/semead/participantes/#{participante.id}/pagar"
-    end
-  end
-
 end

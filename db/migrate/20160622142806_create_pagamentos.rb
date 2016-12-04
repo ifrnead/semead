@@ -2,11 +2,13 @@ class CreatePagamentos < ActiveRecord::Migration
   def change
     create_table :pagamentos do |t|
       t.references :participante, index: true, foreign_key: true
-      t.text :json
-      t.date :expira_em
-      t.string :mercado_pago_id
-      t.text :init_point
-      t.text :sandbox_init_point
+      t.text :mp_preference
+      t.text :mp_payment
+      t.string :mp_id
+      t.text :mp_merchant_order
+      t.text :mp_init_point
+      t.date :prazo
+      t.float :valor
       t.string :situacao
 
       t.timestamps null: false

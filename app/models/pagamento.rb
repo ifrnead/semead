@@ -5,7 +5,7 @@ class Pagamento < ActiveRecord::Base
 
   validates :participante, presence: true
 
-  before_create :definir_situacao
+  before_create :definir_situacao, :definir_prazo, :definir_valor
 
   SITUACOES = {
     :pending => 'Pendente',
@@ -24,7 +24,7 @@ class Pagamento < ActiveRecord::Base
     pagamento = Pagamento.create(participante: participante)
 
     if Rails.env.development?
-      base_url = "http://localhost:3000"
+      base_url = "http://semead.jalerson.ultrahook.com/semead"
     else
       base_url = "http://eventos.ifrn.edu.br/semead"
     end
@@ -56,12 +56,13 @@ class Pagamento < ActiveRecord::Base
     }
 
     preference = mp.create_preference(preference_data)
-    pagamento.update_attributes(json: preference, expira_em: pagamento.prazo, mercado_pago_id: preference['response']['id'], init_point: preference['response']['init_point'], sandbox_init_point: preference['response']['sandbox_init_point'])
+    pagamento.update_attributes(mp_preference: preference, prazo: pagamento.prazo, mp_id: preference['response']['id'], mp_init_point: preference['response']['init_point'])
 
     return pagamento
   end
 
   def atualizar_situacao(situacao)
+    self.update_attribute(:situacao, situacao)
     case situacao
       when 'pending'
         PagamentoMailer.pendente(self.participante).deliver_now
@@ -77,8 +78,10 @@ class Pagamento < ActiveRecord::Base
       when 'cancelled'
         PagamentoMailer.cancelado(self.participante).deliver_now
       when 'refunded'
+        self.participante.update_attribute(:pago, false)
         PagamentoMailer.devolvido(self.participante).deliver_now
       when 'charged_back'
+        self.participante.update_attribute(:pago, false)
         PagamentoMailer.devolvido(self.participante).deliver_now
     end
   end
@@ -87,44 +90,52 @@ class Pagamento < ActiveRecord::Base
     self.situacao = 'pending'
   end
 
-  def prazo
-    if Date.today <= Date.new(2016, 8, 30)
-      return Date.new(2016, 8, 30)
-    elsif Date.today <= Date.new(2016, 10, 31)
-      return Date.new(2016, 10, 31)
-    else
-      return Date.new(2016, 11, 29)
-    end
+  def definir_prazo
+    self.prazo = Date.new(2016, 12, 30)
   end
 
-  def valor
-    return 1 if Config.dev?
+  def definir_valor
+    self.valor = 1 if Config.dev?
+    return
 
     if self.prazo == Date.new(2016, 8, 30)
       if self.participante.tipo?('estudante')
-        return 80
+        self.valor = 80
+        return
       elsif self.participante.tipo?('professor_ensino_superior_posgraduacao') or self.participante.tipo?('professor_educacao_basica') or self.participante.tipo?('profissional_educacao')
-        return 100
+        self.valor = 100
+        return
       else
-        return 120
+        self.valor = 120
+        return
       end
     elsif self.prazo == Date.new(2016, 10, 31)
       if self.participante.tipo?('estudante')
-        return 100
+        self.valor = 100
+        return
       elsif self.participante.tipo?('professor_ensino_superior_posgraduacao') or self.participante.tipo?('professor_educacao_basica') or self.participante.tipo?('profissional_educacao')
-        return 120
+        self.valor = 120
+        return
       else
-        return 140
+        self.valor = 140
+        return
       end
     else
       if self.participante.tipo?('estudante')
-        return 120
+        self.valor = 120
+        return
       elsif self.participante.tipo?('professor_ensino_superior_posgraduacao') or self.participante.tipo?('professor_educacao_basica') or self.participante.tipo?('profissional_educacao')
-        return 140
+        self.valor = 140
+        return
       else
-        return 160
+        self.valor = 160
+        return
       end
     end
+  end
+
+  def payment(key)
+    eval(self.mp_payment)['response']['collection'][key]
   end
 
 end

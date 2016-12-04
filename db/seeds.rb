@@ -8,7 +8,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts "Criando tipos de participantes..."
+print "Criando tipos de participantes... "
 
 TipoParticipante.create(nome: "Professor do ensino superior e pós-graduação", slug: 'professor_ensino_superior_posgraduacao')
 TipoParticipante.create(nome: "Professor da educação básica", slug: 'professor_educacao_basica')
@@ -16,7 +16,9 @@ TipoParticipante.create(nome: "Profissional de educação", slug: 'profissional_
 TipoParticipante.create(nome: "Estudante", slug: 'estudante')
 TipoParticipante.create(nome: "Outros", slug: 'outros')
 
-puts "Criando perfis..."
+puts "concluído!"
+
+print "Criando perfis... "
 
 admin = Perfil.create(nome: 'Administrador', slug: 'administrador')
 membro_comissao_central = Perfil.create(nome: 'Membro da Comissão Central', slug: 'membro_comissao_central')
@@ -26,7 +28,9 @@ membro_comissao_cientifica = Perfil.create(nome: 'Membro da Comissão Científic
 secretario = Perfil.create(nome: 'Secretário', slug: 'secretario')
 Perfil.create(nome: 'Participante', slug: 'participante')
 
-puts "Criando usuários..."
+puts "concluído!"
+
+print "Criando usuários... "
 
 # Admin
 
@@ -146,7 +150,9 @@ tloureiro = Organizador.create(usuario: tloureiro)
 isaac = Usuario.create(nome: 'Isaac Newton', email: 'isaac.ribeiro@ifrn.edu.br', password: '321mud@r', perfil: secretario)
 Organizador.create(usuario: isaac)
 
-puts "Criando linhas de pesquisa..."
+puts "concluído!"
+
+print "Criando linhas de pesquisa... "
 
 linha_politicas = Linha.create(nome: 'Políticas e Institucionalização da EaD', slug: 'politicas_institucionalizacao')
 linha_modelos = Linha.create(nome: 'Modelos e Experiências pedagógicas em EaD', slug: 'modelos_experiencias_pedagogicas')
@@ -154,7 +160,9 @@ linha_formacao = Linha.create(nome: 'Formação Docente em EaD', slug: 'formacao
 linha_solucoes = Linha.create(nome: 'Soluções Tecnológicas para EaD', slug: 'solucoes_tecnologicas')
 linha_producao = Linha.create(nome: 'Produção de Materiais Didáticos para EaD', slug: 'producao_material_didatico')
 
-puts "Adicionando membros às linhas..."
+puts "concluído!"
+
+print "Adicionando membros às linhas... "
 
 Membro.create(linha: linha_politicas, organizador: thalita, coordenador: true)
 Membro.create(linha: linha_politicas, organizador: alex, coordenador: false)
@@ -200,12 +208,16 @@ Membro.create(linha: linha_producao, organizador: lidiane, coordenador: false)
 Membro.create(linha: linha_producao, organizador: tloureiro, coordenador: false)
 Membro.create(linha: linha_producao, organizador: tmedeiros, coordenador: false)
 
-puts "Adicionando tipos de trabalhos"
+puts "concluído!"
+
+print "Adicionando tipos de trabalhos... "
 
 TipoTrabalho.create(nome: 'Apresentação oral', slug: 'apresentacao_oral')
 TipoTrabalho.create(nome: 'Pôster', slug: 'poster')
 
-puts "Criando países..."
+puts "concluído!"
+
+print "Criando países... "
 
 Pais.create(nome: "AFEGANISTÃO", name: "AFGHANISTAN")
 Pais.create(nome: "ACROTÍRI E DECELIA", name: "AKROTIRI E DEKÉLIA")
@@ -460,9 +472,11 @@ Pais.create(nome: "WALLIS E FUTUNA", name: "WALLIS AND FUTUNA")
 Pais.create(nome: "ZÂMBIA", name: "ZAMBIA")
 Pais.create(nome: "ZIMBABUÉ", name: "ZIMBABWE")
 
+puts "concluído!"
+
 brasil = Pais.find_by_nome('Brasil')
 
-puts "Criando estados..."
+print "Criando estados... "
 
 Estado.create(codigo: 12, nome: "Acre", sigla: "AC", pais: brasil)
 Estado.create(codigo: 27, nome: "Alagoas", sigla: "AL", pais: brasil)
@@ -492,7 +506,9 @@ Estado.create(codigo: 35, nome: "São Paulo", sigla: "SP", pais: brasil)
 Estado.create(codigo: 28, nome: "Sergipe", sigla: "SE", pais: brasil)
 Estado.create(codigo: 17, nome: "Tocantins", sigla: "TO", pais: brasil)
 
-puts "Criando cidades..."
+puts "concluído!"
+
+print "Criando cidades... "
 
 Cidade.create(estado_id: 9, codigo: 5200050, nome: "Abadia de Goiás")
 Cidade.create(estado_id: 13, codigo: 3100104, nome: "Abadia dos Dourados")
@@ -6059,3 +6075,5 @@ Cidade.create(estado_id: 15, codigo: 2517407, nome: "Zabelê")
 Cidade.create(estado_id: 25, codigo: 3557154, nome: "Zacarias")
 Cidade.create(estado_id: 10, codigo: 2114007, nome: "Zé Doca")
 Cidade.create(estado_id: 24, codigo: 4219853, nome: "Zortéa")
+
+puts "concluído!"

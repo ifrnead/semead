@@ -95,15 +95,17 @@ ActiveRecord::Schema.define(version: 20160715140326) do
   end
 
   create_table "pagamentos", force: :cascade do |t|
-    t.integer  "participante_id",    limit: 4
-    t.text     "json",               limit: 65535
-    t.date     "expira_em"
-    t.string   "mercado_pago_id",    limit: 255
-    t.text     "init_point",         limit: 65535
-    t.text     "sandbox_init_point", limit: 65535
-    t.string   "situacao",           limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "participante_id",   limit: 4
+    t.text     "mp_preference",     limit: 65535
+    t.text     "mp_payment",        limit: 65535
+    t.string   "mp_id",             limit: 255
+    t.text     "mp_merchant_order", limit: 65535
+    t.text     "mp_init_point",     limit: 65535
+    t.date     "prazo"
+    t.float    "valor",             limit: 24
+    t.string   "situacao",          limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "pagamentos", ["participante_id"], name: "index_pagamentos_on_participante_id", using: :btree

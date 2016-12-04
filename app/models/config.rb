@@ -4,8 +4,8 @@ class Config
   def initialize
     @configs = {
       :dev => true,
-      :data_abertura_inscricoes => Date.new(2016, 7, 1),
-      :data_encerramento_inscricoes => Date.new(2016, 11, 30),
+      :data_abertura_inscricoes => Date.new(2016, 11, 1),
+      :data_encerramento_inscricoes => Date.new(2016, 12, 30),
       :data_inicio_submissao_trabalhos => Date.new(2016, 7, 1),
       :data_termino_submissao_trabalhos => Date.new(2016, 8, 1),
       :data_inicio_submissao_minicursos => Date.new(2016, 7, 1),

@@ -30,6 +30,6 @@ class Admin::ParticipantesController < ApplicationController
   private
 
   def set_participante
-    @participante = Participante.includes(:trabalhos).find(params[:id])
+    @participante = Participante.includes(:trabalhos, :pagamentos).find(params[:id])
   end
 end
