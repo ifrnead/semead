@@ -1,5 +1,9 @@
 class ParticipantesController < ApplicationController
 
+  def index
+    render json: Participante.select2(params[:q])
+  end
+
   def participacao
     @participante = current_user.autenticavel
     authorize! :show, @participante

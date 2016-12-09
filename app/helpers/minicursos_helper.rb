@@ -10,4 +10,8 @@ module MinicursosHelper
     end
   end
 
+  def avaliacao_options
+    [['Reprovado', -1], ['Pendente', 0], ['Aprovado', 1]]
+  end
+
 end

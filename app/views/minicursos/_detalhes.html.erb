@@ -13,4 +13,12 @@
   <dd><%= @minicurso.material %></dd>
   <dt>Referências</dt>
   <dd><%= @minicurso.referencias %></dd>
+  <% if @minicurso.local.present? %>
+    <dt>Local</dt>
+    <dd><%= @minicurso.local %></dd>
+  <% end %>
+  <% if @minicurso.vagas.present? %>
+    <dt>Vagas</dt>
+    <dd><%= @minicurso.vagas %></dd>
+  <% end %>
 </dl>

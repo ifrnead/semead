@@ -29,6 +29,9 @@
               <% if can? :show, minicurso %>
                 <%= link_to fa_icon('eye'), admin_minicurso_path(minicurso), title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
               <% end %>
+              <% if can? :edit, minicurso %>
+                <%= link_to fa_icon('edit'), edit_admin_minicurso_path(minicurso), title: 'Editar', class: 'btn btn-primary btn-sm' %>
+              <% end %>
             </div>
           </td>
         </tr>

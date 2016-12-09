@@ -1,0 +1,73 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#minicurso_participante_id").select2({
+        theme: "bootstrap",
+        language: "pt-BR",
+        ajax: {
+          url: "<%= participantes_path %>",
+          dataType: 'json',
+          delay: 250,
+          data: function(params) {
+            return {
+              q: params.term,
+              page: params.page
+            }
+          },
+          processResults: function (data) {
+            return {
+              results: $.map(data, function (item) {
+                          return {
+                            text: item.nome,
+                            id: item.id
+                          }
+                        })
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 3
+      });
+
+      <% if @minicurso.participante.present? %>
+        $("#minicurso_participante_id").select2('data', {id: <%= @minicurso.participante.id %>, text: '<%= @minicurso.participante.nome %>'});
+      <% end %>
+    });
+
+    function toggle(id) {
+      $("#participante_"+id).parent().toggle('blind');
+    }
+
+    function verificar_pais() {
+      pais_id = $("#participante_pais_id").val();
+      if(pais_id != 33) {
+        $("#participante_cidade_id").attr('disabled', 'disabled');
+      } else {
+        $("#participante_cidade_id").attr('disabled', false);
+      }
+    }
+  </script>
+<% end %>
+
+<%= bootstrap_form_for(@minicurso, url: admin_minicurso_path(@minicurso)) do |f| %>
+  <p>Todos os campos são obrigatórios.</p>
+  <%= f.text_field :titulo, label: 'Título' %>
+  <%= f.select :participante_id, Participante.select, label: 'Proponente' %>
+  <%= f.select :avaliacao, options_for_select(avaliacao_options, @minicurso.avaliacao), label: 'Avaliação' %>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <%= f.text_field :local, label: 'Local' %>
+      <%= f.text_area :justificativa, rows: 5 %>
+      <%= f.text_area :objetivos, rows: 5 %>
+      <%= f.text_area :metodologia, rows: 5 %>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <%= f.text_field :vagas, label: 'Quantidade de vagas' %>
+      <%= f.text_area :programacao, rows: 5, label: 'Programação' %>
+      <%= f.text_area :material, rows: 5, label: 'Material necessário' %>
+      <%= f.text_area :referencias, rows: 5, label: 'Referências' %>
+    </div>
+  </div>
+  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+<% end %>

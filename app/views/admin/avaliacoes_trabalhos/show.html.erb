@@ -25,18 +25,26 @@
 <% else %>
   <p>
     <strong>Atende às normas da Holos?</strong>
-    <% if @avaliacao.atende_normas == AvaliacaoTrabalho::ATENDE_NORMAS[:sim] %>
-      Sim
+    <% if @avaliacao.atende_normas.nil? %>
+      Não avaliado
     <% else %>
-      Não/recusado
+      <% if @avaliacao.atende_normas == AvaliacaoTrabalho::ATENDE_NORMAS[:sim] %>
+        Sim
+      <% else %>
+        Não/recusado
+      <% end %>
     <% end %>
   </p>
   <p>
     <strong>O tema está inserido na temática do evento?</strong>
-    <% if @avaliacao.tematica_evento == AvaliacaoTrabalho::TEMATICA_EVENTO[:sim] %>
-      Sim
+    <% if @avaliacao.tematica_evento.nil? %>
+      Não avaliado
     <% else %>
-      Não/recusado
+      <% if @avaliacao.tematica_evento == AvaliacaoTrabalho::TEMATICA_EVENTO[:sim] %>
+        Sim
+      <% else %>
+        Não/recusado
+      <% end %>
     <% end %>
   </p>
 

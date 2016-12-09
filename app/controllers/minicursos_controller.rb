@@ -4,7 +4,7 @@ class MinicursosController < ApplicationController
 
   def index
     authorize! :index, Minicurso
-    @minicursos = current_user.autenticavel.minicursos
+    @minicursos = current_user.autenticavel.minicursos_propostos
   end
 
   def new

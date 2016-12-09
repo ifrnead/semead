@@ -1,13 +1,17 @@
 # encoding: utf-8
 
 class Participante < ActiveRecord::Base
+  include Selectable
+
   belongs_to :tipo_participante
   belongs_to :cidade
   belongs_to :pais
   has_one :usuario, as: :autenticavel, dependent: :destroy
   has_many :trabalhos, dependent: :destroy
   has_many :pagamentos, dependent: :destroy
-  has_many :minicursos, dependent: :destroy
+  has_many :minicursos_propostos, dependent: :destroy, class_name: 'Minicurso'
+  has_many :inscricoes
+  has_many :minicursos, through: :inscricoes
 
   has_attached_file :nota_empenho
 
@@ -48,5 +52,13 @@ class Participante < ActiveRecord::Base
 
   def pago?
     return self.pago
+  end
+
+  def self.select2(params)
+    participantes = Array.new
+    self.where("nome LIKE '%#{params}%'").each do |participante|
+      participantes << { id: participante.id, nome: participante.nome }
+    end
+    return participantes
   end
 end

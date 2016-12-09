@@ -18,4 +18,8 @@ class Organizador < ActiveRecord::Base
   def perfil
     self.usuario.perfil
   end
+
+  def trabalhos_avaliacao_pendente
+    self.trabalhos.where('avaliacoes_trabalhos.situacao' => AvaliacaoTrabalho::SITUACOES[:pendente])
+  end
 end

@@ -4,15 +4,16 @@ class Config
   def initialize
     @configs = {
       :dev => true,
-      :data_abertura_inscricoes => Date.new(2016, 11, 1),
-      :data_encerramento_inscricoes => Date.new(2016, 12, 30),
-      :data_inicio_submissao_trabalhos => Date.new(2016, 7, 1),
-      :data_termino_submissao_trabalhos => Date.new(2016, 8, 1),
-      :data_inicio_submissao_minicursos => Date.new(2016, 7, 1),
-      :data_termino_submissao_minicursos => Date.new(2016, 8, 1),
-      :data_inicio_inscricoes_minicursos => Date.new(2016, 7, 1),
-      :data_termino_inscricoes_minicursos => Date.new(2016, 8, 1),
-      :prazo_redefinir_senha => 1 # dia
+      :data_abertura_inscricoes => Date.new(2016, 12, 7),
+      :data_encerramento_inscricoes => Date.new(2017, 5, 10),
+      :data_inicio_submissao_trabalhos => Date.new(2016, 12, 7),
+      :data_termino_submissao_trabalhos => Date.new(2017, 2, 12),
+      :data_inicio_submissao_minicursos => Date.new(2016, 12, 7),
+      :data_termino_submissao_minicursos => Date.new(2017, 2, 12),
+      :data_inicio_inscricoes_minicursos => Date.new(2017, 4, 4),
+      :data_termino_inscricoes_minicursos => Date.new(2017, 5, 10),
+      :prazo_redefinir_senha => 1, # dia
+      :prazo_pagamento => 5 # dias
     }
   end
 

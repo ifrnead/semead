@@ -91,14 +91,16 @@ class Pagamento < ActiveRecord::Base
   end
 
   def definir_prazo
-    self.prazo = Date.new(2016, 12, 30)
+    self.prazo = Date.today + Config.instance.get(:prazo_pagamento)
   end
 
   def definir_valor
-    self.valor = 1 if Config.dev?
-    return
+    if Config.dev?
+      self.valor = 1
+      return
+    end
 
-    if self.prazo == Date.new(2016, 8, 30)
+    if Date.today <= Date.new(2017, 2, 28)
       if self.participante.tipo?('estudante')
         self.valor = 80
         return
@@ -109,7 +111,7 @@ class Pagamento < ActiveRecord::Base
         self.valor = 120
         return
       end
-    elsif self.prazo == Date.new(2016, 10, 31)
+    elsif Date.today <= Date.new(2017, 4, 30)
       if self.participante.tipo?('estudante')
         self.valor = 100
         return

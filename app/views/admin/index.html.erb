@@ -1,1 +1,6 @@
 <h1><%= fa_icon 'dashboard' %> Painel</h1>
+
+<% if @trabalhos_avaliacao_pendente.present? %>
+  <h2><%= fa_icon 'file-text-o' %> Trabalhos com avaliação pendente</h2>
+  <%= render partial: 'admin/trabalhos/table', locals: { trabalhos: @trabalhos_avaliacao_pendente } %>
+<% end %>

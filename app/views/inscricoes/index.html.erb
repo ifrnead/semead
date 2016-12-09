@@ -1,0 +1,39 @@
+<h1><%= fa_icon 'pencil' %> Inscrição</h1>
+
+<% if @minicursos_inscritos.empty? %>
+  <div class="alert alert-success" role="alert"><strong>Atenção:</strong> Você ainda não está inscrito em minicursos.</div>
+<% else %>
+
+<% end %>
+
+<h1><%= fa_icon 'graduation-cap' %> Minicursos</h1>
+
+<% if @minicursos.empty? %>
+  <p>Nenhum minicurso encontrado.</p>
+<% else %>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <% @minicursos.each_with_index do |minicurso, index| %>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading<%= index %>">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+              <%= minicurso.titulo %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%= index %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= index %>">
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt>Ministrante</dt><dd><%= minicurso.participante.nome %></dd>
+              <dt>Objetivos</dt><dd><%= minicurso.objetivos %></dd>
+              <dt>Programação</dt><dd><%= minicurso.programacao %></dd>
+            </dl>
+            <div class="btn-group">
+              <%= link_to (fa_icon 'pencil') + " Quero me inscrever", "#", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

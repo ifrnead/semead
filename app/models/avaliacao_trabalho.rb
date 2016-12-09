@@ -5,7 +5,7 @@ class AvaliacaoTrabalho < ActiveRecord::Base
 
   before_create :definir_situacao
   before_update :verificar_situacao
-  after_update :verificar_discrepancia, :notificar_autor
+  after_update :verificar_discrepancia# , :notificar_autor
 
   validates :situacao, :atende_normas, :tematica_evento, :linha_tematica, :relevancia, :adequacao, :consistencia, :interlocucao, :originalidade, presence: true, on: :update, unless: :outra_linha?
   validates :parecer, presence: true, if: :reprovado?

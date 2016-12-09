@@ -26,6 +26,14 @@ class Usuario < ActiveRecord::Base
     self.tem_perfil?('administrador')
   end
 
+  def organizador?
+    self.autenticavel_type == 'Organizador'
+  end
+
+  def participante?
+    self.autenticavel_type == 'Participante'
+  end
+
   def gerar_codigo_recuperacao_senha
     self.codigo_recuperar_senha = SecureRandom.hex
     self.prazo_recuperacao_senha = DateTime.now + Config.instance.get(:prazo_redefinir_senha)

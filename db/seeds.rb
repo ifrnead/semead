@@ -139,11 +139,23 @@ rose = Organizador.create(usuario: rose)
 douglas = Usuario.create(nome: 'Roberto Douglas', email: 'douglas.costa@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
 douglas = Organizador.create(usuario: douglas)
 
-lidiane = Usuario.create(nome: 'Lidiane Medeiros', email: 'lidiane.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
-lidiane = Organizador.create(usuario: lidiane)
+# lidiane = Usuario.create(nome: 'Lidiane Medeiros', email: 'lidiane.medeiros@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+# lidiane = Organizador.create(usuario: lidiane)
 
 tloureiro = Usuario.create(nome: 'Thiago Loureiro', email: 'thiago.loureiro@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
 tloureiro = Organizador.create(usuario: tloureiro)
+
+sarah = Usuario.create(nome: 'Sarah Raquel', email: 'sarah.raquel@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+sarah = Organizador.create(usuario: sarah)
+
+liane = Usuario.create(nome: 'Liane Mariz', email: 'liane.mariz@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+liane = Organizador.create(usuario: liane)
+
+everton = Usuario.create(nome: 'Everton Almeida', email: 'everton.almeida@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+everton = Organizador.create(usuario: everton)
+
+adilina = Usuario.create(nome: 'Adilina Andrade', email: 'adilina.andrade@ifrn.edu.br', password: '321mud@r', perfil: membro_comissao_cientifica)
+adilina = Organizador.create(usuario: adilina)
 
 # Secretaria
 
@@ -191,6 +203,9 @@ Membro.create(linha: linha_formacao, organizador: gueidson, coordenador: false)
 Membro.create(linha: linha_formacao, organizador: jroberto, coordenador: false)
 Membro.create(linha: linha_formacao, organizador: patricia, coordenador: false)
 Membro.create(linha: linha_formacao, organizador: silvia, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: sarah, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: liane, coordenador: false)
+Membro.create(linha: linha_formacao, organizador: adilina, coordenador: false)
 
 Membro.create(linha: linha_solucoes, organizador: allan, coordenador: true)
 Membro.create(linha: linha_solucoes, organizador: charles, coordenador: false)
@@ -200,11 +215,13 @@ Membro.create(linha: linha_solucoes, organizador: jalerson, coordenador: false)
 Membro.create(linha: linha_solucoes, organizador: jp, coordenador: false)
 Membro.create(linha: linha_solucoes, organizador: wagner, coordenador: false)
 Membro.create(linha: linha_solucoes, organizador: emanuel, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: sarah, coordenador: false)
+Membro.create(linha: linha_solucoes, organizador: everton, coordenador: false)
 
 Membro.create(linha: linha_producao, organizador: fabio, coordenador: true)
 Membro.create(linha: linha_producao, organizador: rose, coordenador: false)
 Membro.create(linha: linha_producao, organizador: douglas, coordenador: false)
-Membro.create(linha: linha_producao, organizador: lidiane, coordenador: false)
+# Membro.create(linha: linha_producao, organizador: lidiane, coordenador: false)
 Membro.create(linha: linha_producao, organizador: tloureiro, coordenador: false)
 Membro.create(linha: linha_producao, organizador: tmedeiros, coordenador: false)
 
