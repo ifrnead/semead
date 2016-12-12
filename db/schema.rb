@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20161206154306) do
     t.text     "referencias",     limit: 65535
     t.integer  "participante_id", limit: 4
     t.integer  "avaliacao",       limit: 4
-    t.integer  "vagas",       limit: 4
-    t.string   "local",             limit: 255
+    t.string   "local",           limit: 255
+    t.integer  "vagas",           limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end

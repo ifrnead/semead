@@ -4,4 +4,14 @@
 
 <%= render partial: 'pagamento_inscricao' %>
 
-<%= render partial: 'submissao_trabalho' %>
+<% if Config.permitir_submissao_trabalhos? %>
+  <%= render partial: 'submissao_trabalho' %>
+<% end %>
+
+<% if Config.permitir_submissao_minicursos? %>
+  <%= render partial: 'submissao_minicurso' %>
+<% end %>
+
+<% if Config.permitir_inscricao_minicursos? %>
+  <%= render partial: 'inscricao_minicurso' %>
+<% end %>

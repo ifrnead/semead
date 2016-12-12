@@ -2,4 +2,14 @@
 
 <p>O pagamento da sua taxa de inscrição para a III SEMEAD está em mediação. Para acompanhar a situação de sua inscrição, entre no Painel do Participante através do endereço: <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a></p>
 
-<%= render partial: 'participante_mailer/submissao_trabalho' %>
+<% if Config.permitir_submissao_trabalhos? %>
+  <%= render partial: 'participante_mailer/submissao_trabalho' %>
+<% end %>
+
+<% if Config.permitir_submissao_minicursos? %>
+  <%= render partial: 'participante_mailer/submissao_minicurso' %>
+<% end %>
+
+<% if Config.permitir_inscricao_minicursos? %>
+  <%= render partial: 'participante_mailer/inscricao_minicurso' %>
+<% end %>

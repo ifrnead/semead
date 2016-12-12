@@ -3,7 +3,7 @@ class Config
 
   def initialize
     @configs = {
-      :dev => true,
+      :dev => false,
       :data_abertura_inscricoes => Date.new(2016, 12, 7),
       :data_encerramento_inscricoes => Date.new(2017, 5, 10),
       :data_inicio_submissao_trabalhos => Date.new(2016, 12, 7),

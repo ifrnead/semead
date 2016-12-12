@@ -43,7 +43,11 @@ class Pagamento < ActiveRecord::Base
       ],
       payer: {
         name: pagamento.participante.nome,
-        email: pagamento.participante.email
+        email: pagamento.participante.email,
+        identification: {
+          type: 'CPF',
+          number: pagamento.participante.documento
+        }
       },
       back_urls: {
         pending: (base_url + "/pagamentos/processando"),

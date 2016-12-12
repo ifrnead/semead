@@ -4,4 +4,14 @@
 
 <%= render partial: 'participante_mailer/pagamento_inscricao' %>
 
-<%= render partial: 'participante_mailer/submissao_trabalho' %>
+<% if Config.permitir_submissao_trabalhos? %>
+  <%= render partial: 'participante_mailer/submissao_trabalho' %>
+<% end %>
+
+<% if Config.permitir_submissao_minicursos? %>
+  <%= render partial: 'participante_mailer/submissao_minicurso' %>
+<% end %>
+
+<% if Config.permitir_inscricao_minicursos? %>
+  <%= render partial: 'participante_mailer/inscricao_minicurso' %>
+<% end %>
