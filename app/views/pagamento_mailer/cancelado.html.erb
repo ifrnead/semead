@@ -3,15 +3,3 @@
 <p>A sua inscrição para a III SEMEAD foi realizada, contudo, o pagamento da sua taxa de inscrição foi cancelada por solicitação sua, pela organização do evento ou porque o prazo para pagamento expirou. A sua inscrição no evento só estará confirmada e garantida após a confirmação de pagamento da taxa de inscrição.</p>
 
 <%= render partial: 'participante_mailer/pagamento_inscricao' %>
-
-<% if Config.permitir_submissao_trabalhos? %>
-  <%= render partial: 'participante_mailer/submissao_trabalho' %>
-<% end %>
-
-<% if Config.permitir_submissao_minicursos? %>
-  <%= render partial: 'participante_mailer/submissao_minicurso' %>
-<% end %>
-
-<% if Config.permitir_inscricao_minicursos? %>
-  <%= render partial: 'participante_mailer/inscricao_minicurso' %>
-<% end %>
