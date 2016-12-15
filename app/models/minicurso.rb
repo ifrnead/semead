@@ -5,7 +5,7 @@ class Minicurso < ActiveRecord::Base
 
   validates :titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias, presence: true, on: :create
   validates :titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias, :vagas, :local, presence: true, on: :update
-  validates :vagas, numericality: { only_integer: true }
+  validates :vagas, numericality: { only_integer: true }, on: :update
 
   before_create :definir_avaliacao
 
