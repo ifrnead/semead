@@ -1,7 +1,21 @@
 <% @participante.pagamentos.each do |pagamento| %>
-  <% if pagamento.mp_payment.present? %>
-    <div class="panel panel">
-      <div class="panel-body">
+  <div class="panel panel">
+    <div class="panel-body">
+      <% if pagamento.mp_merchant_order.present? %>
+        <h3>Merchant Order Data</h3>
+        <dl class="dl-horizontal">
+          <dt>ID</dt><dd><%= pagamento.merchant_order('id') %></dd>
+          <dt>Preference ID</dt><dd><%= pagamento.merchant_order('preference_id') %></dd>
+          <dt>Criado em</dt><dd><%= data(str_to_date(pagamento.merchant_order('date_created'))) %></dd>
+          <dt>Última modificação</dt><dd><%= data(str_to_date(pagamento.merchant_order('last_updated'))) %></dd>
+          <dt>Status</dt><dd><%= pagamento.merchant_order('status') %></dd>
+          <dt>Valor total</dt><dd>R$ <%= pagamento.merchant_order('total_amount') %></dd>
+          <dt>Referência externa</dt><dd><%= pagamento.merchant_order('external_reference') %></dd>
+        </dl>
+      <% end %>
+      <% if pagamento.mp_payment.present? %>
+        <hr>
+        <h3>Payment Data</h3>
         <dl class="dl-horizontal">
           <dt>ID</dt><dd><%= pagamento.payment('id') %></dd>
           <dt>Criado em</dt><dd><%= data(str_to_date(pagamento.payment('date_created'))) %></dd>
@@ -20,7 +34,7 @@
           <dt>Código de autorização</dt><dd><%= pagamento.payment('authorization_code') %></dd>
           <dt>Últimos 4 dígitos</dt><dd><%= pagamento.payment('last_four_digits') %></dd>
         </dl>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 <% end %>

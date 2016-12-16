@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   resources :trabalhos do
     get 'prazo_encerrado', on: :collection
   end
-  resources :minicursos
-  resources :inscricoes
+  resources :minicursos do
+    resources :inscricoes
+  end
   namespace :admin do
     resources :participantes do
       get 'aprovar_nota_empenho'
@@ -50,6 +51,8 @@ Rails.application.routes.draw do
   get 'pagamentos/processando'
   get 'pagamentos/aprovado'
   get 'pagamentos/falhou'
+  get 'inscricoes' => 'inscricoes#index', as: :inscricoes
+  get 'minicursos/inscricoes/cancelar' => 'inscricoes#cancelar', as: :cancelar_inscricao
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

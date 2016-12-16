@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206154306) do
+ActiveRecord::Schema.define(version: 20161215174301) do
 
   create_table "avaliacoes_trabalhos", force: :cascade do |t|
     t.integer  "situacao",        limit: 4
@@ -54,16 +54,6 @@ ActiveRecord::Schema.define(version: 20161206154306) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-
-  create_table "inscricoes", force: :cascade do |t|
-    t.integer  "minicurso_id",    limit: 4
-    t.integer  "participante_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "inscricoes", ["minicurso_id"], name: "index_inscricoes_on_minicurso_id", using: :btree
-  add_index "inscricoes", ["participante_id"], name: "index_inscricoes_on_participante_id", using: :btree
 
   create_table "linhas", force: :cascade do |t|
     t.string   "nome",       limit: 255
@@ -145,9 +135,11 @@ ActiveRecord::Schema.define(version: 20161206154306) do
     t.string   "nota_empenho_content_type",     limit: 255
     t.integer  "nota_empenho_file_size",        limit: 4
     t.datetime "nota_empenho_updated_at"
+    t.integer  "minicurso_id",                  limit: 4
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
+  add_index "participantes", ["minicurso_id"], name: "index_participantes_on_minicurso_id", using: :btree
   add_index "participantes", ["pais_id"], name: "index_participantes_on_pais_id", using: :btree
   add_index "participantes", ["tipo_participante_id"], name: "index_participantes_on_tipo_participante_id", using: :btree
 
@@ -210,13 +202,12 @@ ActiveRecord::Schema.define(version: 20161206154306) do
   add_foreign_key "avaliacoes_trabalhos", "organizadores"
   add_foreign_key "avaliacoes_trabalhos", "trabalhos"
   add_foreign_key "cidades", "estados"
-  add_foreign_key "inscricoes", "minicursos"
-  add_foreign_key "inscricoes", "participantes"
   add_foreign_key "membros", "linhas"
   add_foreign_key "membros", "organizadores"
   add_foreign_key "minicursos", "participantes"
   add_foreign_key "pagamentos", "participantes"
   add_foreign_key "participantes", "cidades"
+  add_foreign_key "participantes", "minicursos"
   add_foreign_key "participantes", "paises"
   add_foreign_key "participantes", "tipo_participantes"
   add_foreign_key "trabalhos", "linhas"

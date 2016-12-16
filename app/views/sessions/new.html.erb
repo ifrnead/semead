@@ -1,17 +1,5 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= fa_icon 'key' %> Autenticação</h3>
-      </div>
-      <div class="panel-body">
-        <%= bootstrap_form_tag(url: sessions_path) do |f| %>
-          <%= f.text_field :email %>
-          <%= f.password_field :password, label: 'Senha' %>
-          <%= f.submit 'Enviar', class: 'btn btn-primary' %>
-          <a class="btn btn-default pull-right" href="<%= recuperar_senha_path %>">Esqueceu sua senha?</a>
-        <% end %>
-      </div>
-    </div>
+    <%= render partial: 'form' %>
   </div>
 </div>

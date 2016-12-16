@@ -10,8 +10,7 @@ class Participante < ActiveRecord::Base
   has_many :trabalhos, dependent: :destroy
   has_many :pagamentos, dependent: :destroy
   has_many :minicursos_propostos, dependent: :destroy, class_name: 'Minicurso'
-  has_many :inscricoes
-  has_many :minicursos, through: :inscricoes
+  belongs_to :minicurso
 
   has_attached_file :nota_empenho
 

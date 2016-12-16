@@ -144,4 +144,8 @@ class Pagamento < ActiveRecord::Base
     eval(self.mp_payment)['response']['collection'][key]
   end
 
+  def merchant_order(key)
+    eval(self.mp_merchant_order)['response'][key]
+  end
+
 end
