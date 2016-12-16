@@ -1,11 +1,13 @@
 class InscricoesController < ApplicationController
 
   def index
+    authorize! :inscrever, Minicurso
     @minicurso = current_user.autenticavel.minicurso
     @minicursos = Minicurso.com_vagas
   end
 
   def new
+    authorize! :inscrever, Minicurso
     minicurso = Minicurso.find(params[:minicurso_id])
     if minicurso.tem_vagas?
       current_user.autenticavel.update_attribute(:minicurso_id, minicurso.id)

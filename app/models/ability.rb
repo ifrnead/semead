@@ -48,7 +48,7 @@ class Ability
       can :show, Participante, id: usuario.autenticavel.id
       can [ :new, :create, :index ], Trabalho if usuario.autenticavel.pago?
       can [ :new, :create, :index ], Minicurso if usuario.autenticavel.pago?
-      can [ :new, :create, :index ], Inscricao if usuario.autenticavel.pago?
+      can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.pago?
       can :show, Minicurso, participante_id: usuario.autenticavel.id
       can :show, Trabalho, participante_id: usuario.autenticavel.id
     end
