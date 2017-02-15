@@ -50,10 +50,18 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem "factory_girl"
   gem "factory_girl_rails"
+  gem 'cpf_faker'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
+  gem "capybara"
+  gem 'cucumber-rails', :require => false
+  gem "faker"
+  # gem "guard-rspec"
+  gem "launchy"
+  gem "database_cleaner"
+  gem 'capybara-select2', :github => 'goodwill/capybara-select2'
 end
 
 group :development do
