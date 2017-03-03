@@ -55,7 +55,7 @@ class Participante < ActiveRecord::Base
 
   def self.select2(params)
     participantes = Array.new
-    self.where("nome LIKE '%#{params}%'").each do |participante|
+    self.joins(:usuario).where("nome LIKE '%#{params}%'").each do |participante|
       participantes << { id: participante.id, nome: participante.nome }
     end
     return participantes
