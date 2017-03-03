@@ -3,7 +3,7 @@ class Admin::TrabalhosController < ApplicationController
 
   def index
     authorize! :index, Trabalho
-    if current_user.tem_perfil?('administrador') or current_user.tem_perfil?('membro_comissao_central') or current_user.tem_perfil?('coordenador_comissao_cientifica')
+    if current_user.tem_perfil?('administrador') or current_user.tem_perfil?('membro_comissao_central') or current_user.tem_perfil?('coordenador_comissao_cientifica') or current_user.tem_perfil?('secretario')
       @trabalhos = Trabalho.all
     elsif current_user.tem_perfil?('coordenador_linha_pesquisa') or current_user.tem_perfil?('membro_comissao_cientifica')
       @trabalhos = current_user.autenticavel.trabalhos

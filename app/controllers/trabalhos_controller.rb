@@ -20,6 +20,7 @@ class TrabalhosController < ApplicationController
     if Config.permitir_submissao_trabalhos?
       @trabalho = Trabalho.new
       @trabalho.participante = current_user.autenticavel
+      @trabalho.autores.build(nome: current_user.autenticavel.nome)
       authorize! :create, @trabalho
     else
       redirect_to prazo_encerrado_trabalhos_path
@@ -82,12 +83,12 @@ class TrabalhosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trabalho
-      @trabalho = Trabalho.find(params[:id])
+      @trabalho = Trabalho.includes(:linha, :participante, :tipo_trabalho, :avaliacoes, :autores).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trabalho_params
-      params.require(:trabalho).permit(:titulo, :resumo, :linha_id, :participante_id, :tipo_trabalho_id, :arquivo)
+      params.require(:trabalho).permit(:titulo, :resumo, :linha_id, :participante_id, :tipo_trabalho_id, :arquivo, autores_attributes: [ :nome ])
     end
 
     def set_participante

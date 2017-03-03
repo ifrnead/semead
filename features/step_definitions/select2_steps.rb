@@ -1,4 +1,4 @@
-Quando /^o visitante selecionar "(.*?)" no select2 "(.*?)" $/ do |value, placeholder|
+Quando /^o visitante selecionar (.*?) no select2 (.*?)$/ do |value, placeholder|
   container = page.find('.select2-container', text: placeholder)
   container.find('a.select2-choice').click
   input  = container.find("input[type='text']")

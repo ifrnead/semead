@@ -16,6 +16,7 @@
 //= require select2-full
 //= require select2_locale_pt-BR
 //= require_tree .
+//= require jquery_nested_form
 
 function redirect(url) {
   location.href = url;

@@ -9,7 +9,7 @@ FactoryGirl.define do
     tipo_participante_id Faker::Number.between(1, 5)
   end
 
-  factory :usuario_participante do
+  factory :usuario do
     nome Faker::Name.name
     email Faker::Internet.email
     password Faker::Internet.password

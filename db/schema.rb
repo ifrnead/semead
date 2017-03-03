@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215174301) do
+ActiveRecord::Schema.define(version: 20170302181139) do
+
+  create_table "autores", force: :cascade do |t|
+    t.string   "nome",        limit: 255
+    t.integer  "trabalho_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "autores", ["trabalho_id"], name: "index_autores_on_trabalho_id", using: :btree
 
   create_table "avaliacoes_trabalhos", force: :cascade do |t|
     t.integer  "situacao",        limit: 4
@@ -198,6 +207,7 @@ ActiveRecord::Schema.define(version: 20161215174301) do
   add_index "usuarios", ["autenticavel_id"], name: "index_usuarios_on_autenticavel_id", using: :btree
   add_index "usuarios", ["perfil_id"], name: "index_usuarios_on_perfil_id", using: :btree
 
+  add_foreign_key "autores", "trabalhos"
   add_foreign_key "avaliacoes_trabalhos", "linhas"
   add_foreign_key "avaliacoes_trabalhos", "organizadores"
   add_foreign_key "avaliacoes_trabalhos", "trabalhos"

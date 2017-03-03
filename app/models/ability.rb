@@ -42,6 +42,7 @@ class Ability
     if usuario.tem_perfil?('secretario')
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
       can [ :show, :index ], Pagamento
+      can [ :show, :index, :ver_autores ], Trabalho
     end
 
     if usuario.tem_perfil?('participante')

@@ -11,6 +11,7 @@ gem 'mercadopago-sdk'
 gem 'rake', '11.2.2'
 gem 'exception_notification'
 gem 'whenever', :require => false
+gem "nested_form"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -58,6 +59,7 @@ group :test do
   gem "capybara"
   gem 'cucumber-rails', :require => false
   gem "faker"
+  gem 'poltergeist'
   # gem "guard-rspec"
   gem "launchy"
   gem "database_cleaner"

@@ -3,6 +3,9 @@ class Trabalho < ActiveRecord::Base
   belongs_to :participante
   belongs_to :tipo_trabalho
   has_many :avaliacoes, class_name: 'AvaliacaoTrabalho', dependent: :destroy
+  has_many :autores
+
+  accepts_nested_attributes_for :autores, :reject_if => proc { |params| params['nome'].blank? }
 
   before_destroy :apagar_arquivo
   after_create :definir_avaliadores
@@ -10,7 +13,7 @@ class Trabalho < ActiveRecord::Base
   validates :titulo, :resumo, :linha_id, :tipo_trabalho_id, presence: true
 
   has_attached_file :arquivo
-  validates_attachment :arquivo, presence: true, content_type: { content_type: "application/pdf" }
+  validates_attachment :arquivo, presence: true, content_type: { content_type: [ "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ] }
 
   def minha_avaliacao(organizador)
     return self.avaliacoes.where(organizador_id: organizador.id).first

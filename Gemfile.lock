@@ -65,6 +65,7 @@ GEM
     climate_control (0.0.3)
       activesupport (>= 3.0)
     clipboard (1.1.1)
+    cliver (0.3.2)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.1)
@@ -140,6 +141,7 @@ GEM
     multi_json (1.12.1)
     multi_test (0.1.2)
     mysql2 (0.4.4)
+    nested_form (0.3.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     paperclip (5.0.0)
@@ -148,6 +150,10 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    poltergeist (1.13.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     public_suffix (2.0.4)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -243,6 +249,9 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -272,7 +281,9 @@ DEPENDENCIES
   launchy
   mercadopago-sdk
   mysql2 (>= 0.3.13, < 0.5)
+  nested_form
   paperclip (~> 5.0.0)
+  poltergeist
   rails (= 4.2.6)
   rake (= 11.2.2)
   rspec-rails (~> 3.5)

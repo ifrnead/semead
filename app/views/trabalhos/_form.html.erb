@@ -1,8 +1,24 @@
-<%= bootstrap_form_for(@trabalho, html: { multipart: true }) do |f| %>
+<%= bootstrap_nested_form_for(@trabalho, html: { multipart: true }) do |f| %>
   <p>Todos os campos são obrigatórios.</p>
   <%= f.text_field :titulo, label: 'Título' %>
   <%= f.text_area :resumo, rows: 5 %>
-  <%= f.file_field :arquivo, label: 'Arquivo (pdf)' %>
+  <div class="alert alert-info" role="alert"><strong>Atenção:</strong> Preencha os nomes dos autores abaixo na mesma ordem em que eles devem ser apresentados no artigo.</div>
+  <label for="autores" class="control-label">Autores</label>
+  <%= f.fields_for :autores do |autores| %>
+    <div class="form-group">
+      <div class="input-group">
+        <%= autores.text_field :nome, hide_label: true, placeholder: 'Nome do autor' %>
+        <span class="input-group-btn">
+          <%= autores.link_to_remove "Remover", class: 'btn btn-default' %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.link_to_add "Adicionar autor", :autores, class: 'btn btn-default' %>
+  </div>
+  <div class="alert alert-warning" role="alert"><strong>Atenção:</strong> O artigo submetido não pode conter os nomes dos autores.</div>
+  <%= f.file_field :arquivo, label: 'Arquivo (doc ou docx)' %>
   <%= f.select :linha_id, Linha.select, prompt: 'Selecione' %>
   <%= f.select :tipo_trabalho_id, TipoTrabalho.select, prompt: 'Selecione' %>
   <%= f.submit 'Enviar', class: 'btn btn-primary' %>

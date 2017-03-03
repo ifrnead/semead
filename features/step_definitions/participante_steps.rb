@@ -10,8 +10,8 @@ Quando(/^o visitante preencher os campos do formulário de inscrição do evento
   fill_in 'participante_usuario_attributes_email', with: @usuario.email
   fill_in 'participante_usuario_attributes_password', with: @usuario.password
   fill_in 'participante_usuario_attributes_password_confirmation', with: @usuario.password
-  # select2 "Natal", from: "Cidade", search: true
+  select2 "Natal", from: "Cidade", search: true
   fill_in 'participante_documento', with: @participante.documento
-  select 4, from: 'participante_tipo_participante_id'
+  select "Estudante", from: 'participante_tipo_participante_id'
   fill_in 'participante_instituicao', with: @participante.instituicao
 end
