@@ -12,8 +12,15 @@ class Trabalho < ActiveRecord::Base
 
   validates :titulo, :resumo, :linha_id, :tipo_trabalho_id, presence: true
 
-  has_attached_file :arquivo
+  has_attached_file :arquivo, {
+    path: "public/system/:class/:attachment/:id/:style/:filename",
+    url: "system/:class/:attachment/:id/:style/:filename"
+  }
   validates_attachment :arquivo, presence: true, content_type: { content_type: [ "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ] }
+
+  def download
+    "/semead/#{self.arquivo.url}"
+  end
 
   def minha_avaliacao(organizador)
     return self.avaliacoes.where(organizador_id: organizador.id).first

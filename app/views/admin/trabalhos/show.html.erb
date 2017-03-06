@@ -5,7 +5,7 @@
   <div class="col-md-6">
     <div class="btn-group pull-right">
       <% if can? :show, @trabalho %>
-        <%= link_to fa_icon('download') + " Download", @trabalho.arquivo.url, class: "btn btn-primary" %>
+        <%= link_to fa_icon('download') + " Download", @trabalho.download, class: "btn btn-primary" %>
       <% end %>
       <% if @avaliacao.present? and can? :edit, @avaliacao %>
         <%= link_to fa_icon('gavel') + " Avaliar", admin_trabalho_avaliar_path(@trabalho), class: "btn btn-primary" %>
