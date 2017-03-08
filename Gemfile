@@ -12,6 +12,8 @@ gem 'rake', '11.2.2'
 gem 'exception_notification'
 gem 'whenever', :require => false
 gem "nested_form"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

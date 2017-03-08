@@ -52,6 +52,7 @@ class Ability
       can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.pago?
       can :show, Minicurso, participante_id: usuario.autenticavel.id
       can :show, Trabalho, participante_id: usuario.autenticavel.id
+      can [ :show, :index ], Certificado, participante_id: usuario.autenticavel.id
     end
 
     # Define abilities for the passed in user here. For example:

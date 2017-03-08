@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <style>
+      .container, .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .content {
+        z-index: 10;
+        margin-top: 8.2cm;
+        margin-right: 1cm;
+        margin-left: 1cm;
+        text-align: justify;
+      }
+      .background {
+        width: 29cm;
+        height: 20.3cm;
+      }
+      p.right-side {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <%= wicked_pdf_image_tag 'certificado.jpg', class: 'background' %>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>
