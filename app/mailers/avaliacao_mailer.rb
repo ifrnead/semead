@@ -5,9 +5,9 @@ class AvaliacaoMailer < ApplicationMailer
     @trabalho = trabalho
 
     if Rails.env.development?
-      @download = "http://localhost:3000" + @trabalho.arquivo.url
+      @download = "http://localhost:3000" + @trabalho.download
     else
-      @download = "http://eventos.ifrn.edu.br/semead" + @trabalho.arquivo.url
+      @download = "http://eventos.ifrn.edu.br" + @trabalho.download
     end
 
     mail to: avaliador.email, subject: '[SEMEAD] Avaliação atribuída para você'
