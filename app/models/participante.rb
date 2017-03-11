@@ -15,8 +15,8 @@ class Participante < ActiveRecord::Base
   has_attached_file :nota_empenho
 
   validates :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
-  validates :cidade_id, presence: true, if: "pais_id == 33"
-  validates :documento, cpf: true, if: "pais_id == 33"
+  validates :cidade_id, presence: true, if: :brasileiro?
+  validates :documento, cpf: true, if: :brasileiro?
   validates :documento, uniqueness: true
   validates :necessidades_especiais, presence: true, if: :possui_necessidades_especiais?
   validates_attachment :nota_empenho, presence: true, content_type: { content_type: "application/pdf" }, if: :pagamento_por_empenho?
@@ -37,6 +37,10 @@ class Participante < ActiveRecord::Base
     self.usuario.nome
   end
 
+  def brasileiro?
+    self.pais.brasil?
+  end
+
   def atribuir_perfil
     self.usuario.perfil = Perfil.find_by_slug('participante')
   end
@@ -51,6 +55,14 @@ class Participante < ActiveRecord::Base
 
   def pago?
     return self.pago
+  end
+
+  def tipo_documento
+    if brasileiro?
+      "CPF"
+    else
+      "passaporte"
+    end
   end
 
   def self.select2(params)

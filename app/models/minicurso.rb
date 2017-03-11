@@ -37,4 +37,8 @@ class Minicurso < ActiveRecord::Base
   def tem_vagas?
     self.vagas_disponiveis > 0
   end
+
+  def carga_horaria
+    4
+  end
 end

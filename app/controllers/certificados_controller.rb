@@ -13,7 +13,7 @@ class CertificadosController < ApplicationController
         render 'show', layout: 'certificado'
       end
       format.pdf do
-        render pdf: 'certificado.pdf',
+        render pdf: 'certificado',
                layout: 'certificado',
                orientation: 'Landscape',
                page_size: 'A4',
