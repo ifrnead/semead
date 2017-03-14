@@ -17,6 +17,7 @@ class Ability
       can [ :show, :index, :edit, :update ], Minicurso
       can [ :show, :index ], Trabalho
       can [ :show, :index ], Pagamento
+      can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
