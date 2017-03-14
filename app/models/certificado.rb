@@ -6,9 +6,9 @@ class Certificado < ActiveRecord::Base
   TEXTOS = {
     :inicio => "Certificamos que <strong>[PARTICIPANTE_NOME]</strong>, nascido(a) no <strong>[PARTICIPANTE_PAIS]</strong>, portador(a) do [PARTICIPANTE_TIPO_DOCUMENTO] nº  <strong>[PARTICIPANTE_DOCUMENTO]</strong>, ",
     :participacao_evento => "participou do",
-    :apresentacao_trabalho => "apresentou o trabalho <strong>[TRABALHO_TITULO]</strong> no",
+    :apresentacao_trabalho => "apresentou o [TRABALHO_TIPO] <strong>[TRABALHO_TITULO]</strong> no",
     :apresentacao_minicurso => "ministrou o minicurso <strong>[MINICURSO_TITULO]</strong>, com carga-horária de <strong>[MINICURSO_CH] horas</strong>, no",
-    :organizacao_evento => "participou da organização do",
+    :organizacao_evento => "participou da organização, atuando como [PARTICIPANTE_ATUACAO], do",
     :fim => " III Seminário Internacional de Educação a Distância, realizado no Campus de Educação a Distância do Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte, entre os dias 10 e 12 de maio de 2017."
   }
 
@@ -38,7 +38,9 @@ class Certificado < ActiveRecord::Base
       "PARTICIPANTE_PAIS" => self.participante.pais.nome.upcase,
       "PARTICIPANTE_TIPO_DOCUMENTO" => self.participante.tipo_documento,
       "PARTICIPANTE_DOCUMENTO" => self.participante.documento,
+      "PARTICIPANTE_ATUACAO" => (self.participante.atuacao unless self.participante.atuacao.blank?),
       "TRABALHO_TITULO" => (self.trabalho.titulo if self.trabalho),
+      "TRABALHO_TIPO" => (self.trabalho.tipo_trabalho.to_s if self.trabalho),
       "MINICURSO_TITULO" => (self.minicurso.titulo if self.minicurso),
       "MINICURSO_CH" => (self.minicurso.carga_horaria.to_s if self.minicurso)
     }
