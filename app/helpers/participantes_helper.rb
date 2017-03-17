@@ -20,4 +20,13 @@ module ParticipantesHelper
     return html
   end
 
+  def select2_default_option(participante)
+    if participante.cidade.present?
+      [ [ participante.cidade.nome_sigla, participante.cidade.id ] ]
+    else
+      cidade = Cidade.includes(:estado).where("cidades.nome = 'Natal'").first
+      [ [ cidade.nome_sigla, cidade.id ] ]
+    end
+  end
+
 end

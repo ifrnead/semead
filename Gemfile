@@ -54,18 +54,17 @@ group :development, :test do
   gem "factory_girl"
   gem "factory_girl_rails"
   gem 'cpf_faker'
+  gem "faker"
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem "capybara"
+  gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
-  gem "faker"
-  gem 'poltergeist'
   # gem "guard-rspec"
   gem "launchy"
   gem "database_cleaner"
-  gem 'capybara-select2', :github => 'goodwill/capybara-select2'
 end
 
 group :development do
