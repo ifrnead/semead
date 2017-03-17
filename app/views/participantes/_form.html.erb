@@ -37,10 +37,6 @@
         escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
         minimumInputLength: 3
       });
-
-      <% if @participante.cidade.present? %>
-        $("#participante_cidade_id").select2('data', {id: <%= @participante.cidade.id %>, text: '<%= @participante.cidade.nome %>'});
-      <% end %>
     });
 
     function toggle(id) {
@@ -67,7 +63,7 @@
     <%= usuario.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha *' %>
   <% end %>
   <%= participante.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
-  <%= participante.select :cidade_id, {}, label: 'Cidade' %>
+  <%= participante.select :cidade_id, select2_default_option(@participante), label: 'Cidade' %>
   <%= participante.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
   <%= participante.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
   <%= participante.text_field :instituicao, label: 'Instituição *' %>

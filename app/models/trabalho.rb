@@ -19,7 +19,11 @@ class Trabalho < ActiveRecord::Base
   validates_attachment :arquivo, presence: true, content_type: { content_type: [ "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ] }
 
   def download
-    "/semead/#{self.arquivo.url}"
+    if Rails.env.production?
+      return "/semead/#{self.arquivo.url}"
+    else
+      return self.arquivo.url
+    end
   end
 
   def minha_avaliacao(organizador)
