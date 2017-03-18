@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302181139) do
+ActiveRecord::Schema.define(version: 20170318132128) do
 
   create_table "autores", force: :cascade do |t|
     t.string   "nome",        limit: 255
@@ -33,16 +33,30 @@ ActiveRecord::Schema.define(version: 20170302181139) do
     t.integer  "consistencia",    limit: 4
     t.integer  "interlocucao",    limit: 4
     t.integer  "originalidade",   limit: 4
-    t.string   "parecer",         limit: 255
+    t.text     "parecer",         limit: 65535
     t.integer  "trabalho_id",     limit: 4
     t.integer  "organizador_id",  limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "avaliacoes_trabalhos", ["linha_id"], name: "index_avaliacoes_trabalhos_on_linha_id", using: :btree
   add_index "avaliacoes_trabalhos", ["organizador_id"], name: "index_avaliacoes_trabalhos_on_organizador_id", using: :btree
   add_index "avaliacoes_trabalhos", ["trabalho_id"], name: "index_avaliacoes_trabalhos_on_trabalho_id", using: :btree
+
+  create_table "certificados", force: :cascade do |t|
+    t.string   "tipo",            limit: 255
+    t.integer  "participante_id", limit: 4
+    t.integer  "minicurso_id",    limit: 4
+    t.integer  "trabalho_id",     limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "organizador_id",  limit: 4
+  end
+
+  add_index "certificados", ["minicurso_id"], name: "index_certificados_on_minicurso_id", using: :btree
+  add_index "certificados", ["participante_id"], name: "index_certificados_on_participante_id", using: :btree
+  add_index "certificados", ["trabalho_id"], name: "index_certificados_on_trabalho_id", using: :btree
 
   create_table "cidades", force: :cascade do |t|
     t.integer  "codigo",     limit: 4
@@ -101,8 +115,9 @@ ActiveRecord::Schema.define(version: 20170302181139) do
   add_index "minicursos", ["participante_id"], name: "index_minicursos_on_participante_id", using: :btree
 
   create_table "organizadores", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "atuacao",    limit: 255
   end
 
   create_table "pagamentos", force: :cascade do |t|
@@ -211,6 +226,9 @@ ActiveRecord::Schema.define(version: 20170302181139) do
   add_foreign_key "avaliacoes_trabalhos", "linhas"
   add_foreign_key "avaliacoes_trabalhos", "organizadores"
   add_foreign_key "avaliacoes_trabalhos", "trabalhos"
+  add_foreign_key "certificados", "minicursos"
+  add_foreign_key "certificados", "participantes"
+  add_foreign_key "certificados", "trabalhos"
   add_foreign_key "cidades", "estados"
   add_foreign_key "membros", "linhas"
   add_foreign_key "membros", "organizadores"
