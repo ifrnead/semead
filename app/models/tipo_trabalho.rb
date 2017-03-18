@@ -5,7 +5,7 @@ class TipoTrabalho < ActiveRecord::Base
 
   def to_s
     if self.slug == 'apresentacao_oral'
-      return "artigo"
+      return "apresentação oral"
     else
       return "pôster"
     end

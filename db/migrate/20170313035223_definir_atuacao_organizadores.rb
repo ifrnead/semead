@@ -4,7 +4,7 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     jp = Organizador.joins(:usuario).where("usuarios.email = 'joao.queiroz@ifrn.edu.br'").first
     ana = Organizador.joins(:usuario).where("usuarios.email = 'ana.henrique@ifrn.edu.br'").first
     thalita = Organizador.joins(:usuario).where("usuarios.email = 'thalita.motta@ifrn.edu.br'").first
-    marilia = Organizador.joins(:usuario).where("usuarios.email = 'marilia.silveira@ifrn.edu.br''").first
+    marilia = Organizador.joins(:usuario).where("usuarios.email = 'marilia.silveira@ifrn.edu.br'").first
     edneide = Organizador.joins(:usuario).where("usuarios.email = 'edneide.bezerra@ifrn.edu.br'").first
     allan = Organizador.joins(:usuario).where("usuarios.email = 'allan.garcia@ifrn.edu.br'").first
     fabio = Organizador.joins(:usuario).where("usuarios.email = 'fabio.silva@ifrn.edu.br'").first
@@ -51,6 +51,7 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     alex.update_attributes(atuacao: 'membro da Comissão Organizadora Central e avaliador da linha de pesquisa de Políticas e Institucionalização da EaD')
     alberico.update_attributes(atuacao: 'membro da Comissão Organizadora Central e avaliador da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     tmedeiros.update_attributes(atuacao: 'Avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD, membro da Comissão Organizadora Central e da Comissão de Infraestrutura e Logística')
+    leonardo.update_attributes(atuacao: 'membro da Comissão Organizadora Central e da Comissão de Comunicação Social e Divulgação')
     elizama.update_attributes(atuacao: 'membro da Comissão Organizadora Central e avaliadora da linha de pesquisa de Políticas e Institucionalização da EaD')
     jroberto.update_attributes(atuacao: 'membro da Comissão Organizadora Central e avaliador da linha de pesquisa de Formação Docente em EaD')
     kelson.update_attributes(atuacao: 'membro da Comissão de Infraestrutura e Logística')
@@ -73,7 +74,7 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     rose.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Produção de Materiais Didáticos para EaD e membro da Comissão de Comunicação Social e Divulgação')
     douglas.update_attributes(atuacao: 'avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
     tloureiro.update_attributes(atuacao: 'secretário, membro da Comissão de Infraestrutura e Logística e avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
-    sarah.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
+    sarah.update_attributes(atuacao: 'membro da Comissão de Infraestrutura e Logística, e avaliadora da linha de pesquisa de Formação Docente em EaD')
     liane.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
     everton.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
     adilina.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
@@ -81,6 +82,6 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
   end
 
   def down
-    #code
+    Organizador.update_all(atuacao: nil)
   end
 end

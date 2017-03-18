@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307175406) do
+ActiveRecord::Schema.define(version: 20170313035223) do
 
   create_table "autores", force: :cascade do |t|
     t.string   "nome",        limit: 255
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170307175406) do
   create_table "certificados", force: :cascade do |t|
     t.string   "tipo",            limit: 255
     t.integer  "participante_id", limit: 4
+    t.integer  "organizador_id", limit: 4
     t.integer  "minicurso_id",    limit: 4
     t.integer  "trabalho_id",     limit: 4
     t.datetime "created_at",                  null: false
@@ -114,8 +115,9 @@ ActiveRecord::Schema.define(version: 20170307175406) do
   add_index "minicursos", ["participante_id"], name: "index_minicursos_on_participante_id", using: :btree
 
   create_table "organizadores", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "atuacao",    limit: 255
   end
 
   create_table "pagamentos", force: :cascade do |t|

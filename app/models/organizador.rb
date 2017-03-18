@@ -4,6 +4,7 @@ class Organizador < ActiveRecord::Base
   has_many :linhas, through: :membros
   has_many :avaliacoes_trabalhos
   has_many :trabalhos, through: :avaliacoes_trabalhos
+  has_many :certificados
 
   accepts_nested_attributes_for :usuario
 
