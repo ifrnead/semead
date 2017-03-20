@@ -12,10 +12,10 @@ module ParticipantesHelper
     else
       html += "<i title='Pagamento da taxa de inscrição tradicional' class='fa fa-credit-card' aria-hidden='true'></i>&nbsp;"
     end
-    if participante.pago?
-      html += "<i title='Pagamento da taxa de inscrição efetuado' class='fa fa-money' aria-hidden='true'></i>&nbsp;"
+    if participante.confirmado?
+      html += "<i title='Confirmado' class='fa fa-thumbs-up' aria-hidden='true'></i>&nbsp;"
     else
-      html += "<i title='Pagamento da taxa de inscrição pendente' class='fa-disabled fa fa-money' aria-hidden='true'></i>&nbsp;"
+      html += "<i title='Pendente' class='fa-disabled fa fa-thumbs-up' aria-hidden='true'></i>&nbsp;"
     end
     return html
   end
@@ -26,6 +26,31 @@ module ParticipantesHelper
     else
       cidade = Cidade.includes(:estado).where("cidades.nome = 'Natal'").first
       [ [ cidade.nome_sigla, cidade.id ] ]
+    end
+  end
+
+  def isencao_options
+    [
+      [ 'Organizador', 'Organizador' ],
+      [ 'Aluno do Campus EaD' ]
+    ]
+  end
+
+  def situacao_inscricao(participante)
+    if participante.pago?
+      return "<span class='label label-primary'>Pagamento confirmado</span>"
+    elsif participante.pagamento_por_empenho?
+      return "<span class='label label-warning'>Verificação da nota de empenho</span>"
+    elsif participante.isento != nil
+      if participante.isento == Participante::ISENCAO[:rejeitado]
+        return "<span class='label label-danger'>Isenção rejeitada</span>"
+      elsif participante.isento == Participante::ISENCAO[:solicitado]
+        return "<span class='label label-warning'>Verificando isenção</span>"
+      elsif participante.isento == Participante::ISENCAO[:aprovado]
+        return "<span class='label label-primary'>Isenção aprovada</span>"
+      end
+    else
+      return "<span class='label label-danger'>Pagamento pendente</span>"
     end
   end
 

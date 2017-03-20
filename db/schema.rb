@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318132128) do
+ActiveRecord::Schema.define(version: 20170318192346) do
 
   create_table "autores", force: :cascade do |t|
     t.string   "nome",        limit: 255
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(version: 20170318132128) do
     t.integer  "nota_empenho_file_size",        limit: 4
     t.datetime "nota_empenho_updated_at"
     t.integer  "minicurso_id",                  limit: 4
+    t.integer  "isento",                        limit: 4
+    t.string  "motivo_isencao",                        limit: 4
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree

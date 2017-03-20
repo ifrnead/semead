@@ -5,6 +5,12 @@
         redirect("<%= admin_participante_aprovar_nota_empenho_path(@participante) %>");
       }
     }
+
+    function avaliar_isencao(avaliacao) {
+      if(confirm("Tem certeza que deseja avaliar a isenção da taxa de inscrição?")) {
+        redirect("<%= admin_participante_avaliar_isencao_path(@participante) %>?avaliacao="+avaliacao);
+      }
+    }
   </script>
 <% end %>
 
@@ -15,8 +21,12 @@
   <div class="col-md-6">
     <div class="btn-group pull-right">
       <div class="btn-group">
-        <% if can? :aprovar_nota_empenho, @participante and @participante.pagamento_por_empenho? and !(@participante.pago?) %>
+        <% if can? :aprovar_nota_empenho, @participante and @participante.pagamento_por_empenho? and !(@participante.confirmado?) %>
           <%= link_to fa_icon('money') + " Aprovar nota de empenho", "javascript:void(0)", onclick: "aprovar_nota_empenho()", class: "btn btn-primary" %>
+        <% end %>
+        <% if can? :aprovar_isencao, @participante and @participante.solicitou_isencao? and !(@participante.confirmado?) %>
+          <%= link_to fa_icon('thumbs-up') + " Aprovar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:aprovado].to_s+")", class: "btn btn-primary" %>
+          <%= link_to fa_icon('thumbs-down') + " Rejeitar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:rejeitado].to_s+")", class: "btn btn-primary" %>
         <% end %>
         <% if can? :update, @participante %>
           <%= link_to fa_icon('edit') + " Editar", edit_admin_participante_path(@participante), class: "btn btn-primary" %>

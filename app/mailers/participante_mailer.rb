@@ -18,4 +18,19 @@ class ParticipanteMailer < ApplicationMailer
     mail(to: participante.email, subject: '[SEMEAD] Minicurso proposto com sucesso!')
   end
 
+  def isencao_aprovada(participante)
+    @participante = participante
+    mail(to: participante.email, subject: '[SEMEAD] Isenção da taxa de inscrição aprovada!')
+  end
+
+  def isencao_rejeitada(participante)
+    @participante = participante
+    mail(to: participante.email, subject: '[SEMEAD] Isenção da taxa de inscrição rejeitada')
+  end
+
+  def nota_empenho_aprovada(participante)
+    @participante = participante
+    mail(to: participante.email, subject: '[SEMEAD] Nota da empenho aprovada')
+  end
+
 end

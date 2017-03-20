@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :participantes do
       get 'aprovar_nota_empenho'
+      get 'avaliar_isencao'
     end
     resources :organizadores
     resources :trabalhos do

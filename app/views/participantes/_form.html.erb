@@ -9,6 +9,10 @@
         $("#participante_nota_empenho").parent().hide();
       }
 
+      if(!$("#participante_isento").is(':checked')) {
+        $("#participante_motivo_isencao").parent().hide();
+      }
+
       $("#participante_cidade_id").select2({
         theme: "bootstrap",
         language: "pt-BR",
@@ -67,6 +71,8 @@
   <%= participante.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
   <%= participante.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
   <%= participante.text_field :instituicao, label: 'Instituição *' %>
+  <%= participante.check_box :isento, label: 'Sou isento do pagamento da taxa de inscrição', onchange: "toggle('motivo_isencao')" %>
+  <%= participante.select :motivo_isencao, isencao_options, label: 'Motivo da isenção' %>
   <%= participante.check_box :pagamento_por_empenho, label: 'Minha taxa de inscrição será paga por nota de empenho', onchange: "toggle('nota_empenho')" %>
   <%= participante.file_field :nota_empenho, label: 'Nota de empenho (pdf)' %>
   <%= participante.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: "toggle('necessidades_especiais')" %>

@@ -12,7 +12,10 @@ class Participante < ActiveRecord::Base
   has_many :minicursos_propostos, dependent: :destroy, class_name: 'Minicurso'
   belongs_to :minicurso
 
-  has_attached_file :nota_empenho
+  has_attached_file :nota_empenho, {
+    path: "public/system/:class/:attachment/:id/:style/:filename",
+    url: "system/:class/:attachment/:id/:style/:filename"
+  }
 
   validates :pais_id, :documento, :tipo_participante_id, :instituicao, presence: true
   validates :cidade_id, presence: true, if: "pais_id == 33"
@@ -24,6 +27,20 @@ class Participante < ActiveRecord::Base
   accepts_nested_attributes_for :usuario
 
   before_create :atribuir_perfil
+
+  ISENCAO = {
+    :rejeitado => 0,
+    :solicitado => 1,
+    :aprovado => 2
+  }
+
+  def download_nota_empenho
+    if Rails.env.production?
+      return "/semead/#{self.nota_empenho.url}"
+    else
+      return "/#{self.nota_empenho.url}"
+    end
+  end
 
   def possui_necessidades_especiais?
     self.possui_necessidades_especiais.present?
@@ -49,8 +66,38 @@ class Participante < ActiveRecord::Base
     return self.pagamento_por_empenho
   end
 
+  def aprovar_nota_empenho
+    self.update_attribute(:pago, true)
+    ParticipanteMailer.nota_empenho_aprovada(self).deliver_now
+  end
+
   def pago?
     return self.pago
+  end
+
+  def isento?
+    self.isento == ISENCAO[:aprovado]
+  end
+
+  def avaliar_isencao(avaliacao)
+    self.update_attribute(:isento, avaliacao)
+    if self.isencao_aprovada?
+      ParticipanteMailer.isencao_aprovada(self).deliver_now
+    else
+      ParticipanteMailer.isencao_rejeitada(self).deliver_now
+    end
+  end
+
+  def solicitou_isencao?
+    self.isento == ISENCAO[:solicitado]
+  end
+
+  def isencao_aprovada?
+    self.isento == ISENCAO[:aprovado]
+  end
+
+  def confirmado?
+    self.pago? or self.isento?
   end
 
   def self.select2(params)

@@ -7,13 +7,13 @@ class Ability
 
     if usuario.admin?
       can :manage, :all
-      can :aprovar_nota_empenho, Participante
+      can [:aprovar_nota_empenho, :avaliar_isencao], Participante
       can [ :show, :index ], Pagamento
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
       can :manage, Organizador
-      can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
+      can [ :show, :index, :edit, :update, :aprovar_nota_empenho, :avaliar_isencao ], Participante
       can [ :show, :index, :edit, :update ], Minicurso
       can [ :show, :index ], Trabalho
       can [ :show, :index ], Pagamento
@@ -41,16 +41,16 @@ class Ability
     end
 
     if usuario.tem_perfil?('secretario')
-      can [ :show, :index, :edit, :update, :aprovar_nota_empenho ], Participante
+      can [ :show, :index, :edit, :update, :aprovar_nota_empenho, :avaliar_isencao ], Participante
       can [ :show, :index ], Pagamento
       can [ :show, :index, :ver_autores ], Trabalho
     end
 
     if usuario.tem_perfil?('participante')
       can :show, Participante, id: usuario.autenticavel.id
-      can [ :new, :create, :index ], Trabalho if usuario.autenticavel.pago?
-      can [ :new, :create, :index ], Minicurso if usuario.autenticavel.pago?
-      can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.pago?
+      can [ :new, :create, :index ], Trabalho if usuario.autenticavel.confirmado?
+      can [ :new, :create, :index ], Minicurso if usuario.autenticavel.confirmado?
+      can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.confirmado?
       can :show, Minicurso, participante_id: usuario.autenticavel.id
       can :show, Trabalho, participante_id: usuario.autenticavel.id
     end

@@ -1,0 +1,40 @@
+<table id="datatable" class="table table-bordered table-hover">
+  <thead>
+    <th>Nome</th>
+    <th>CPF/Passaporte</th>
+    <th>País/Cidade</th>
+    <th>Observações</th>
+    <th>Opções</th>
+  </thead>
+  <tbody>
+    <% participantes.each do |participante| %>
+      <tr>
+        <td><%= participante.nome %></td>
+        <td><%= participante.documento %></td>
+        <td>
+          <% if participante.pais.brasil? %>
+            <%= participante.cidade.nome_sigla %>
+          <% else %>
+            <%= participante.pais.nome %>
+          <% end %>
+        </td>
+        <td>
+          <%= icons_listagem_participante(participante).html_safe %>
+        </td>
+        <td>
+          <div class="btn-group">
+            <% if can? :show, participante %>
+              <%= link_to fa_icon('eye'), admin_participante_path(participante), title: 'Detalhar', class: "btn btn-primary btn-sm" %>
+            <% end %>
+            <% if can? :update, participante %>
+              <%= link_to fa_icon('edit'), edit_admin_participante_path(participante), title: 'Editar', class: "btn btn-primary btn-sm" %>
+            <% end %>
+            <% if can? :destroy, participante %>
+              <%= link_to fa_icon('trash'), admin_participante_path(participante), title: 'Excluir', class: "btn btn-primary btn-sm", method: :delete, data: { confirm: 'Tem certeza que deseja excluir esse participante?' } %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
