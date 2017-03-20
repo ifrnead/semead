@@ -19,8 +19,10 @@
         <dl class="dl-horizontal">
           <dt>ID</dt><dd><%= pagamento.payment('id') %></dd>
           <dt>Criado em</dt><dd><%= data(str_to_date(pagamento.payment('date_created'))) %></dd>
-          <dt>Aprovado em</dt><dd><%= data(str_to_date(pagamento.payment('date_approved'))) %></dd>
-          <dt>Valor liberado em</dt><dd><%= data(str_to_date(pagamento.payment('money_release_date'))) %></dd>
+          <% if pagamento.payment('date_approved').present? %>
+            <dt>Aprovado em</dt><dd><%= data(str_to_date(pagamento.payment('date_approved'))) %></dd>
+            <dt>Valor liberado em</dt><dd><%= data(str_to_date(pagamento.payment('money_release_date'))) %></dd>
+          <% end %>
           <dt>Pagante</dt><dd><%= pagamento.payment('payer')['first_name'] %> <%= pagamento.payment('payer')['last_name'] %></dd>
           <dt>Telefone do pagante</dt><dd>(<%= pagamento.payment('payer')['phone']['area_code'] %>) <%= pagamento.payment('payer')['phone']['number'] %></dd>
           <dt>Documento</dt><dd><%= pagamento.payment('payer')['identification']['number'] %> (<%= pagamento.payment('payer')['identification']['type'] %>)</dd>
