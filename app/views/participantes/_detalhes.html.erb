@@ -18,4 +18,8 @@
     <dt>Nota de empenho: </dt>
     <dd><%= link_to fa_icon('download'), @participante.download_nota_empenho %></dd>
   <% end %>
+  <% if @participante.solicitou_isencao? %>
+    <dt>Motivo da isenção: </dt>
+    <dd><%= @participante.motivo_isencao %></dd>
+  <% end %>
 </dl>
