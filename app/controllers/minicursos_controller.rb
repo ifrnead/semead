@@ -8,8 +8,15 @@ class MinicursosController < ApplicationController
   end
 
   def new
-    authorize! :new, Minicurso
-    @minicurso = Minicurso.new
+    if Config.permitir_submissao_minicursos?
+      authorize! :new, Minicurso
+      @minicurso = Minicurso.new
+    else
+      redirect_to prazo_encerrado_minicursos_path
+    end
+  end
+
+  def prazo_encerrado
   end
 
   def create

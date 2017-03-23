@@ -1,0 +1,15 @@
+<p>Caro(a) <%= @participante.nome %>,</p>
+
+<p>Ficamos felizes em informar que a sua isenção da taxa de inscrição da III SEMEAD foi aprovada, portanto sua inscrição está confirmada.</p>
+
+<% if Config.permitir_submissao_trabalhos? %>
+  <%= render partial: 'submissao_trabalho' %>
+<% end %>
+
+<% if Config.permitir_submissao_minicursos? %>
+  <%= render partial: 'submissao_minicurso' %>
+<% end %>
+
+<% if Config.permitir_inscricao_minicursos? %>
+  <%= render partial: 'inscricao_minicurso' %>
+<% end %>

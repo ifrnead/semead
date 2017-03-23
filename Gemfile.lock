@@ -53,6 +53,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-email (2.5.0)
+      capybara (~> 2.4)
+      mail
     capybara-webkit (1.12.0)
       capybara (>= 2.3.0, < 2.13.0)
       json
@@ -251,6 +254,7 @@ DEPENDENCIES
   byebug
   cancancan (~> 1.10)
   capybara
+  capybara-email
   capybara-webkit
   coffee-rails (~> 4.1.0)
   cpf_faker

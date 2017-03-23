@@ -6,6 +6,6 @@
   Você será notificado via e-mail caso o seu minicurso seja aprovado ou não, contudo, pode acompanhar a atual situação da avaliação através do endereço <%= link_to "http://eventos.ifrn.edu.br/semead/login", "http://eventos.ifrn.edu.br/semead/login" %>, clicando na aba 'Minicursos', e, em seguida, selecionando o minicurso que deseja verificar a avaliação.
 </p>
 
-<% unless @participante.pago? %>
+<% unless @participante.confirmado? %>
   <%= render partial: 'pagamento_inscricao' %>
 <% end %>

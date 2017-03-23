@@ -1,6 +1,31 @@
 <h1><%= fa_icon 'dashboard' %> Painel</h1>
 
+<h3><%= fa_icon 'file-text-o' %> Trabalhos com avaliação pendente</h3>
+
 <% if @trabalhos_avaliacao_pendente.present? %>
-  <h2><%= fa_icon 'file-text-o' %> Trabalhos com avaliação pendente</h2>
   <%= render partial: 'admin/trabalhos/table', locals: { trabalhos: @trabalhos_avaliacao_pendente } %>
+<% else %>
+  <p>Nenhum trabalho com avaliação pendente atribuído para você.</p>
+<% end %>
+
+<hr>
+
+<h3><%= fa_icon 'users' %> Participantes com pagamento por nota de empenho</h3>
+
+<% if @participantes_notas_empenho.present? %>
+  <p>Os participantes abaixo relacionados informaram que o pagamento da taxa de inscrição foi realizada através de nota de empenho, contudo, é preciso avaliar e aprovar o documento.</p>
+  <%= render partial: 'admin/participantes/table', locals: { participantes: @participantes_notas_empenho } %>
+<% else %>
+  <p>Nenhuma nota de empenho pendente para ser avaliada.</p>
+<% end %>
+
+<hr>
+
+<h3><%= fa_icon 'users' %> Participantes solicitação de isenção</h3>
+
+<% if @participantes_isentos.present? %>
+  <p>Os participantes abaixo relacionados informaram que tem isenção da taxa de inscrição, contudo, é preciso verificar se eles de fato fazem jus ao benefício.</p>
+  <%= render partial: 'admin/participantes/table', locals: { participantes: @participantes_isentos } %>
+<% else %>
+  <p>Nenhuma avaliação de isenção da taxa de inscrição pendente.</p>
 <% end %>

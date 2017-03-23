@@ -3,11 +3,13 @@ Rails.application.routes.draw do
     get 'prazo_encerrado', on: :collection
   end
   resources :minicursos do
+    get 'prazo_encerrado', on: :collection
     resources :inscricoes
   end
   namespace :admin do
     resources :participantes do
       get 'aprovar_nota_empenho'
+      get 'avaliar_isencao'
     end
     resources :organizadores
     resources :trabalhos do

@@ -1,17 +1,15 @@
 <p>Caro(a) <%= @participante.nome %>,</p>
 
-<p>A sua inscrição para a III SEMEAD foi realizada com sucesso! Contudo, ainda será preciso confirmá-la através do pagamento da sua taxa de inscrição.</p>
+<p>A sua inscrição para a III SEMEAD foi realizada com sucesso! Contudo, ainda será preciso confirmá-la através
+  <% if @participante.pagamento_por_empenho? %>
+    da verificação da sua nota de empenho para o pagamento da taxa de inscrição.
+  <% elsif @participante.solicitou_isencao? %>
+    da conferência da sua isenção da taxa de inscrição.
+  <% else %>
+    do pagamento da sua taxa de inscrição.
+  <% end %>
+</p>
 
-<%= render partial: 'pagamento_inscricao' %>
-
-<% if Config.permitir_submissao_trabalhos? %>
-  <%= render partial: 'submissao_trabalho' %>
-<% end %>
-
-<% if Config.permitir_submissao_minicursos? %>
-  <%= render partial: 'submissao_minicurso' %>
-<% end %>
-
-<% if Config.permitir_inscricao_minicursos? %>
-  <%= render partial: 'inscricao_minicurso' %>
+<% unless @participante.pagamento_por_empenho? or @participante.solicitou_isencao? %>
+  <%= render partial: 'pagamento_inscricao' %>
 <% end %>

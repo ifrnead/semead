@@ -39,7 +39,7 @@
           <% if can? :index, Minicurso %>
             <li><a href="<%= minicursos_path %>"><%= fa_icon 'graduation-cap' %> Minicursos</a></li>
           <% end %>
-          <% if Config.permitir_inscricao_minicursos? and current_user.autenticavel.pago? %>
+          <% if Config.permitir_inscricao_minicursos? and current_user.autenticavel.confirmado? %>
             <li><a href="<%= inscricoes_path %>"><%= fa_icon 'pencil' %> Inscrições</a></li>
           <% end %>
         <% else %>

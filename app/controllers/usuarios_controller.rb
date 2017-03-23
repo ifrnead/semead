@@ -1,4 +1,5 @@
 class UsuariosController < ApplicationController
+  load_and_authorize_resource :only => :conta
 
   def conta
     @usuario = current_user

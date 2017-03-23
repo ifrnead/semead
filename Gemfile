@@ -62,6 +62,7 @@ group :test do
   gem "capybara"
   gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
+  gem 'capybara-email'
   # gem "guard-rspec"
   gem "launchy"
   gem "database_cleaner"

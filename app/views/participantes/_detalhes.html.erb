@@ -13,20 +13,13 @@
     <dt>Necessidades específicas: </dt>
     <dd><%= @participante.necessidades_especiais %></dd>
   <% end %>
-  <dt>Situação: </dt>
-  <dd>
-    <% if @participante.pago? %>
-      <span class="label label-primary">Pagamento confirmado</span>
-    <% else %>
-      <% if @participante.pagamento_por_empenho? %>
-        <span class="label label-warning">Verificação da nota de empenho</span>
-      <% else %>
-        <span class="label label-danger">Pagamento pendente</span>
-      <% end %>
-    <% end %>
-  </dd>
+  <dt>Situação: </dt><dd><%= situacao_inscricao(@participante).html_safe %></dd>
   <% if @participante.pagamento_por_empenho? %>
     <dt>Nota de empenho: </dt>
-    <dd><%= link_to fa_icon('download'), @participante.nota_empenho.url %></dd>
+    <dd><%= link_to fa_icon('download'), @participante.download_nota_empenho %></dd>
+  <% end %>
+  <% if @participante.solicitou_isencao? %>
+    <dt>Motivo da isenção: </dt>
+    <dd><%= @participante.motivo_isencao %></dd>
   <% end %>
 </dl>
