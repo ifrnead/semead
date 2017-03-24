@@ -30,10 +30,7 @@ module ParticipantesHelper
   end
 
   def isencao_options
-    [
-      [ 'Organizador', 'Organizador' ],
-      [ 'Aluno do Campus EaD' ]
-    ]
+    [ [ 'Organizador' ], [ 'Aluno do Campus EaD' ], [ 'Tutor(a) do Campus EaD' ] ]
   end
 
   def situacao_inscricao(participante)
