@@ -1,4 +1,5 @@
 class ParticipantesController < ApplicationController
+  load_and_authorize_resource only: :participacao
 
   def participacao
     @participante = current_user.autenticavel

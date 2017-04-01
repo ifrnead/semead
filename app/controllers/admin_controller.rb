@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :auth_required
+  load_and_authorize_resource
 
   def index
     if current_user.organizador?

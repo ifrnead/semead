@@ -1,6 +1,7 @@
 class MinicursosController < ApplicationController
   before_action :set_minicurso, only: [:show, :edit, :update, :destroy]
   before_action :set_participante, only: [ :create ]
+  load_and_authorize_resource
 
   def index
     authorize! :index, Minicurso
