@@ -1,12 +1,13 @@
 class TrabalhosController < ApplicationController
   before_action :set_trabalho, only: [:show, :edit, :update, :destroy]
   before_action :set_participante, only: [ :create ]
+  before_filter :auth_required
 
   # GET /trabalhos
   # GET /trabalhos.json
   def index
-    @trabalhos = current_user.autenticavel.trabalhos
     authorize! :index, Trabalho
+    @trabalhos = current_user.autenticavel.trabalhos
   end
 
   # GET /trabalhos/1

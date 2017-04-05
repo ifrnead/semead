@@ -20,6 +20,6 @@
   <div class="alert alert-warning" role="alert"><strong>Atenção:</strong> O artigo submetido não pode conter os nomes dos autores.</div>
   <%= f.file_field :arquivo, label: 'Arquivo (doc ou docx)' %>
   <%= f.select :linha_id, Linha.select, prompt: 'Selecione' %>
-  <%= f.select :tipo_trabalho_id, TipoTrabalho.select, prompt: 'Selecione' %>
+  <%= f.select :tipo_trabalho_id, TipoTrabalho.select, prompt: 'Selecione', label: 'Tipo de trabalho' %>
   <%= f.submit 'Enviar', class: 'btn btn-primary' %>
 <% end %>

@@ -1,4 +1,5 @@
 class ParticipantesController < ApplicationController
+  before_filter :auth_required, :only => [ :participacao ]
 
   def participacao
     @participante = current_user.autenticavel
