@@ -1,7 +1,7 @@
 class TrabalhosController < ApplicationController
   before_action :set_trabalho, only: [:show, :edit, :update, :destroy]
   before_action :set_participante, only: [ :create ]
-  load_and_authorize_resource
+  before_filter :auth_required
 
   # GET /trabalhos
   # GET /trabalhos.json

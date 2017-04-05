@@ -1,5 +1,5 @@
 class UsuariosController < ApplicationController
-  load_and_authorize_resource :only => :conta
+  before_filter :auth_required, :only => [ :conta ]
 
   def conta
     @usuario = current_user

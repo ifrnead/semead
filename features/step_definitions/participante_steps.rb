@@ -11,7 +11,7 @@ end
 
 Dado(/^preencha o formulário para submeter um trabalho do tipo "([^"]*)" na linha "([^"]*)"$/) do |tipo_trabalho, linha|
   @trabalho = build(:trabalho)
-  fill_in 'Título', with: @trabalho.titulo
+  fill_in 'trabalho_titulo', with: @trabalho.titulo
   fill_in 'Resumo', with: @trabalho.resumo
   attach_file 'Arquivo (doc ou docx)', 'features/support/files/sample.docx'
   select linha, from: 'Linha'

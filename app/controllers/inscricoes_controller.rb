@@ -1,6 +1,6 @@
 class InscricoesController < ApplicationController
-  before_filter :auth_required, :only => [ :cancelar ]
-  
+  before_filter :auth_required
+
   def index
     authorize! :inscrever, Minicurso
     @minicurso = current_user.autenticavel.minicurso

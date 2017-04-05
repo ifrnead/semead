@@ -7,9 +7,9 @@ class Config
       :data_abertura_inscricoes => Date.new(2016, 12, 7),
       :data_encerramento_inscricoes => Date.new(2017, 5, 10),
       :data_inicio_submissao_trabalhos => Date.new(2016, 12, 7),
-      :data_termino_submissao_trabalhos => Date.new(2017, 4, 2),
+      :data_termino_submissao_trabalhos => Date.new(2017, 4, 9),
       :data_inicio_submissao_minicursos => Date.new(2016, 12, 7),
-      :data_termino_submissao_minicursos => Date.new(2017, 4, 2),
+      :data_termino_submissao_minicursos => Date.new(2017, 4, 9),
       :data_inicio_inscricoes_minicursos => Date.new(2017, 4, 15),
       :data_termino_inscricoes_minicursos => Date.new(2017, 5, 10),
       :prazo_redefinir_senha => 1, # dia
