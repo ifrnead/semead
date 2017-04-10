@@ -5,6 +5,8 @@ class Ability
 
     usuario ||= Usuario.new
 
+    can [ :show, :index ], Certificado, usuario_id: usuario.autenticavel.id
+
     if usuario.admin?
       can :manage, :all
       can [:aprovar_nota_empenho, :avaliar_isencao], Participante
@@ -53,7 +55,6 @@ class Ability
       can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.confirmado?
       can :show, Minicurso, participante_id: usuario.autenticavel.id
       can :show, Trabalho, participante_id: usuario.autenticavel.id
-      can [ :show, :index ], Certificado, participante_id: usuario.autenticavel.id
     end
 
     # Define abilities for the passed in user here. For example:

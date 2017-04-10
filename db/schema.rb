@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170313035223) do
-=======
 ActiveRecord::Schema.define(version: 20170318192346) do
->>>>>>> master
 
   create_table "autores", force: :cascade do |t|
     t.string   "nome",        limit: 255
@@ -49,25 +45,14 @@ ActiveRecord::Schema.define(version: 20170318192346) do
   add_index "avaliacoes_trabalhos", ["trabalho_id"], name: "index_avaliacoes_trabalhos_on_trabalho_id", using: :btree
 
   create_table "certificados", force: :cascade do |t|
-    t.string   "tipo",            limit: 255
-    t.integer  "participante_id", limit: 4
-<<<<<<< HEAD
-    t.integer  "organizador_id", limit: 4
-=======
->>>>>>> master
-    t.integer  "minicurso_id",    limit: 4
-    t.integer  "trabalho_id",     limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-<<<<<<< HEAD
-=======
-    t.integer  "organizador_id",  limit: 4
->>>>>>> master
+    t.text     "texto",      limit: 65535
+    t.string   "titulo", limit: 255
+    t.integer  "usuario_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  add_index "certificados", ["minicurso_id"], name: "index_certificados_on_minicurso_id", using: :btree
-  add_index "certificados", ["participante_id"], name: "index_certificados_on_participante_id", using: :btree
-  add_index "certificados", ["trabalho_id"], name: "index_certificados_on_trabalho_id", using: :btree
+  add_index "certificados", ["usuario_id"], name: "index_certificados_on_usuario_id", using: :btree
 
   create_table "cidades", force: :cascade do |t|
     t.integer  "codigo",     limit: 4
@@ -172,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170318192346) do
     t.datetime "nota_empenho_updated_at"
     t.integer  "minicurso_id",                  limit: 4
     t.integer  "isento",                        limit: 4
-    t.string  "motivo_isencao",                        limit: 4
+    t.string   "motivo_isencao",                limit: 255
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
@@ -239,9 +224,7 @@ ActiveRecord::Schema.define(version: 20170318192346) do
   add_foreign_key "avaliacoes_trabalhos", "linhas"
   add_foreign_key "avaliacoes_trabalhos", "organizadores"
   add_foreign_key "avaliacoes_trabalhos", "trabalhos"
-  add_foreign_key "certificados", "minicursos"
-  add_foreign_key "certificados", "participantes"
-  add_foreign_key "certificados", "trabalhos"
+  add_foreign_key "certificados", "usuarios"
   add_foreign_key "cidades", "estados"
   add_foreign_key "membros", "linhas"
   add_foreign_key "membros", "organizadores"

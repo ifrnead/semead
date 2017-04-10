@@ -27,13 +27,13 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     silvia = Organizador.joins(:usuario).where("usuarios.email = 'silvia.mendonca@ifrn.edu.br'").first
     maria = Organizador.joins(:usuario).where("usuarios.email = 'maria.dantas@ifrn.edu.br'").first
     christine = Organizador.joins(:usuario).where("usuarios.email = 'christine.fonseca@ifrn.edu.br'").first
-    charles = Organizador.joins(:usuario).where("usuarios.email = 'charles.freitas@ifrn.edu.br'").first
+    # charles = Organizador.joins(:usuario).where("usuarios.email = 'charles.freitas@ifrn.edu.br'").first
     clauber = Organizador.joins(:usuario).where("usuarios.email = 'clauber.bezerra@ifrn.edu.br'").first
     erick = Organizador.joins(:usuario).where("usuarios.email = 'erick.bergamini@ifrn.edu.br'").first
     emanuel = Organizador.joins(:usuario).where("usuarios.email = 'emanuel.lourenco@ifrn.edu.br'").first
     rose = Organizador.joins(:usuario).where("usuarios.email = 'rosemary.borges@ifrn.edu.br'").first
-    douglas = Organizador.joins(:usuario).where("usuarios.email = 'douglas.costa@ifrn.edu.br'").first
-    tloureiro = Organizador.joins(:usuario).where("usuarios.email = 'thiago.loureiro@ifrn.edu.br'").first
+    # douglas = Organizador.joins(:usuario).where("usuarios.email = 'douglas.costa@ifrn.edu.br'").first
+    # tloureiro = Organizador.joins(:usuario).where("usuarios.email = 'thiago.loureiro@ifrn.edu.br'").first
     sarah = Organizador.joins(:usuario).where("usuarios.email = 'sarah.raquel@ifrn.edu.br'").first
     liane = Organizador.joins(:usuario).where("usuarios.email = 'liane.mariz@ifrn.edu.br'").first
     everton = Organizador.joins(:usuario).where("usuarios.email = 'everton.almeida@ifrn.edu.br'").first
@@ -67,13 +67,13 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     silvia.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     maria.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     christine.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
-    charles.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
+    # charles.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
     clauber.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
     erick.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD, membro da Comissão Organizadora Central e da Comissão de Infraestrutura e Logística')
     emanuel.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
     rose.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Produção de Materiais Didáticos para EaD e membro da Comissão de Comunicação Social e Divulgação')
-    douglas.update_attributes(atuacao: 'avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
-    tloureiro.update_attributes(atuacao: 'secretário, membro da Comissão de Infraestrutura e Logística e avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
+    # douglas.update_attributes(atuacao: 'avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
+    # tloureiro.update_attributes(atuacao: 'secretário, membro da Comissão de Infraestrutura e Logística e avaliador da linha de pesquisa de Produção de Materiais Didáticos para EaD')
     sarah.update_attributes(atuacao: 'membro da Comissão de Infraestrutura e Logística, e avaliadora da linha de pesquisa de Formação Docente em EaD')
     liane.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
     everton.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')

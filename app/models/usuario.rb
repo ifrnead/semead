@@ -2,6 +2,7 @@ class Usuario < ActiveRecord::Base
   has_secure_password
   belongs_to :autenticavel, polymorphic: true
   belongs_to :perfil
+  has_many :certificados
 
   validates :nome, presence: true
   validates :email, presence: true, uniqueness: true, email: true
