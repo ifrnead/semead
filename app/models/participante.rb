@@ -112,6 +112,10 @@ class Participante < ActiveRecord::Base
     self.pago? or self.isento?
   end
 
+  def credenciado?
+    self.credenciado
+  end
+
   def self.select2(params)
     participantes = Array.new
     self.joins(:usuario).where("nome LIKE '%#{params}%'").each do |participante|
@@ -122,5 +126,9 @@ class Participante < ActiveRecord::Base
 
   def self.confirmados
     self.joins(:usuario).where("pago = true OR isento = 2")
+  end
+
+  def self.credenciados
+    self.joins(:usuario).where("credenciado = true")
   end
 end
