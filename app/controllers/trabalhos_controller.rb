@@ -93,6 +93,8 @@ class TrabalhosController < ApplicationController
     end
 
     def set_participante
-      params[:trabalho][:participante_id] = current_user.autenticavel.id
+      if current_user.participante?
+        params[:trabalho][:participante_id] = current_user.autenticavel.id
+      end
     end
 end
