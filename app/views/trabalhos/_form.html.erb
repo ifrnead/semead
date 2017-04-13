@@ -1,3 +1,13 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $("#trabalho_participante").select2({
+        theme: "bootstrap"
+      });
+    });
+  </script>
+<% end %>
+
 <%= bootstrap_nested_form_for(@trabalho, html: { multipart: true }) do |f| %>
   <p>Todos os campos são obrigatórios.</p>
   <%= f.text_field :titulo, label: 'Título' %>
