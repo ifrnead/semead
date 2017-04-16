@@ -1,5 +1,6 @@
 class ParticipantesController < ApplicationController
   before_filter :auth_required, :only => [ :participacao ]
+  before_filter :fix_isencao, :only => [ :create ]
 
   def participacao
     @participante = current_user.autenticavel
@@ -55,6 +56,14 @@ class ParticipantesController < ApplicationController
   end
 
   private
+
+    def fix_isencao
+      if params[:participante][:isento] == "0"
+        params[:participante][:isento] = nil
+      else
+        params[:participante][:isento] = 1
+      end
+    end
 
     def participante_params
       params.require(:participante).permit(:documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, :pagamento_por_empenho, :nota_empenho, :isento, :motivo_isencao, usuario_attributes: [ :nome, :email, :password, :password_confirmation ])
