@@ -1,6 +1,19 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $("#trabalho_participante").select2({
+        theme: "bootstrap"
+      });
+    });
+  </script>
+<% end %>
+
 <%= bootstrap_nested_form_for(@trabalho, html: { multipart: true }) do |f| %>
   <p>Todos os campos são obrigatórios.</p>
   <%= f.text_field :titulo, label: 'Título' %>
+  <% if current_user.admin? %>
+    <%= f.select :participante, Participante.select, prompt: 'Selecione' %>
+  <% end %>
   <%= f.text_area :resumo, rows: 5 %>
   <div class="alert alert-info" role="alert"><strong>Atenção:</strong> Preencha os nomes dos autores abaixo na mesma ordem em que eles devem ser apresentados no artigo.</div>
   <label for="autores" class="control-label">Autores</label>

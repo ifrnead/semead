@@ -72,7 +72,7 @@
   <%= participante.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
   <%= participante.text_field :instituicao, label: 'Instituição *' %>
   <%= participante.check_box :isento, label: 'Sou isento do pagamento da taxa de inscrição', onchange: "toggle('motivo_isencao')" %>
-  <%= participante.select :motivo_isencao, isencao_options, label: 'Motivo da isenção' %>
+  <%= participante.select :motivo_isencao, isencao_options, label: 'Motivo da isenção', prompt: 'Selecione' %>
   <%= participante.check_box :pagamento_por_empenho, label: 'Minha taxa de inscrição será paga por nota de empenho', onchange: "toggle('nota_empenho')" %>
   <%= participante.file_field :nota_empenho, label: 'Nota de empenho (pdf)' %>
   <%= participante.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: "toggle('necessidades_especiais')" %>

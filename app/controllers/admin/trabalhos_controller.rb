@@ -1,6 +1,15 @@
 class Admin::TrabalhosController < ApplicationController
   before_action :set_trabalho, only: [:show, :edit, :update, :destroy]
 
+  def new
+    if current_user.admin?
+      @trabalho = Trabalho.new
+      @trabalho.autores.build
+    else
+      redirect_to admin_trabalhos_path
+    end
+  end
+
   def index
     authorize! :index, Trabalho
     if current_user.tem_perfil?('administrador') or current_user.tem_perfil?('membro_comissao_central') or current_user.tem_perfil?('coordenador_comissao_cientifica') or current_user.tem_perfil?('secretario')
