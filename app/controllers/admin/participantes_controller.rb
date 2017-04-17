@@ -23,6 +23,17 @@ class Admin::ParticipantesController < ApplicationController
     redirect_to admin_participante_path(@participante), notice: 'Avaliação da isenção da taxa de inscrição realizada!'
   end
 
+  def credenciar
+    participante = Participante.find(params[:participante_id])
+    authorize! :credenciar, participante
+    if participante.confirmado?
+      participante.credenciar
+      redirect_to admin_participantes_path, notice: "#{participante.nome} credenciado com sucesso!"
+    else
+      redirect_to admin_participantes_path, error: "Não é possível credenciar um participante não-confirmado!"
+    end
+  end
+
   def new
     @participante = Participante.new
     @participante.usuario = Usuario.new

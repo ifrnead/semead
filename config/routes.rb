@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :participantes do
+      get 'credenciar'
       get 'aprovar_nota_empenho'
       get 'avaliar_isencao'
     end

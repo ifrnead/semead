@@ -12,4 +12,8 @@ module ApplicationHelper
     eval(str)
   end
 
+  def fa_icon(icon, title: '', classes: '')
+    "<i class='fa fa-#{icon} #{classes}' title='#{title}' aria-hidden='true'></i>".html_safe
+  end
+
 end

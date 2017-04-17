@@ -101,6 +101,10 @@ class Participante < ActiveRecord::Base
     end
   end
 
+  def credenciar
+    self.update_attribute(:credenciado, true)
+  end
+
   def solicitou_isencao?
     self.isento == ISENCAO[:solicitado]
   end

@@ -3,19 +3,29 @@ module ParticipantesHelper
   def icons_listagem_participante(participante)
     html = ""
     if participante.possui_necessidades_especiais?
-      html += "<i title='Possui necessidades especiais' class='fa fa-wheelchair' aria-hidden='true'></i>&nbsp;"
-    else
-      html += "<i title='Não possui necessidades especiais' class='fa-disabled fa fa-wheelchair' aria-hidden='true'></i>&nbsp;"
+      html += fa_icon('wheelchair', title: 'Possui necessidades especiais')
+      html += "&nbsp".html_safe
     end
     if participante.pagamento_por_empenho?
-      html += "<i title='Pagamento da taxa de inscrição por empenho' class='fa-disabled fa fa-credit-card' aria-hidden='true'></i>&nbsp;"
+      html += fa_icon('text-file-o', title: 'Pagamento da taxa de inscrição por empenho')
+      html += "&nbsp".html_safe
+    elsif participante.isento? or participante.solicitou_isencao? or participante.isencao_aprovada?
+      html += fa_icon('user-times', title: 'Solicitou isenção/isento')
+      html += "&nbsp".html_safe
     else
-      html += "<i title='Pagamento da taxa de inscrição tradicional' class='fa fa-credit-card' aria-hidden='true'></i>&nbsp;"
+      html += fa_icon('credit-card', title: 'Pagamento da taxa de inscrição tradicional')
+      html += "&nbsp".html_safe
     end
     if participante.confirmado?
-      html += "<i title='Confirmado' class='fa fa-thumbs-up' aria-hidden='true'></i>&nbsp;"
+      html += fa_icon('thumbs-up', title: 'Confirmado')
+      html += "&nbsp".html_safe
     else
-      html += "<i title='Pendente' class='fa-disabled fa fa-thumbs-up' aria-hidden='true'></i>&nbsp;"
+      html += fa_icon('thumbs-up', classes: 'fa-disabled', title: 'Não confirmado')
+      html += "&nbsp".html_safe
+    end
+    if participante.credenciado?
+      html += fa_icon('check', title: 'Credenciado')
+      html += "&nbsp".html_safe
     end
     return html
   end

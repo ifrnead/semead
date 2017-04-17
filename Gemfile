@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'font-awesome-rails'
 gem 'bootstrap_form'
 gem 'validates_cpf_cnpj'
 gem 'validates'

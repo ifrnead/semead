@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20170411172124) do
     t.integer  "minicurso_id",                  limit: 4
     t.integer  "isento",                        limit: 4
     t.string   "motivo_isencao",                limit: 255
+    t.boolean  "credenciado", default: false
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree
