@@ -25,8 +25,8 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     ivoneide = Organizador.joins(:usuario).where("usuarios.email = 'ivoneide.bezerra@ifrn.edu.br'").first
     patricia = Organizador.joins(:usuario).where("usuarios.email = 'patricia.chagas@ifrn.edu.br'").first
     silvia = Organizador.joins(:usuario).where("usuarios.email = 'silvia.mendonca@ifrn.edu.br'").first
-    maria = Organizador.joins(:usuario).where("usuarios.email = 'maria.dantas@ifrn.edu.br'").first
-    christine = Organizador.joins(:usuario).where("usuarios.email = 'christine.fonseca@ifrn.edu.br'").first
+    # maria = Organizador.joins(:usuario).where("usuarios.email = 'maria.dantas@ifrn.edu.br'").first
+    christine = Organizador.joins(:usuario).where("usuarios.email = 'christinemeyrelles@gmail.com'").first
     # charles = Organizador.joins(:usuario).where("usuarios.email = 'charles.freitas@ifrn.edu.br'").first
     clauber = Organizador.joins(:usuario).where("usuarios.email = 'clauber.bezerra@ifrn.edu.br'").first
     erick = Organizador.joins(:usuario).where("usuarios.email = 'erick.bergamini@ifrn.edu.br'").first
@@ -65,7 +65,7 @@ class DefinirAtuacaoOrganizadores < ActiveRecord::Migration
     ivoneide.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     patricia.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     silvia.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
-    maria.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
+    # maria.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Modelos e Experiências Pedagógicas em EaD')
     christine.update_attributes(atuacao: 'avaliadora da linha de pesquisa de Formação Docente em EaD')
     # charles.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
     clauber.update_attributes(atuacao: 'avaliador da linha de pesquisa de Soluções Tecnológicas para EaD')
