@@ -1,6 +1,10 @@
 <p><strong>Avaliação:</strong> <%= avaliacao_minicurso(@minicurso.avaliacao).html_safe %></p>
 
 <dl>
+  <dt>Título</dt>
+  <dd><%= @minicurso.titulo %></dd>
+  <dt>Ministrante</dt>
+  <dd><%= @minicurso.participante.nome %></dd>
   <dt>Justificativa</dt>
   <dd><%= @minicurso.justificativa %></dd>
   <dt>Objetivos</dt>

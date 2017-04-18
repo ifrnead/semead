@@ -42,7 +42,17 @@ class Admin::ParticipantesController < ApplicationController
 
   def index
     authorize! :index, Participante
-    @participantes = Participante.includes(:tipo_participante, :cidade, :pais).all
+
+    if params[:nome].nil?
+      @participantes = Participante.includes(:cidade, :usuario).all
+    else
+      @participantes = Participante.joins(:usuario).includes(:cidade, :usuario).where("usuarios.nome LIKE \"%#{params[:nome]}%\"")
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @participantes, include: :usuario }
+    end
   end
 
   private

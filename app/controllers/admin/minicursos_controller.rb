@@ -6,6 +6,22 @@ class Admin::MinicursosController < ApplicationController
     @minicursos = Minicurso.all
   end
 
+  def new
+    authorize! :new, Minicurso
+    @minicurso = Minicurso.new
+  end
+
+  def create
+    @minicurso = Minicurso.new(minicurso_params)
+    authorize! :new, @minicurso
+
+    if @minicurso.save
+      redirect_to admin_minicursos_path, notice: 'Minicurso cadastrado com sucesso!'
+    else
+      render :new
+    end
+  end
+
   def edit
     authorize! :edit, @minicurso
   end
