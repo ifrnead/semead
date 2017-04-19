@@ -105,6 +105,10 @@ class Trabalho < ActiveRecord::Base
     end
   end
 
+  def self.aprovados
+    self.all.select { |trabalho| trabalho.aprovado? }
+  end
+
   def aprovado?
     return self.situacao == AvaliacaoTrabalho::SITUACOES[:aprovado]
   end
