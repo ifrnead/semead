@@ -1,0 +1,18 @@
+<p>Prezados(as) autores(as)</p>
+
+<p>
+  <strong>
+    <% if @trabalho.autores.empty? %>
+      <%= @trabalho.participante.nome %>
+    <% else %>
+      <% @trabalho.autores.each do |autor| %>
+        <%= autor.nome %><br>
+      <% end %>
+    <% end %>
+  </strong>
+</p>
+
+<p class="justify">A Comissão Organizadora do III Seminário Internacional de Educação a Distância: Cenário Atual e Perspectivas da Educação a Distância tem a satisfação de comunicar que seu trabalho, intitulado <%= @trabalho.titulo.upcase %> foi <strong>APROVADO</strong> pela Comissão Científica para apresentação em forma de <%= @trabalho.tipo_trabalho %>.
+</p>
+
+<p class="justify">O local e o horário da apresentação do seu trabalho serão divulgados, posteriormente, na página do evento.</p>

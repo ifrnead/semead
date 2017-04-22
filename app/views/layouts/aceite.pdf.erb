@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <style>
+      img.logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      img.assinatura {
+        width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .content {
+        z-index: 10;
+        margin-top: 1.5cm;
+        margin-right: 1cm;
+        margin-left: 1cm;
+        text-align: justify;
+      }
+      p.pull-right {
+        text-align: right;
+      }
+      p.center {
+        text-align: center;
+      }
+      p.justify {
+        text-align: justify;
+      }
+      h3 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%= wicked_pdf_image_tag 'semead2.png', class: 'logo' %>
+    <div class="content">
+      <p class="pull-right">Natal, RN, <%= I18n.l Date.today, format: :long %></p>
+
+      <h3>CARTA DE ACEITE</h3>
+
+      <%= yield %>
+
+      <p>Cordialmente,</p>
+      <p class="center">
+        <%= wicked_pdf_image_tag 'assinatura-jp.png', class: 'assinatura' %>
+        <strong>Prof. D.Sc. João Paulo Queiroz dos Santos</strong><br>
+        Coordenador Geral da III SEMEAD
+      </p>
+    </div>
+  </body>
+</html>

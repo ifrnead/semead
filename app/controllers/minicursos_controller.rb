@@ -34,6 +34,24 @@ class MinicursosController < ApplicationController
     end
   end
 
+  def aceite
+    @minicurso = Minicurso.find(params[:minicurso_id])
+    authorize! :aceite, @minicurso
+    if @minicurso.aprovado?
+      respond_to do |format|
+        format.pdf do
+          render pdf: 'aceite',
+                 layout: 'aceite',
+                 orientation: 'Portrait',
+                 page_size: 'A4',
+                 show_as_html: params.key?('debug')
+        end
+      end
+    else
+      redirect_to minicursos_path, alert: 'Minicurso com avaliação pendente ou não aprovado!'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_minicurso

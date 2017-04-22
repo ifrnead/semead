@@ -1,26 +1,29 @@
-<h1><%= fa_icon 'pencil' %> Inscrição</h1>
+<h1><%= fa_icon 'pencil' %> Suas inscrições</h1>
 
-<% if @minicurso.nil? %>
+<% if @inscricoes.empty? %>
   <div class="alert alert-success" role="alert"><strong>Atenção:</strong> Você ainda não está inscrito em minicursos.</div>
 <% else %>
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= @minicurso.titulo %></h3>
-    </div>
-    <div class="panel-body">
-      <dl class="dl-horizontal">
-        <dt>Ministrante</dt><dd><%= @minicurso.participante.nome %></dd>
-        <dt>Objetivos</dt><dd><%= @minicurso.objetivos %></dd>
-        <dt>Metodologia</dt><dd><%= @minicurso.metodologia %></dd>
-        <dt>Programação</dt><dd><%= @minicurso.programacao %></dd>
-      </dl>
-    </div>
-    <div class="panel-footer">
-      <div class="btn-group">
-        <%= link_to (fa_icon 'times') + " Cancelar inscrição", cancelar_inscricao_path, class: "btn btn-danger", data: {confirm: 'Tem certeza que deseja cancelar sua inscrição nesse minicurso?'} %>
+  <% @inscricoes.each do |inscricao| %>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= inscricao.minicurso.titulo %></h3>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt>Ministrante</dt><dd><%= inscricao.minicurso.participante.nome %></dd>
+          <dt>Objetivos</dt><dd><%= inscricao.minicurso.objetivos %></dd>
+          <dt>Metodologia</dt><dd><%= inscricao.minicurso.metodologia %></dd>
+          <dt>Programação</dt><dd><%= inscricao.minicurso.programacao %></dd>
+          <dt>Local</dt><dd><%= inscricao.minicurso.local %></dd>
+        </dl>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-group">
+          <%= link_to (fa_icon 'times') + " Cancelar inscrição", inscricao_cancelar_path(inscricao_id: inscricao.id), class: "btn btn-danger", data: {confirm: 'Tem certeza que deseja cancelar sua inscrição nesse minicurso?'} %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 <h1><%= fa_icon 'graduation-cap' %> Minicursos</h1>
@@ -45,11 +48,15 @@
               <dt>Objetivos</dt><dd><%= minicurso.objetivos %></dd>
               <dt>Metodologia</dt><dd><%= minicurso.metodologia %></dd>
               <dt>Programação</dt><dd><%= minicurso.programacao %></dd>
+              <dt>Local</dt><dd><%= minicurso.local %></dd>
               <dt>Vagas disponíveis</dt><dd><%= minicurso.vagas_disponiveis %> vaga(s)</dd>
             </dl>
-            <% if @minicurso.nil? %>
+            <% if @inscricoes.size < Config.instance.get(:quantidade_maxima_inscricoes_minicursos) %>
               <div class="btn-group">
-                <%= link_to (fa_icon 'pencil') + " Quero me inscrever", new_minicurso_inscricao_path(minicurso), class: "btn btn-primary" %>
+                <%= form_tag(inscricoes_path, method: :post) do %>
+                  <%= hidden_field_tag :minicurso_id, minicurso.id %>
+                  <%= submit_tag "Quero me inscrever", class: 'btn btn-primary' %>
+                <% end %>
               </div>
             <% end %>
           </div>

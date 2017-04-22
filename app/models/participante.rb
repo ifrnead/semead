@@ -10,7 +10,8 @@ class Participante < ActiveRecord::Base
   has_many :trabalhos, dependent: :destroy
   has_many :pagamentos, dependent: :destroy
   has_many :minicursos_propostos, dependent: :destroy, class_name: 'Minicurso'
-  belongs_to :minicurso
+  has_many :inscricoes
+  has_many :minicursos, through: :inscricoes
 
   has_attached_file :nota_empenho, {
     path: "public/system/:class/:attachment/:id/:style/:filename",

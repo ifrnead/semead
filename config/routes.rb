@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   resources :trabalhos do
     get 'prazo_encerrado', on: :collection
+    get 'aceite'
   end
   resources :minicursos do
     get 'prazo_encerrado', on: :collection
-    resources :inscricoes
+    get 'aceite'
+  end
+  resources :inscricoes do
+    get 'encerradas', on: :collection
+    get 'cancelar'
   end
   namespace :admin do
     resources :participantes do
@@ -56,8 +61,7 @@ Rails.application.routes.draw do
   get 'pagamentos/processando'
   get 'pagamentos/aprovado'
   get 'pagamentos/falhou'
-  get 'inscricoes' => 'inscricoes#index', as: :inscricoes
-  get 'minicursos/inscricoes/cancelar' => 'inscricoes#cancelar', as: :cancelar_inscricao
+  get 'usuarios/:usuario_id/personificar' => 'sessions#personificar', as: :personificar
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

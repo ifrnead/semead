@@ -1,6 +1,7 @@
 class Minicurso < ActiveRecord::Base
   belongs_to :participante # Proponente/ministrante
-  has_many :participantes # Inscritos
+  has_many :inscricoes
+  has_many :participantes, through: :inscricoes
 
   validates :titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias, presence: true, on: :create
   validates :titulo, :justificativa, :objetivos, :metodologia, :programacao, :material, :referencias, :vagas, :local, presence: true, on: :update
@@ -36,6 +37,10 @@ class Minicurso < ActiveRecord::Base
 
   def tem_vagas?
     self.vagas_disponiveis > 0
+  end
+
+  def aprovado?
+    self.avaliacao == AVALIACAO[:aprovado]
   end
 
   def carga_horaria

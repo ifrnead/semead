@@ -81,6 +81,24 @@ class TrabalhosController < ApplicationController
   def prazo_encerrado
   end
 
+  def aceite
+    @trabalho = Trabalho.find(params[:trabalho_id])
+    authorize! :aceite, @trabalho
+    if @trabalho.aprovado?
+      respond_to do |format|
+        format.pdf do
+          render pdf: 'aceite',
+                 layout: 'aceite',
+                 orientation: 'Portrait',
+                 page_size: 'A4',
+                 show_as_html: params.key?('debug')
+        end
+      end
+    else
+      redirect_to trabalhos_path, alert: 'Trabalho com avaliação pendente ou não aprovado!'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trabalho

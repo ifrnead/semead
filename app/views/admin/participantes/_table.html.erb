@@ -23,6 +23,9 @@
         </td>
         <td>
           <div class="btn-group">
+            <% if can?(:personificar, participante.usuario) %>
+              <%= link_to fa_icon('user-secret'), personificar_path(usuario_id: participante.usuario.id), class: "btn btn-primary btn-sm" %>
+            <% end %>
             <% if can?(:credenciar, participante) and participante.confirmado? %>
               <% unless participante.credenciado? %>
                 <%= link_to fa_icon('address-card-o'), admin_participante_credenciar_path(participante), title: 'Credenciar', class: "btn btn-primary btn-sm" %>

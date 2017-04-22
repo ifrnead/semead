@@ -12,6 +12,7 @@ class Ability
       can [:aprovar_nota_empenho, :avaliar_isencao, :credenciar ], Participante
       can [ :show, :index ], Pagamento
       can [ :ver_autores ], Trabalho
+      can [ :personificar ], Usuario
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
@@ -51,11 +52,12 @@ class Ability
 
     if usuario.tem_perfil?('participante')
       can :show, Participante, id: usuario.autenticavel.id
-      can [ :new, :create, :index, :ver_autores ], Trabalho if usuario.autenticavel.confirmado?
+      can [ :new, :create, :index ], Trabalho if usuario.autenticavel.confirmado?
       can [ :new, :create, :index ], Minicurso if usuario.autenticavel.confirmado?
-      can [ :inscrever ], Minicurso if Config.permitir_inscricao_minicursos? and usuario.autenticavel.confirmado?
-      can :show, Minicurso, participante_id: usuario.autenticavel.id
-      can :show, Trabalho, participante_id: usuario.autenticavel.id
+      can [ :index, :new ], Inscricao if Config.permitir_inscricao_minicursos? and usuario.autenticavel.confirmado?
+      can [ :cancelar ], Inscricao, participante_id: usuario.autenticavel.id
+      can [ :show, :aceite ], Minicurso, participante_id: usuario.autenticavel.id
+      can [ :show, :aceite, :ver_autores ], Trabalho, participante_id: usuario.autenticavel.id
     end
 
     # Define abilities for the passed in user here. For example:

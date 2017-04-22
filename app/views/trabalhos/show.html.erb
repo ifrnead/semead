@@ -4,6 +4,9 @@
   </div>
   <div class="col-md-6">
     <div class="btn-group pull-right">
+      <% if @trabalho.aprovado? %>
+        <a href="<%= trabalho_aceite_path(@trabalho, format: :pdf) %>" class="btn btn-primary"><%= fa_icon 'envelope' %> Carta de Aceite</a>
+      <% end %>
       <a href="<%= @trabalho.download %>" class="btn btn-primary"><%= fa_icon 'download' %> Download</a>
       <a href="<%= trabalhos_path %>" class="btn btn-primary"><%= fa_icon 'undo' %> Voltar</a>
     </div>

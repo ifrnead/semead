@@ -33,6 +33,9 @@
           <td><%= situacao(trabalho.situacao).html_safe %></td>
           <td>
             <div class="btn-group">
+              <% if trabalho.aprovado? and can? :aceite, trabalho %>
+                <%= link_to fa_icon('envelope'), trabalho_aceite_path(trabalho, format: :pdf), class: "btn btn-primary btn-sm", title: 'Carta de aceite' %>
+              <% end %>
               <%= link_to fa_icon('download'), trabalho.download, title: 'Download', class: 'btn btn-primary btn-sm' %>
               <%= link_to fa_icon('eye'), trabalho, title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
             </div>

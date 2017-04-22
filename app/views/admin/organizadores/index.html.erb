@@ -33,6 +33,9 @@
           <td><%= organizador.perfil.nome %></td>
           <td>
             <div class="btn-group">
+              <% if can?(:personificar, organizador.usuario) %>
+                <%= link_to fa_icon('user-secret'), personificar_path(usuario_id: organizador.usuario.id), class: "btn btn-primary btn-sm" %>
+              <% end %>
               <% if can? :show, organizador %>
                 <%= link_to fa_icon('eye'), admin_organizador_path(organizador), title: 'Detalhar', class: "btn btn-primary btn-sm" %>
               <% end %>

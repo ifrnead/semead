@@ -29,6 +29,9 @@
           <td><%= avaliacao_minicurso(minicurso.avaliacao).html_safe %></td>
           <td>
             <div class="btn-group">
+              <% if minicurso.aprovado? and can? :aceite, minicurso %>
+                <%= link_to fa_icon('envelope'), minicurso_aceite_path(minicurso, format: :pdf), title: 'Carta de aceite', class: 'btn btn-primary btn-sm' %>
+              <% end %>
               <% if can? :show, minicurso %>
                 <%= link_to fa_icon('eye'), minicurso, title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
               <% end %>
