@@ -38,7 +38,7 @@ class InscricoesController < ApplicationController
     inscricao = Inscricao.find(params[:inscricao_id])
     authorize! :cancelar, inscricao
     if inscricao
-      inscricao.delete
+      inscricao.destroy
       redirect_to inscricoes_path, notice: 'Cancelamento de inscrição realizado com sucesso!'
     else
       redirect_to inscricoes_path, alert: 'Inscrição não localizada!'
