@@ -4,7 +4,6 @@ namespace :avaliacao do
   task notificar_trabalhos: :environment do
     print "Enviando mensagem para os autores de trabalhos... "
     Trabalho.all.each do |trabalho|
-      byebug
       if trabalho.aprovado?
         AvaliacaoMailer.trabalho_aprovado(trabalho).deliver_now
       else
@@ -18,7 +17,6 @@ namespace :avaliacao do
   task notificar_minicursos: :environment do
     print "Enviando mensagem para os proponentes de minicursos... "
     Minicurso.all.each do |minicurso|
-      byebug
       if minicurso.aprovado?
         AvaliacaoMailer.minicurso_aprovado(minicurso).deliver_now
       else
