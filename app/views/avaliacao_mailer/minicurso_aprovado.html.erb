@@ -1,0 +1,16 @@
+<p>Caro(a) <%= @minicurso.participante.nome.upcase %>,</p>
+
+<p>A Comissão Organizadora do III Seminário Internacional de Educação a Distância: Cenário Atual e Perspectivas da Educação a Distância tem a satisfação de comunicar que sua proposta de minicurso, intitulada <%= @minicurso.titulo.upcase %>, foi <strong>APROVADA</strong> pela Comissão Científica.</p>
+
+<p>Seu minicurso será realizado no(a) <%= @minicurso.local %>, no dia 10 de maio de 2017, das 13h30 as 15h30, e das 16h30 as 18h30, totalizando uma carga-horária de 4hs.</p>
+
+<p>A sua carta de aceite está disponível no seguinte endereço: <a href="http://eventos.ifrn.edu.br/semead/minicursos/<%= @minicurso.id %>/aceite.pdf">http://eventos.ifrn.edu.br/semead/minicursos/<%= @minicurso.id %>/aceite.pdf</a></p>
+
+<p>Você também pode emitir a carta de aceite através do nosso sistema seguindo os passos abaixo.</p>
+
+<ol>
+  <li>Acesse: <a href="http://eventos.ifrn.edu.br/semead/login">http://eventos.ifrn.edu.br/semead/login</a></li>
+  <li>Entre com suas credenciais</li>
+  <li>Clique na opção "Minicursos" no menu superior</li>
+  <li>Na tabela, há um conjunto de botões para cada minicurso proposto. Para os minicursos aprovados, há um botão com um ícone de envelope. Basta clicar nele para emitir sua carta de aceite</li>
+</ol>

@@ -1,5 +1,16 @@
-<p>Caro(a) <%= @trabalho.participante.nome %>,</p>
+<p>Caro(a) <%= @trabalho.participante.nome.upcase %>,</p>
 
-<p>Parabéns! Seu trabalho, intitulado <strong><%= @trabalho.titulo %></strong>, foi APROVADO para ser apresentado na III SEMEAD.</p>
+<p>A Comissão Organizadora do III Seminário Internacional de Educação a Distância: Cenário Atual e Perspectivas da Educação a Distância tem a satisfação de comunicar que seu trabalho, intitulado <%= @trabalho.titulo.upcase %>, foi <strong>APROVADO</strong> pela Comissão Científica.</p>
 
-<p>Por gentileza, aguarde contato da Comissão de Avaliação de Trabalhos Científicos para orientações sobre sua apresentação.</p>
+<p>Os posters serão apresentados no dia 10 de maio de 2017, das 15h30 as 16h30, durante o intervalo dos minicursos. Os trabalhos aprovados para apresentação oral serão apresentados no dia 11 de maio de 2017, das 10h30 as 12hs, das 16hs as 18hs, e, no dia 12 de maio de 2017, serão apresentados das 08h30 as 10hs.</p>
+
+<p>A sua carta de aceite está disponível no seguinte endereço: <a href="http://eventos.ifrn.edu.br/semead/trabalhos/<%= @trabalho.id %>/aceite.pdf">http://eventos.ifrn.edu.br/semead/trabalhos/<%= @trabalho.id %>/aceite.pdf</a></p>
+
+<p>Você também pode emitir a carta de aceite através do nosso sistema seguindo os passos abaixo.</p>
+
+<ol>
+  <li>Acesse: <a href="http://eventos.ifrn.edu.br/semead/login">http://eventos.ifrn.edu.br/semead/login</a></li>
+  <li>Entre com suas credenciais</li>
+  <li>Clique na opção "Trabalhos" no menu superior</li>
+  <li>Na tabela, há um conjunto de botões para cada trabalho submetido. Para os trabalhos aprovados, há um botão com um ícone de envelope. Basta clicar nele para emitir sua carta de aceite</li>
+</ol>

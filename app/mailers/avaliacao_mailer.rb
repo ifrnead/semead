@@ -25,4 +25,16 @@ class AvaliacaoMailer < ApplicationMailer
     mail to: trabalho.participante.email, subject: '[SEMEAD] Avaliação do seu trabalho'
   end
 
+  def minicurso_aprovado(minicurso)
+    @minicurso = minicurso
+
+    mail to: minicurso.participante.email, subject: '[SEMEAD] Sua proposta de minicurso foi aprovada!'
+  end
+
+  def minicurso_reprovado(minicurso)
+    @minicurso = minicurso
+
+    mail to: minicurso.participante.email, subject: '[SEMEAD] Avaliação da sua proposta de minicurso'
+  end
+
 end

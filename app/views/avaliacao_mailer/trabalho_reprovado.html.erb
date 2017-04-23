@@ -1,5 +1,7 @@
-<p>Caro(a) <%= @trabalho.participante.nome %>,</p>
+<p>Caro(a) <%= @trabalho.participante.nome.upcase %>,</p>
 
-<p>Infelizmente o seu trabalho, intitulado <strong><%= @trabalho.titulo %></strong>, não foi aceito para ser apresentado na III SEMEAD.</p>
+<p>Infelizmente o seu trabalho, intitulado <strong><%= @trabalho.titulo.upcase %></strong>, não foi aceito para ser apresentado na III SEMEAD.</p>
+
+<p>Seguem abaixo os pareceres fornecidos pelos avaliadores.</p>
 
 <%= render partial: 'trabalhos/pareceres' %>
