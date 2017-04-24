@@ -48,6 +48,7 @@ class Ability
       can [ :show, :index, :aprovar_nota_empenho, :avaliar_isencao, :credenciar ], Participante
       can [ :show, :index ], Pagamento
       can [ :show, :index, :ver_autores ], Trabalho
+      can [ :show, :index ], Minicurso
     end
 
     if usuario.tem_perfil?('participante')
