@@ -5,7 +5,7 @@ class Ability
 
     usuario ||= Usuario.new
 
-    can [ :show, :index ], Certificado, usuario_id: usuario.autenticavel.id
+    can [ :show, :index ], Certificado, usuario_id: usuario.id
 
     if usuario.admin?
       can :manage, :all
