@@ -19,27 +19,27 @@ class Ability
       can :manage, Organizador
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho, :avaliar_isencao ], Participante
       can [ :show, :index, :edit, :update ], Minicurso
-      can [ :show, :index ], Trabalho
+      can [ :show, :index, :ver_autores ], Trabalho
       can [ :show, :index ], Pagamento
       can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
       can [ :index, :show ], Participante
-      can [ :show, :index, :edit, :update ], Trabalho
+      can [ :show, :index, :edit, :update, :ver_autores ], Trabalho
       can [ :show, :index, :edit, :update ], Minicurso
       can :manage, AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('coordenador_linha_pesquisa')
       can [ :index, :show ], Participante
-      can [ :show, :index, :edit, :update ], Trabalho
+      can [ :show, :index, :edit, :update, :ver_autores ], Trabalho
       can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
     end
 
     if usuario.tem_perfil?('membro_comissao_cientifica')
       can [ :index, :show ], Participante
-      can [ :index, :show ], Trabalho
+      can [ :index, :show, :ver_autores ], Trabalho
       can [ :index, :show ], AvaliacaoTrabalho
       can [ :edit, :update ], AvaliacaoTrabalho, organizador_id: usuario.autenticavel.id
     end

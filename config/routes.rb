@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'credenciar'
       get 'aprovar_nota_empenho'
       get 'avaliar_isencao'
+      get 'confirmados', on: :collection
     end
     resources :organizadores
     resources :trabalhos do

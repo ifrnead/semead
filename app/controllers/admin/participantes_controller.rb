@@ -55,6 +55,15 @@ class Admin::ParticipantesController < ApplicationController
     end
   end
 
+  def confirmados
+    authorize! :index, Participante
+    @participantes = Participante.confirmados
+
+    respond_to do |format|
+      format.csv
+    end
+  end
+
   private
 
   def set_participante
