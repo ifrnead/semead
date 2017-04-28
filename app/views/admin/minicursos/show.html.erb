@@ -9,4 +9,31 @@
   </div>
 </div>
 
-<%= render partial: '/minicursos/detalhes' %>
+<p><strong>Avaliação:</strong> <%= avaliacao_minicurso(@minicurso.avaliacao).html_safe %></p>
+
+<dl>
+  <dt>Título</dt>
+  <dd><%= @minicurso.titulo %></dd>
+  <dt>Ministrante</dt>
+  <dd><%= link_to @minicurso.participante.nome, admin_participante_path(@minicurso.participante) %></dd>
+  <dt>Justificativa</dt>
+  <dd><%= @minicurso.justificativa %></dd>
+  <dt>Objetivos</dt>
+  <dd><%= @minicurso.objetivos %></dd>
+  <dt>Metodologia</dt>
+  <dd><%= @minicurso.metodologia %></dd>
+  <dt>Programação</dt>
+  <dd><%= @minicurso.programacao %></dd>
+  <dt>Material necessário</dt>
+  <dd><%= @minicurso.material %></dd>
+  <dt>Referências</dt>
+  <dd><%= @minicurso.referencias %></dd>
+  <% if @minicurso.local.present? %>
+    <dt>Local</dt>
+    <dd><%= @minicurso.local %></dd>
+  <% end %>
+  <% if @minicurso.vagas.present? %>
+    <dt>Vagas</dt>
+    <dd><%= @minicurso.vagas %></dd>
+  <% end %>
+</dl>

@@ -23,7 +23,45 @@
   </div>
 </div>
 
-<%= render partial: 'trabalhos/detalhes' %>
+<h3><%= @trabalho.titulo %></h3>
+
+<p><strong>Resumo</strong></p>
+
+<p><%= @trabalho.resumo %></p>
+
+<% if can? :ver_autores, @trabalho %>
+  <p>
+    <strong>Autor(es):</strong><br>
+    <ul>
+      <% if @trabalho.autores.empty? %>
+        <li><%= link_to @trabalho.participante.nome, admin_participante_path(@trabalho.participante) %></li>
+      <% else %>
+        <% @trabalho.autores.each do |autor| %>
+          <% if autor.nome.downcase == @trabalho.participante.nome.downcase %>
+            <li><%= link_to @trabalho.participante.nome, admin_participante_path(@trabalho.participante) %></li>
+          <% else %>
+            <li><%= autor.nome %></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
+
+<p>
+  <strong>Linha de pesquisa:</strong>
+  <%= @trabalho.linha.nome %>
+</p>
+
+<p>
+  <strong>Tipo de trabalho:</strong>
+  <%= @trabalho.tipo_trabalho.nome %>
+</p>
+
+<p>
+  <strong>Avaliação:</strong>
+  <%= situacao(@trabalho.situacao).html_safe %>
+</p>
 
 <% if can? :index, AvaliacaoTrabalho %>
   <h2><%= fa_icon 'gavel' %> Avaliações</h2>
