@@ -1,0 +1,33 @@
+<% if minicursos.empty? %>
+  <p>Nenhum minicurso proposto até o momento.</p>
+<% else %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Inscritos</th>
+        <th>Avaliação</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% minicursos.each do |minicurso| %>
+        <tr>
+          <td><%= minicurso.titulo %></td>
+          <td><%= minicurso.inscricoes.size %></td>
+          <td><%= avaliacao_minicurso(minicurso.avaliacao).html_safe %></td>
+          <td>
+            <div class="btn-group">
+              <% if can? :show, minicurso %>
+                <%= link_to fa_icon('eye'), admin_minicurso_path(minicurso), title: 'Detalhar', class: 'btn btn-primary btn-sm' %>
+              <% end %>
+              <% if can? :edit, minicurso %>
+                <%= link_to fa_icon('edit'), edit_admin_minicurso_path(minicurso), title: 'Editar', class: 'btn btn-primary btn-sm' %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -9,6 +9,16 @@ class Admin::ParticipantesController < ApplicationController
     authorize! :update, @participante
   end
 
+  def update
+    authorize! :update, @participante
+    @participante.assign_attributes(participante_params)
+    if @participante.save(validate: false)
+      redirect_to admin_participante_path(@participante), notice: 'Participante atualizado com sucesso!'
+    else
+      render :edit, alert: 'Erro ao atualizar participante!'
+    end
+  end
+
   def aprovar_nota_empenho
     authorize! :aprovar_nota_empenho, Participante
     @participante = Participante.find(params[:participante_id])
@@ -68,5 +78,9 @@ class Admin::ParticipantesController < ApplicationController
 
   def set_participante
     @participante = Participante.includes(:trabalhos, :pagamentos).find(params[:id])
+  end
+
+  def participante_params
+    params.require(:participante).permit(:documento, :tipo_participante_id, :cidade_id, :pais_id, :instituicao, :possui_necessidades_especiais, :necessidades_especiais, :pagamento_por_empenho, :nota_empenho, :isento, :motivo_isencao, usuario_attributes: [ :nome, :email, :password, :password_confirmation ])
   end
 end

@@ -1,0 +1,22 @@
+<% if certificados.empty? %>
+  <p>Nenhum certificado emitido até o momento.</p>
+<% else %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th>Título</th>
+      <th>Opções</th>
+    </thead>
+    <tbody>
+      <% certificados.each do |certificado| %>
+        <tr>
+          <td><%= certificado.titulo %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to fa_icon('eye'), certificado_path(certificado, format: :pdf), class: "btn btn-primary btn-sm" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

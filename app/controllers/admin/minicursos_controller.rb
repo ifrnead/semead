@@ -1,5 +1,5 @@
 class Admin::MinicursosController < ApplicationController
-  before_action :set_minicurso, only: [:show, :edit, :update, :destroy]
+  before_action :set_minicurso, only: [:edit, :update, :destroy]
 
   def index
     authorize! :index, Minicurso
@@ -40,6 +40,7 @@ class Admin::MinicursosController < ApplicationController
   end
 
   def show
+    @minicurso = Minicurso.includes(:inscricoes).find(params[:id])
     authorize! :show, @minicurso
   end
 

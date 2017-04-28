@@ -37,3 +37,30 @@
     <dd><%= @minicurso.vagas %></dd>
   <% end %>
 </dl>
+
+<h2><%= fa_icon 'pencil' %> Inscrições</h2>
+
+<% if @minicurso.inscricoes.empty? %>
+  <p>Nenhuma inscrição realizada para esse minicurso até o momento.</p>
+<% else %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th>Nome</th>
+      <th>Emitir certificado?</th>
+      <th>Opções</th>
+    </thead>
+    <tbody>
+      <% @minicurso.inscricoes.each do |inscricao| %>
+        <tr>
+          <td><%= link_to inscricao.participante.nome, admin_participante_path(inscricao.participante) %></td>
+          <td><%= emitir_certificado?(inscricao) %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to fa_icon('trash'), admin_inscricao_path(inscricao), method: :delete, class: "btn btn-primary btn-sm", data: { confirm: 'Tem certeza que deseja excluir essa inscrição?' } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

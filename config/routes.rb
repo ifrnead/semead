@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'cancelar'
   end
   namespace :admin do
+    resources :inscricoes
     resources :participantes do
       get 'credenciar'
       get 'aprovar_nota_empenho'

@@ -44,6 +44,8 @@
 
 <%= render partial: 'participantes/detalhes' %>
 
+<hr>
+
 <h2><%= fa_icon 'file-text-o' %> Trabalhos</h2>
 
 <% if @participante.trabalhos.empty? %>
@@ -51,6 +53,26 @@
 <% else %>
   <%= render partial: 'trabalhos' %>
 <% end %>
+
+<hr>
+
+<h2><%= fa_icon 'graduation-cap' %> Minicursos</h2>
+
+<%= render partial: 'admin/minicursos/table', locals: { minicursos: @participante.minicursos_propostos } %>
+
+<hr>
+
+<h2><%= fa_icon 'pencil' %> Inscrições</h2>
+
+<%= render partial: 'inscricoes', locals: { inscricoes: @participante.inscricoes } %>
+
+<hr>
+
+<h2><%= fa_icon 'certificate' %> Certificados</h2>
+
+<%= render partial: 'certificados/table', locals: { certificados: @participante.usuario.certificados } %>
+
+<hr>
 
 <% if can? :show, Pagamento %>
   <h2><%= fa_icon 'usd' %> Pagamentos</h2>

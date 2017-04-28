@@ -17,4 +17,84 @@
   </div>
 </div>
 
-<%= render partial: 'participantes/form' %>
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      if(!$("#participante_possui_necessidades_especiais").is(':checked')) {
+        $("#participante_necessidades_especiais").parent().hide();
+      }
+
+      if(!$("#participante_pagamento_por_empenho").is(':checked')) {
+        $("#participante_nota_empenho").parent().hide();
+      }
+
+      if(!$("#participante_isento").is(':checked')) {
+        $("#participante_motivo_isencao").parent().hide();
+      }
+
+      $("#participante_cidade_id").select2({
+        theme: "bootstrap",
+        language: "pt-BR",
+        ajax: {
+          url: "<%= cidades_path %>",
+          dataType: 'json',
+          delay: 250,
+          data: function(params) {
+            return {
+              q: params.term,
+              page: params.page
+            }
+          },
+          processResults: function (data) {
+            return {
+              results: $.map(data, function (item) {
+                          return {
+                            text: item.nome,
+                            id: item.id
+                          }
+                        })
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 3
+      });
+    });
+
+    function toggle(id) {
+      $("#participante_"+id).parent().toggle('blind');
+    }
+
+    function verificar_pais() {
+      pais_id = $("#participante_pais_id").val();
+      if(pais_id != 33) {
+        $("#participante_cidade_id").attr('disabled', 'disabled');
+      } else {
+        $("#participante_cidade_id").attr('disabled', false);
+      }
+    }
+  </script>
+<% end %>
+
+<%= bootstrap_form_for(@participante, url: admin_participante_path(@participante)) do |participante| %>
+  <p>Os campos marcados com * são obrigatórios.</p>
+  <%= participante.fields_for :usuario do |usuario| %>
+    <%= usuario.text_field :nome, label: 'Nome completo *' %>
+    <%= usuario.email_field :email, label: 'E-mail *' %>
+    <%= usuario.password_field :password, placeholder: 'Mínimo de 4 caracteres', label: 'Senha *' %>
+    <%= usuario.password_field :password_confirmation, placeholder: 'Repita a senha', label: 'Confirmação de senha *' %>
+  <% end %>
+  <%= participante.select :pais_id, Pais.select, {selected: 33, label: 'País *'}, {onchange: 'verificar_pais()'} %>
+  <%= participante.select :cidade_id, select2_default_option(@participante), label: 'Cidade' %>
+  <%= participante.text_field :documento, label: 'CPF/Passaporte *', placeholder: 'Apenas números' %>
+  <%= participante.select :tipo_participante_id, TipoParticipante.select, prompt: 'Selecione', label: 'Perfil *' %>
+  <%= participante.text_field :instituicao, label: 'Instituição *' %>
+  <%= participante.check_box :isento, label: 'Sou isento do pagamento da taxa de inscrição', onchange: "toggle('motivo_isencao')" %>
+  <%= participante.select :motivo_isencao, isencao_options, label: 'Motivo da isenção', prompt: 'Selecione' %>
+  <%= participante.check_box :pagamento_por_empenho, label: 'Minha taxa de inscrição será paga por nota de empenho', onchange: "toggle('nota_empenho')" %>
+  <%= participante.file_field :nota_empenho, label: 'Nota de empenho (pdf)' %>
+  <%= participante.check_box :possui_necessidades_especiais, label: 'Você possui alguma necessidade específica?', onchange: "toggle('necessidades_especiais')" %>
+  <%= participante.text_area :necessidades_especiais, label: 'Descreva a(s) sua(s) necessidade(s) específica(s)' %>
+  <%= participante.submit 'Enviar', class: 'btn btn-primary' %>
+<% end %>

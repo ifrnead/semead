@@ -1,11 +1,11 @@
 class Usuario < ActiveRecord::Base
-  has_secure_password
+  has_secure_password validations: false
   belongs_to :autenticavel, polymorphic: true
   belongs_to :perfil
   has_many :certificados
 
   validates :nome, presence: true
-  validates :email, presence: true, uniqueness: true, email: true
+  validates :email, presence: true, uniqueness: true, email: true, on: :create
   validates :password, length: { minimum: 4 }, confirmation: true, on: :create
 
   def self.autenticar(email, senha)

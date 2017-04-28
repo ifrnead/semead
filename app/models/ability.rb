@@ -22,6 +22,7 @@ class Ability
       can [ :show, :index, :ver_autores ], Trabalho
       can [ :show, :index ], Pagamento
       can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
+      can [ :destroy ], Inscricao
     end
 
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
@@ -49,6 +50,7 @@ class Ability
       can [ :show, :index ], Pagamento
       can [ :show, :index, :ver_autores ], Trabalho
       can [ :show, :index ], Minicurso
+      can [ :destroy ], Inscricao
     end
 
     if usuario.tem_perfil?('participante')

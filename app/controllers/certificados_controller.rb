@@ -2,6 +2,7 @@ class CertificadosController < ApplicationController
 
   def index
     authorize! :index, Certificado
+    @certificados = current_user.certificados
   end
 
   def show
@@ -9,9 +10,6 @@ class CertificadosController < ApplicationController
     authorize! :show, @certificado
 
     respond_to do |format|
-      format.html do
-        render 'show', layout: 'certificado'
-      end
       format.pdf do
         render pdf: 'certificado',
                layout: 'certificado',
