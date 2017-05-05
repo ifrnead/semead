@@ -44,6 +44,20 @@ class Admin::MinicursosController < ApplicationController
     authorize! :show, @minicurso
   end
 
+  def certificados
+    authorize! :certificar, Minicurso
+    @minicurso = Minicurso.includes(:inscricoes).find(params[:minicurso_id])
+  end
+
+  def certificar
+    authorize! :certificar, Minicurso
+    @minicurso = Minicurso.includes(:inscricoes).find(params[:minicurso_id])
+    @minicurso.inscricoes.each do |inscricao|
+      inscricao.update_attribute(:certificado, params["#{inscricao.id}"].to_i)
+    end
+    redirect_to admin_minicurso_certificados_path(@minicurso), notice: 'Certificação realizada com sucesso!'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_minicurso

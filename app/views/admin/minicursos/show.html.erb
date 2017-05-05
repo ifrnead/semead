@@ -4,7 +4,10 @@
   </div>
   <div class="col-md-6">
     <div class="btn-group pull-right">
-      <a href="<%= admin_minicursos_path %>" class="btn btn-primary"><%= fa_icon 'undo' %> Voltar</a>
+      <%= link_to fa_icon('undo') + " Voltar", admin_minicursos_path, class: "btn btn-primary" %>
+      <% if can? :certificar, @minicurso %>
+        <%= link_to fa_icon('certificate') + " Certificados", admin_minicurso_certificados_path(@minicurso), title: 'Certificados', class: 'btn btn-primary' %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -13,12 +13,13 @@ class Ability
       can [ :show, :index ], Pagamento
       can [ :ver_autores ], Trabalho
       can [ :personificar ], Usuario
+      can [ :certificar ], Minicurso
     end
 
     if usuario.tem_perfil?('membro_comissao_central')
       can :manage, Organizador
       can [ :show, :index, :edit, :update, :aprovar_nota_empenho, :avaliar_isencao ], Participante
-      can [ :show, :index, :edit, :update ], Minicurso
+      can [ :show, :index, :edit, :update, :certificar ], Minicurso
       can [ :show, :index, :ver_autores ], Trabalho
       can [ :show, :index ], Pagamento
       can [ :show, :index, :edit, :update ], AvaliacaoTrabalho
@@ -28,7 +29,7 @@ class Ability
     if usuario.tem_perfil?('coordenador_comissao_cientifica')
       can [ :index, :show ], Participante
       can [ :show, :index, :edit, :update, :ver_autores ], Trabalho
-      can [ :show, :index, :edit, :update ], Minicurso
+      can [ :show, :index, :edit, :update, :certificar ], Minicurso
       can :manage, AvaliacaoTrabalho
     end
 
@@ -49,7 +50,7 @@ class Ability
       can [ :show, :index, :aprovar_nota_empenho, :avaliar_isencao, :credenciar ], Participante
       can [ :show, :index ], Pagamento
       can [ :show, :index, :ver_autores ], Trabalho
-      can [ :show, :index ], Minicurso
+      can [ :show, :index, :certificar ], Minicurso
       can [ :destroy ], Inscricao
     end
 

@@ -17,4 +17,8 @@ class Inscricao < ActiveRecord::Base
       errors.add(:base, "Não existem vagas disponíveis")
     end
   end
+
+  def emitir_certificado?
+    self.certificado
+  end
 end

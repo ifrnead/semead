@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       resources :avaliacoes, controller: 'avaliacoes_trabalhos'
     end
     resources :minicursos do
+      get 'certificados'
+      patch 'certificar'
       resources :avaliacoes, controller: 'avaliacoes_minicursos'
     end
   end

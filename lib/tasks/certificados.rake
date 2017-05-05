@@ -69,7 +69,10 @@ namespace :certificados do
   desc "Certificados de participação em minicursos"
   task participacao_minicurso: :environment do
     print "Gerando certificados de participação em minicursos... "
-    # TODO
+    Inscricao.all.each do |inscricao|
+      texto = "Certificamos que <strong>#{inscricao.participante.nome.upcase}</strong>, nascido(a) no <strong>#{inscricao.participante.pais.nome.upcase}</strong>, participou do minicurso <strong>#{inscricao.minicurso.titulo.upcase}</strong>, com carga-horária de 4 horas, no #{FINAL}"
+      Certificado.create(usuario: inscricao.participante.usuario, texto: texto, titulo: 'Certificado de participação de minicurso')
+    end
     puts "Concluído!"
   end
 

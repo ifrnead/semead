@@ -1,0 +1,44 @@
+<%= content_for :head do %>
+  <%= render "layouts/datatables" %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'certificate' %> Certificados</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <a href="<%= admin_minicursos_path %>" class="btn btn-primary"><%= fa_icon 'undo' %> Voltar</a>
+    </div>
+  </div>
+</div>
+
+<h3>Minicurso: <%= @minicurso.titulo %></h3>
+
+<% if @minicurso.inscricoes.empty? %>
+  <p>Nenhuma inscrição encontrada para esse minicurso.</p>
+<% else %>
+  <%= form_tag admin_minicurso_certificar_path, method: :patch do %>
+    <table id="datatable" class="table table-hover table-bordered">
+      <thead>
+        <th>Nome</th>
+        <th>Emitir certificado?</th>
+      </thead>
+      <tbody>
+        <% @minicurso.inscricoes.each do |inscricao| %>
+          <tr>
+            <td><%= inscricao.participante.nome %></td>
+            <td>
+              <% if inscricao.emitir_certificado? %>
+                <%= check_box_tag "#{inscricao.id}", 1, checked: true %>
+              <% else %>
+                <%= check_box_tag "#{inscricao.id}", 1 %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag 'Enviar', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

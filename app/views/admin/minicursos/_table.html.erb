@@ -24,6 +24,9 @@
               <% if can? :edit, minicurso %>
                 <%= link_to fa_icon('edit'), edit_admin_minicurso_path(minicurso), title: 'Editar', class: 'btn btn-primary btn-sm' %>
               <% end %>
+              <% if can? :certificar, minicurso %>
+                <%= link_to fa_icon('certificate'), admin_minicurso_certificados_path(minicurso), title: 'Certificados', class: 'btn btn-primary btn-sm' %>
+              <% end %>
             </div>
           </td>
         </tr>
