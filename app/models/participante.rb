@@ -29,6 +29,7 @@ class Participante < ActiveRecord::Base
   accepts_nested_attributes_for :usuario
 
   before_create :atribuir_perfil
+  after_create :isencao_automatica
 
   ISENCAO = {
     :rejeitado => 0,
@@ -99,6 +100,12 @@ class Participante < ActiveRecord::Base
       ParticipanteMailer.isencao_aprovada(self).deliver_now
     else
       ParticipanteMailer.isencao_rejeitada(self).deliver_now
+    end
+  end
+
+  def isencao_automatica
+    if Isento.verificar(self.documento)
+      self.avaliar_isencao(ISENCAO[:aprovado])
     end
   end
 
