@@ -2,6 +2,7 @@
 
 class Participante < ActiveRecord::Base
   include Selectable
+  include GoogleDriveAPI
 
   belongs_to :tipo_participante
   belongs_to :cidade
@@ -127,6 +128,18 @@ class Participante < ActiveRecord::Base
 
   def credenciado?
     self.credenciado
+  end
+
+  def respondeu_questionario?
+    if self.respondeu_questionario
+      return true
+    else
+      if questionario_respondido_por?(self.documento)
+        self.update_attribute(:respondeu_questionario, true)
+        return true
+      end
+      return false
+    end
   end
 
   def self.select2(params)

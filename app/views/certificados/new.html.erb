@@ -1,0 +1,41 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $("#certificado_usuario_id").select2({
+        theme: "bootstrap"
+      });
+    });
+  </script>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'certificate' %> Novo Certificado</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <a href="<%= certificados_path %>" class="btn btn-primary"><%= fa_icon 'undo' %> Voltar</a>
+    </div>
+  </div>
+</div>
+
+<%= bootstrap_form_for(@certificado) do |f| %>
+  <%= f.text_field :titulo, label: 'Título' %>
+  <%= f.select :usuario_id, Usuario.select, prompt: 'Selecione', label: 'Usuário' %>
+  <div class="row">
+    <div class="col-md-8">
+      <p>Certificamos que [...]</p>
+      <%= f.text_area :texto, rows: 5, hide_label: true, placeholder: 'Digite aqui o corpo do certificado' %>
+      <p>[...] III Seminário Internacional de Educação a Distância, realizado no Campus de Educação a Distância do Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte, entre os dias 10 e 12 de maio de 2017.</p>
+    </div>
+    <div class="col-md-4">
+      <p>Fragmentos disponíveis</p>
+      <ul>
+        <li><strong>[nome]</strong>: nome do usuário</li>
+        <li><strong>[b]</strong>: início do texto em negrito</li>
+        <li><strong>[/b]</strong>: fim do texto em negrito</li>
+      </ul>
+    </div>
+  </div>
+  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+<% end %>

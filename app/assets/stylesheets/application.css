@@ -25,6 +25,10 @@ div.alert h4 {
   margin-bottom: 0px;
 }
 
+div.alert a {
+  color: #3bb5e4;
+}
+
 table.table tbody tr td {
   font-weight: normal !important;
 }

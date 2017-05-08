@@ -1,3 +1,20 @@
-<h1><%= fa_icon 'certificate' %> Certificados</h1>
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= fa_icon 'certificate' %> Certificados</h1>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <% if can? :new, Certificado %>
+        <a href="<%= new_certificado_path %>" class="btn btn-primary"><%= fa_icon 'certificate' %> Novo Certificado</a>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<%= render partial: 'table', locals: { certificados: @certificados } %>
+<% if current_user.participante? and (not current_user.autenticavel.respondeu_questionario?) %>
+  <div class="alert alert-danger" role="alert">
+    <strong>Atenção:</strong> Para emitir os certificados, primeiramente você deve responder ao <%= link_to "Questionário de Avaliação da III SEMEAD", Config.instance.get(:url_questionario_avaliacao), target: '_blank' %>.
+  </div>
+<% else %>
+  <%= render partial: 'table', locals: { certificados: @certificados } %>
+<% end %>

@@ -1,4 +1,6 @@
 class Usuario < ActiveRecord::Base
+  include Selectable
+  
   has_secure_password validations: false
   belongs_to :autenticavel, polymorphic: true
   belongs_to :perfil

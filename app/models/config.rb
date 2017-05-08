@@ -5,7 +5,7 @@ class Config
     @configs = {
       :dev => false,
       :data_abertura_inscricoes => Date.new(2016, 12, 7),
-      :data_encerramento_inscricoes => Date.new(2017, 5, 10),
+      :data_encerramento_inscricoes => Date.new(2017, 5, 8),
       :data_inicio_submissao_trabalhos => Date.new(2016, 12, 7),
       :data_termino_submissao_trabalhos => Date.new(2017, 4, 9),
       :data_inicio_submissao_minicursos => Date.new(2016, 12, 7),
@@ -14,7 +14,9 @@ class Config
       :data_termino_inscricoes_minicursos => Date.new(2017, 5, 10),
       :prazo_redefinir_senha => 1, # dia
       :prazo_pagamento => 5, # dias
-      :quantidade_maxima_inscricoes_minicursos => 1
+      :quantidade_maxima_inscricoes_minicursos => 1,
+      :url_questionario_avaliacao => 'https://goo.gl/forms/MW3LdnvO32F046uj1',
+      :key_planilha_formulario_avaliacao => '1XvsZpc83h7aWEb9JgdKpFijsTsSNA5HEc0-XAGF4biE'
     }
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419173151) do
+ActiveRecord::Schema.define(version: 20170506182638) do
 
   create_table "autores", force: :cascade do |t|
     t.string   "nome",        limit: 255
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20170419173151) do
     t.integer  "isento",                        limit: 4
     t.string   "motivo_isencao",                limit: 255
     t.boolean  "credenciado"
+    t.boolean  "respondeu_questionario",                      default: false
   end
 
   add_index "participantes", ["cidade_id"], name: "index_participantes_on_cidade_id", using: :btree

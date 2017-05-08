@@ -1,0 +1,3 @@
+<% @participantes.each do |participante| %>
+  "<%= participante.nome.mb_chars.upcase.to_s %>";"<%= participante.documento %>";"<%= participante.email %>"
+<% end %>

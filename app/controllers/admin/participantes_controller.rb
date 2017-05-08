@@ -62,6 +62,7 @@ class Admin::ParticipantesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @participantes, include: :usuario }
+      format.csv
     end
   end
 

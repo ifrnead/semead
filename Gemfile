@@ -13,6 +13,7 @@ gem 'whenever', :require => false
 gem "nested_form"
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'google_drive'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
