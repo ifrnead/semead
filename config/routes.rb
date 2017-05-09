@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :minicursos do
       get 'certificados'
       patch 'certificar'
+      get 'participantes'
       resources :avaliacoes, controller: 'avaliacoes_minicursos'
     end
   end

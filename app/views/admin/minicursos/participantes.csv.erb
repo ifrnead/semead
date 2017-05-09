@@ -1,0 +1,3 @@
+<% @minicurso.inscricoes.each do |inscricao| %>
+"<%= inscricao.participante.nome.mb_chars.upcase.to_s %>";"<%= inscricao.participante.documento %>";"<%= inscricao.participante.email %>"
+<% end %>

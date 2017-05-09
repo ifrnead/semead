@@ -49,6 +49,14 @@ class Admin::MinicursosController < ApplicationController
     @minicurso = Minicurso.includes(:inscricoes).find(params[:minicurso_id])
   end
 
+  def participantes
+    @minicurso = Minicurso.includes(:inscricoes).find(params[:minicurso_id])
+    authorize! :show, @minicurso
+    respond_to do |format|
+      format.csv
+    end
+  end
+
   def certificar
     authorize! :certificar, Minicurso
     @minicurso = Minicurso.includes(:inscricoes).find(params[:minicurso_id])
