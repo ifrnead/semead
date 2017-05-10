@@ -26,6 +26,13 @@ class Admin::ParticipantesController < ApplicationController
     redirect_to admin_participante_path(@participante), notice: 'Pagamento por nota de empenho aprovada!'
   end
 
+  def aprovar_pagamento
+    authorize! :aprovar_pagamento, Participante
+    @participante = Participante.find(params[:participante_id])
+    @participante.update_attribute(:pago, true)
+    redirect_to admin_participante_path(@participante), notice: 'Pagamento aprovado com sucesso!'
+  end
+
   def avaliar_isencao
     authorize! :avaliar_isencao, Participante
     @participante = Participante.find(params[:participante_id])

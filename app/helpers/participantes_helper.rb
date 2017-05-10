@@ -7,10 +7,10 @@ module ParticipantesHelper
       html += "&nbsp".html_safe
     end
     if participante.pagamento_por_empenho?
-      html += fa_icon('text-file-o', title: 'Pagamento da taxa de inscrição por empenho')
+      html += fa_icon('file-text-o', title: 'Pagamento da taxa de inscrição por empenho')
       html += "&nbsp".html_safe
     elsif participante.isento? or participante.solicitou_isencao? or participante.isencao_aprovada?
-      html += fa_icon('user-times', title: 'Solicitou isenção/isento')
+      html += fa_icon('credit-card', classes: 'fa-disabled', title: 'Solicitou isenção/isento')
       html += "&nbsp".html_safe
     else
       html += fa_icon('credit-card', title: 'Pagamento da taxa de inscrição tradicional')
@@ -24,7 +24,7 @@ module ParticipantesHelper
       html += "&nbsp".html_safe
     end
     if participante.credenciado?
-      html += fa_icon('check', title: 'Credenciado')
+      html += fa_icon('address-card-o', title: 'Credenciado')
       html += "&nbsp".html_safe
     end
     return html

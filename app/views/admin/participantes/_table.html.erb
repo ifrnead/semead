@@ -28,7 +28,7 @@
             <% end %>
             <% if can?(:credenciar, participante) and participante.confirmado? %>
               <% unless participante.credenciado? %>
-                <%= link_to fa_icon('address-card-o'), admin_participante_credenciar_path(participante), title: 'Credenciar', class: "btn btn-primary btn-sm" %>
+                <%= link_to fa_icon('address-card-o'), admin_participante_credenciar_path(participante), title: 'Credenciar', class: "btn btn-primary btn-sm", data: { confirm: "Tem certeza que deseja credenciar #{participante.nome}?" } %>
               <% end %>
             <% end %>
             <% if can? :show, participante %>

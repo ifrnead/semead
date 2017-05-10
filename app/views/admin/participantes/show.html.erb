@@ -11,6 +11,12 @@
         redirect("<%= admin_participante_avaliar_isencao_path(@participante) %>?avaliacao="+avaliacao);
       }
     }
+
+    function aprovar_pagamento() {
+      if(confirm("Tem certeza que deseja aprovar o pagamento?")) {
+        redirect("<%= admin_participante_aprovar_pagamento_path(@participante) %>");
+      }
+    }
   </script>
 <% end %>
 
@@ -21,12 +27,20 @@
   <div class="col-md-6">
     <div class="btn-group pull-right">
       <div class="btn-group">
-        <% if can? :aprovar_nota_empenho, @participante and @participante.pagamento_por_empenho? and !(@participante.confirmado?) %>
-          <%= link_to fa_icon('money') + " Aprovar nota de empenho", "javascript:void(0)", onclick: "aprovar_nota_empenho()", class: "btn btn-primary" %>
-        <% end %>
-        <% if can? :aprovar_isencao, @participante and @participante.solicitou_isencao? and !(@participante.confirmado?) %>
-          <%= link_to fa_icon('thumbs-up') + " Aprovar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:aprovado].to_s+")", class: "btn btn-primary" %>
-          <%= link_to fa_icon('thumbs-down') + " Rejeitar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:rejeitado].to_s+")", class: "btn btn-primary" %>
+        <% if can?(:aprovar_pagamento, @participante) or can?(:aprovar_nota_empenho, @participante) or can?(:aprovar_isencao, @participante) and not @participante.confirmado? %>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pagamento/Isenção <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% if can? :aprovar_pagamento, @participante and !(@participante.confirmado?) %>
+              <li><%= link_to fa_icon('money') + " Aprovar pagamento", "javascript:void(0)", onclick: "aprovar_pagamento()" %></li>
+            <% end %>
+            <% if can? :aprovar_nota_empenho, @participante and !(@participante.confirmado?) %>
+              <li><%= link_to fa_icon('file-text-o') + " Aprovar nota de empenho", "javascript:void(0)", onclick: "aprovar_nota_empenho()" %></li>
+            <% end %>
+            <% if can? :aprovar_isencao, @participante and !(@participante.confirmado?) %>
+              <li><%= link_to fa_icon('thumbs-up') + " Aprovar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:aprovado].to_s+")" %></li>
+              <li><%= link_to fa_icon('thumbs-down') + " Rejeitar isenção", "javascript:void(0)", onclick: "avaliar_isencao("+Participante::ISENCAO[:rejeitado].to_s+")" %></li>
+            <% end %>
+          </ul>
         <% end %>
         <% if can? :update, @participante %>
           <%= link_to fa_icon('edit') + " Editar", edit_admin_participante_path(@participante), class: "btn btn-primary" %>
