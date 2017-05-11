@@ -3,7 +3,7 @@ class Admin::InscricoesController < ApplicationController
   def create
     authorize! :avulsa, Inscricao
     inscricao = Inscricao.new(inscricao_params)
-    if inscricao.save
+    if inscricao.save(validate: false)
       redirect_to admin_minicurso_path(inscricao.minicurso), notice: 'Inscrição realizada com sucesso!'
     else
       redirect_to admin_minicurso_path(inscricao.minicurso), alert: 'Falha na inscrição!'

@@ -83,7 +83,7 @@
   <h3><%= fa_icon 'plus' %> Nova Inscrição</h3>
 
   <%= bootstrap_form_for @inscricao, url: admin_inscricoes_path do |f| %>
-    <%= f.select :participante_id, Participante.select %>
+    <%= f.select :participante_id, Participante.select(method: 'confirmados') %>
     <%= f.hidden_field :minicurso_id, value: @minicurso.id %>
     <%= f.submit 'Enviar' %>
   <% end %>

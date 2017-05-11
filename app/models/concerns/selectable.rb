@@ -2,9 +2,9 @@ module Selectable
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def select
+    def select(method: 'all')
       options = Array.new
-      self.all.each do |element|
+      self.send(method).each do |element|
         options << [element.nome, element.id]
       end
       return options
