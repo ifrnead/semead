@@ -41,6 +41,7 @@ class Admin::MinicursosController < ApplicationController
 
   def show
     @minicurso = Minicurso.includes(:inscricoes).find(params[:id])
+    @inscricao = Inscricao.new(minicurso: @minicurso)
     authorize! :show, @minicurso
   end
 

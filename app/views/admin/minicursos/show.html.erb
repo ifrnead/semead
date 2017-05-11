@@ -1,3 +1,13 @@
+<%= content_for :head do %>
+  <script type="text/javascript">
+    $(function() {
+      $("#inscricao_participante_id").select2({
+        theme: "bootstrap"
+      });
+    });
+  </script>
+<% end %>
+
 <div class="row">
   <div class="col-md-6">
     <h1><%= fa_icon 'graduation-cap' %> Minicurso</h1>
@@ -66,4 +76,15 @@
       <% end %>
     </tbody>
   </table>
+  <p><%= @minicurso.inscricoes.size %> participante(s) inscrito(s).</p>
+<% end %>
+
+<% if can? :avulsa, Inscricao %>
+  <h3><%= fa_icon 'plus' %> Nova Inscrição</h3>
+
+  <%= bootstrap_form_for @inscricao, url: admin_inscricoes_path do |f| %>
+    <%= f.select :participante_id, Participante.select %>
+    <%= f.hidden_field :minicurso_id, value: @minicurso.id %>
+    <%= f.submit 'Enviar' %>
+  <% end %>
 <% end %>
