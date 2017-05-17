@@ -7,5 +7,6 @@
     <%= usuario.password_field :password_confirmation, label: 'Confirmação de senha *' %>
     <%= usuario.select :perfil_id, Perfil.select, label: 'Perfil *' %>
   <% end %>
+  <%= organizador.text_field :atuacao, label: 'Atuação' %>
   <%= organizador.submit 'Enviar' %>
 <% end %>
