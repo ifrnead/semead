@@ -21,4 +21,8 @@ class Inscricao < ActiveRecord::Base
   def emitir_certificado?
     self.certificado
   end
+
+  def self.emitir_certificados
+    self.where(certificado: true)
+  end
 end

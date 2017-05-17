@@ -157,4 +157,12 @@ class Participante < ActiveRecord::Base
   def self.credenciados
     self.joins(:usuario).where("credenciado = true")
   end
+
+  def self.isentos
+    self.joins(:usuario).where(isento: ISENCAO[:aprovado])
+  end
+
+  def self.pagantes
+    self.joins(:usuario).where(pago: true)
+  end
 end

@@ -67,7 +67,7 @@ namespace :certificados do
   desc "Certificados de participação em minicursos"
   task participacao_minicurso: :environment do
     print "Gerando certificados de participação em minicursos... "
-    Inscricao.all.each do |inscricao|
+    Inscricao.emitir_certificados.each do |inscricao|
       texto = "<strong>#{inscricao.participante.nome.upcase}</strong>, nascido(a) no <strong>#{inscricao.participante.pais.nome.upcase}</strong>, participou do minicurso <strong>#{inscricao.minicurso.titulo.upcase}</strong>, com carga-horária de 4 horas, no"
       Certificado.create(usuario: inscricao.participante.usuario, texto: texto, titulo: 'Certificado de participação de minicurso')
     end
@@ -80,6 +80,13 @@ namespace :certificados do
     Organizador.all.each do |organizador|
       texto = "<strong>#{organizador.nome.upcase}</strong>, nascido(a) no <strong>Brasil</strong>, atuou como #{organizador.atuacao}, na organização do"
       Certificado.create(usuario: organizador.usuario, texto: texto, titulo: 'Certificado de organização')
+    end
+
+    Participante.isentos.each do |participante|
+      if participante.motivo_isencao == 'Organizador'
+        texto = "<strong>#{participante.nome.upcase}</strong>, nascido(a) no <strong>#{participante.pais.nome.upcase}</strong>, atuou na organização do"
+        Certificado.create(usuario: participante.usuario, texto: texto, titulo: 'Certificado de organização')
+      end
     end
     puts "Concluído!"
   end
