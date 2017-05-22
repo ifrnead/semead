@@ -1,5 +1,6 @@
 class CertificadosController < ApplicationController
-
+  before_filter :auth_required
+  
   def index
     authorize! :index, Certificado
     @certificados = current_user.certificados
