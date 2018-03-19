@@ -1,6 +1,6 @@
 Faker::Config.locale = 'pt-BR'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :trabalho do
     titulo { Faker::Book.title }
     resumo { Faker::Lorem.paragraph }

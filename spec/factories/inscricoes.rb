@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :inscricao do
     participante nil
     minicurso nil

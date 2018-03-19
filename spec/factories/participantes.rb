@@ -1,6 +1,6 @@
 Faker::Config.locale = 'pt-BR'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :participante do
     documento { Faker::CPF.numeric }
     cidade_id 3238 # Natal

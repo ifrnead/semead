@@ -1,13 +1,15 @@
 source 'https://rubygems.org'
 
+ruby '2.2.3'
+
 gem 'bootstrap_form'
 gem 'validates_cpf_cnpj'
 gem 'validates'
 gem "select2-rails"
 gem 'cancancan', '~> 1.10'
-gem "paperclip", "~> 5.0.0"
+gem "paperclip", "~> 5.2.0"
 gem 'mercadopago-sdk'
-gem 'rake', '11.2.2'
+gem 'rake', '12.3.0'
 gem 'exception_notification'
 gem 'whenever', :require => false
 gem "nested_form"
@@ -16,9 +18,10 @@ gem 'wkhtmltopdf-binary'
 gem 'google_drive'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.13', '< 0.5'
+# gem 'mysql2', '>= 0.3.13', '< 0.5'
+gem 'pg', '0.20'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -51,8 +54,7 @@ group :development, :test do
   gem 'byebug'
   gem 'ultrahook'
   gem 'rspec-rails', '~> 3.5'
-  gem "factory_girl"
-  gem "factory_girl_rails"
+  gem 'factory_bot_rails'
   gem 'cpf_faker'
   gem "faker"
 end
@@ -60,8 +62,6 @@ end
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem "capybara"
-  gem 'capybara-webkit'
-  gem 'cucumber-rails', :require => false
   gem 'capybara-email'
   # gem "guard-rspec"
   gem "launchy"
