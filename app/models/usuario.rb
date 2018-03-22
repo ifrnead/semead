@@ -1,6 +1,8 @@
+require 'suap'
+
 class Usuario < ActiveRecord::Base
   include Selectable
-  
+
   has_secure_password validations: false
   belongs_to :autenticavel, polymorphic: true
   belongs_to :perfil
@@ -10,12 +12,13 @@ class Usuario < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, email: true, on: :create
   validates :password, length: { minimum: 4 }, confirmation: true, on: :create
 
-  def self.autenticar(email, senha)
-    usuario = self.find_by_email(email)
-    if usuario && usuario.authenticate(senha)
-      return usuario
+  def self.autenticar(username, pass)
+    if username.to_i != 0
+      usuario = self.autenticar_organizador(username, pass)
+    else
+      usuario = self.autenticar_participante(username, pass)
     end
-    return nil
+    usuario
   end
 
   def tem_perfil?(slug)
@@ -42,6 +45,29 @@ class Usuario < ActiveRecord::Base
     self.prazo_recuperacao_senha = DateTime.now + Config.instance.get(:prazo_redefinir_senha)
     self.save(validate: false)
     UsuarioMailer.recuperar_senha(self).deliver_now
+  end
+
+  private
+
+  def self.autenticar_organizador(matricula, senha)
+    usuario = self.find_by_matricula(matricula)
+    if usuario
+      begin
+        SUAP::API.authenticate(username: matricula, password: senha)
+        return usuario
+      rescue RestClient::BadRequest
+        nil
+      end
+    end
+    nil
+  end
+
+  def self.autenticar_participante(email, senha)
+    usuario = self.find_by_email(email)
+    if usuario && usuario.authenticate(senha)
+      return usuario
+    end
+    nil
   end
 
 end

@@ -1,17 +1,16 @@
-Faker::Config.locale = 'pt-BR'
-
 FactoryBot.define do
-  factory :participante do
+  factory :participante, class: Participante do
     documento { Faker::CPF.numeric }
-    cidade_id 3238 # Natal
-    pais_id 33 # Brasil
+    tipo_participante
+    cidade
+    pais
     instituicao { Faker::Company.name }
-    tipo_participante_id { Faker::Number.between(1, 5) }
+    possui_necessidades_especiais false
+    association :autenticavel, factory: :usuario_participante 
   end
 
-  factory :usuario do
-    nome { Faker::Name.name }
-    email { Faker::Internet.email }
-    password { Faker::Internet.password }
+  factory :tipo_participante do
+    nome 'Outros'
+    slug 'outros'
   end
 end

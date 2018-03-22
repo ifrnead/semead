@@ -16,6 +16,7 @@ gem "nested_form"
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'google_drive'
+gem 'rest-client'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7.1'
@@ -53,7 +54,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'ultrahook'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
   gem 'cpf_faker'
   gem "faker"
