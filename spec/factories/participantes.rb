@@ -6,7 +6,7 @@ FactoryBot.define do
     pais
     instituicao { Faker::Company.name }
     possui_necessidades_especiais false
-    association :autenticavel, factory: :usuario_participante 
+    association :usuario, factory: :usuario_participante 
   end
 
   factory :tipo_participante do

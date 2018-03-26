@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Realizando inscrição de participante", js: true do
+RSpec.feature "Realizando inscrição de participante" do
   scenario "O participante preenche todos os campos" do
     visit "/participantes/new"
     @participante = build(:participante)
