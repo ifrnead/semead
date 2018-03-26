@@ -1,18 +1,16 @@
 FactoryBot.define do
   factory :config do
-    dev false
-    data_abertura_inscricoes "2018-03-26"
-    data_encerramento_inscricoes "2018-03-26"
-    data_inicio_submissao_trabalhos "2018-03-26"
-    data_termino_submissao_trabalhos "2018-03-26"
-    data_inicio_submissao_minicursos "2018-03-26"
-    data_termino_submissao_minicursos "2018-03-26"
-    data_inicio_inscricoes_minicursos "2018-03-26"
-    data_termino_inscricoes_minicursos "2018-03-26"
-    prazo_redefinir_senha 1
-    prazo_pagamento 1
-    quantidade_maxima_inscricoes_minicursos 1
-    url_questionario_avaliacao "MyText"
-    key_planilha_formulario_avaliacao "MyText"
+    dev true
+    data_abertura_inscricoes Date.new(2018, 3, 1)
+    data_encerramento_inscricoes Date.new(2018, 12, 31)
+    data_inicio_submissao_trabalhos Date.new(2018, 3, 1)
+    data_termino_submissao_trabalhos Date.new(2018, 12, 31)
+    data_inicio_submissao_minicursos Date.new(2018, 3, 1)
+    data_termino_submissao_minicursos Date.new(2018, 12, 31)
+    data_inicio_inscricoes_minicursos Date.new(2018, 3, 1)
+    data_termino_inscricoes_minicursos Date.new(2018, 12, 31)
+    prazo_redefinir_senha 1 # dia
+    prazo_pagamento 5 # dias
+    quantidade_maxima_inscricoes_minicursos 1 # minicurso
   end
 end
