@@ -51,7 +51,7 @@ class InscricoesController < ApplicationController
   private
 
   def inscricoes_abertas?
-    unless Config.permitir_inscricao_minicursos?
+    unless Config.instance.permitir_inscricao_minicursos?
       redirect_to encerradas_inscricoes_path
     end
   end

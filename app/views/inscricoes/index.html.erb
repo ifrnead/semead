@@ -51,7 +51,7 @@
               <dt>Local</dt><dd><%= minicurso.local %></dd>
               <dt>Vagas disponíveis</dt><dd><%= minicurso.vagas_disponiveis %> vaga(s)</dd>
             </dl>
-            <% if @inscricoes.size < Config.instance.get(:quantidade_maxima_inscricoes_minicursos) %>
+            <% if @inscricoes.size < Config.instance.quantidade_maxima_inscricoes_minicursos %>
               <div class="btn-group">
                 <%= form_tag(inscricoes_path, method: :post) do %>
                   <%= hidden_field_tag :minicurso_id, minicurso.id %>

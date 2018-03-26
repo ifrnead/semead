@@ -6,7 +6,7 @@ module GoogleDriveAPI
   def questionario_respondido_por?(documento)
     cpf = formatar_cpf(documento)
     session = GoogleDrive::Session.from_service_account_key(Rails.root.join('config', 'google_api_secrets.json'))
-    worksheet = session.spreadsheet_by_key(Config.instance.get(:key_planilha_formulario_avaliacao)).worksheets[0]
+    worksheet = session.spreadsheet_by_key(Config.instance.key_planilha_formulario_avaliacao).worksheets[0]
 
     (2..worksheet.num_rows).each do |row|
       if worksheet[row, 2] == cpf

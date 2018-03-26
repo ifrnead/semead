@@ -9,7 +9,7 @@ class MinicursosController < ApplicationController
   end
 
   def new
-    if Config.permitir_submissao_minicursos?
+    if Config.instance.permitir_submissao_minicursos?
       authorize! :new, Minicurso
       @minicurso = Minicurso.new
     else

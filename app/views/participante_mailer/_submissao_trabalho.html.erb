@@ -1,2 +1,2 @@
 <h2>Deseja submeter trabalhos?</h2>
-<p>Para submeter trabalhos, entre no endereço <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a>, preencha e envie suas credenciais, clique na aba 'Trabalhos' e clique no botão 'Enviar Trabalho' (disponível até <%= Config.instance.get(:data_termino_submissao_trabalhos).strftime("%d/%m/%Y") %>).</p>
+<p>Para submeter trabalhos, entre no endereço <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a>, preencha e envie suas credenciais, clique na aba 'Trabalhos' e clique no botão 'Enviar Trabalho' (disponível até <%= data(Config.instance.data_termino_submissao_trabalhos) %>).</p>

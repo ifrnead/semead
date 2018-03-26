@@ -95,11 +95,11 @@ class Pagamento < ActiveRecord::Base
   end
 
   def definir_prazo
-    self.prazo = Date.today + Config.instance.get(:prazo_pagamento)
+    self.prazo = Date.today + Config.instance.prazo_pagamento
   end
 
   def definir_valor
-    if Config.dev?
+    if Config.instance.dev?
       self.valor = 1
       return
     end

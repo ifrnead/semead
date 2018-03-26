@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-6">
     <div class="btn-group pull-right">
-      <% if Config.permitir_submissao_minicursos? and can? :new, Minicurso %>
+      <% if Config.instance.permitir_submissao_minicursos? and can? :new, Minicurso %>
         <a href="<%= new_minicurso_path %>" class="btn btn-primary"><%= fa_icon 'graduation-cap' %> Propor Minicurso</a>
       <% end %>
     </div>

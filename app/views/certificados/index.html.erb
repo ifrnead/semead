@@ -13,7 +13,7 @@
 
 <% if current_user.participante? and (not current_user.autenticavel.respondeu_questionario?) %>
   <div class="alert alert-danger" role="alert">
-    <strong>Atenção:</strong> Para emitir os certificados, primeiramente você deve responder ao <%= link_to "Questionário de Avaliação da III SEMEAD", Config.instance.get(:url_questionario_avaliacao), target: '_blank' %>.
+    <strong>Atenção:</strong> Para emitir os certificados, primeiramente você deve responder ao <%= link_to "Questionário de Avaliação da III SEMEAD", Config.instance.url_questionario_avaliacao, target: '_blank' %>.
   </div>
 <% else %>
   <%= render partial: 'table', locals: { certificados: @certificados } %>

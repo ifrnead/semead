@@ -16,7 +16,7 @@ class ParticipantesController < ApplicationController
         break
       end
     end
-    if pagamento.nil? or Config.dev?
+    if pagamento.nil? or Config.instance.dev?
       pagamento = Pagamento.gerar(participante)
     end
 
@@ -28,7 +28,7 @@ class ParticipantesController < ApplicationController
   end
 
   def new
-    if Config.inscricoes_abertas?
+    if Config.instance.inscricoes_abertas?
       @participante = Participante.new
       @participante.usuario = Usuario.new
       render 'new', layout: 'publico'

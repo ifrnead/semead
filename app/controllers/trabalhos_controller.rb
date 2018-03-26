@@ -18,7 +18,7 @@ class TrabalhosController < ApplicationController
 
   # GET /trabalhos/new
   def new
-    if Config.permitir_submissao_trabalhos?
+    if Config.instance.permitir_submissao_trabalhos?
       @trabalho = Trabalho.new
       @trabalho.participante = current_user.autenticavel
       @trabalho.autores.build(nome: current_user.autenticavel.nome)

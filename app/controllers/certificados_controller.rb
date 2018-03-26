@@ -1,6 +1,6 @@
 class CertificadosController < ApplicationController
   before_filter :auth_required
-  
+
   def index
     authorize! :index, Certificado
     @certificados = current_user.certificados
@@ -26,7 +26,7 @@ class CertificadosController < ApplicationController
     authorize! :show, @certificado
 
     if @certificado.usuario.participante? and (not @certificado.usuario.autenticavel.respondeu_questionario?)
-      redirect_to Config.instance.get(:url_questionario_avaliacao)
+      redirect_to Config.instance.url_questionario_avaliacao
     else
       respond_to do |format|
         format.pdf do

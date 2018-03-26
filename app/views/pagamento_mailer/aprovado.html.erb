@@ -2,14 +2,14 @@
 
 <p>O pagamento da sua taxa de inscrição para a III SEMEAD foi aprovado e, portanto, a sua inscrição está confirmada!</p>
 
-<% if Config.permitir_submissao_trabalhos? %>
+<% if Config.instance.permitir_submissao_trabalhos? %>
   <%= render partial: 'participante_mailer/submissao_trabalho' %>
 <% end %>
 
-<% if Config.permitir_submissao_minicursos? %>
+<% if Config.instance.permitir_submissao_minicursos? %>
   <%= render partial: 'participante_mailer/submissao_minicurso' %>
 <% end %>
 
-<% if Config.permitir_inscricao_minicursos? %>
+<% if Config.instance.permitir_inscricao_minicursos? %>
   <%= render partial: 'participante_mailer/inscricao_minicurso' %>
 <% end %>

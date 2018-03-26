@@ -42,7 +42,7 @@ class Usuario < ActiveRecord::Base
 
   def gerar_codigo_recuperacao_senha
     self.codigo_recuperar_senha = SecureRandom.hex
-    self.prazo_recuperacao_senha = DateTime.now + Config.instance.get(:prazo_redefinir_senha)
+    self.prazo_recuperacao_senha = DateTime.now + Config.instance.prazo_redefinir_senha
     self.save(validate: false)
     UsuarioMailer.recuperar_senha(self).deliver_now
   end

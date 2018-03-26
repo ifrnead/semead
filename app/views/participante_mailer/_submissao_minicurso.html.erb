@@ -1,2 +1,2 @@
 <h2>Deseja propor um minicurso?</h2>
-<p>Para propor minicursos, entre no endereço <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a>, preencha e envie suas credenciais, clique na aba 'Minicursos' e clique no botão 'Propor Minicurso' (disponível até <%= Config.instance.get(:data_termino_submissao_minicursos).strftime("%d/%m/%Y") %>).</p>
+<p>Para propor minicursos, entre no endereço <a href="http://eventos.ifrn.edu.br/semead/login" target="_blank">http://eventos.ifrn.edu.br/semead/login</a>, preencha e envie suas credenciais, clique na aba 'Minicursos' e clique no botão 'Propor Minicurso' (disponível até <%= data(Config.instance.data_termino_submissao_minicursos) %>).</p>

@@ -1,47 +1,41 @@
-class Config
-  include Singleton
+class Config < ActiveRecord::Base
+  validates :dev, :data_abertura_inscricoes, :data_encerramento_inscricoes, :data_inicio_submissao_trabalhos, :data_termino_submissao_trabalhos, :data_inicio_submissao_minicursos, :data_termino_submissao_minicursos, :data_inicio_inscricoes_minicursos, :data_termino_inscricoes_minicursos, :prazo_redefinir_senha, :prazo_pagamento, :quantidade_maxima_inscricoes_minicursos, presence: true
 
-  def initialize
-    @configs = {
-      :dev => false,
-      :data_abertura_inscricoes => Date.new(2016, 12, 7),
-      :data_encerramento_inscricoes => Date.new(2017, 5, 12),
-      :data_inicio_submissao_trabalhos => Date.new(2016, 12, 7),
-      :data_termino_submissao_trabalhos => Date.new(2017, 4, 9),
-      :data_inicio_submissao_minicursos => Date.new(2016, 12, 7),
-      :data_termino_submissao_minicursos => Date.new(2017, 4, 9),
-      :data_inicio_inscricoes_minicursos => Date.new(2017, 5, 5),
-      :data_termino_inscricoes_minicursos => Date.new(2017, 5, 10),
-      :prazo_redefinir_senha => 1, # dia
-      :prazo_pagamento => 5, # dias
-      :quantidade_maxima_inscricoes_minicursos => 1,
-      :url_questionario_avaliacao => 'https://goo.gl/forms/MW3LdnvO32F046uj1',
-      :key_planilha_formulario_avaliacao => '1XvsZpc83h7aWEb9JgdKpFijsTsSNA5HEc0-XAGF4biE'
-    }
+  before_create :garantir_singularidade
+
+  def self.instance
+    if Config.first.nil?
+      raise ActiveRecord::RecordNotFound('Instancia de configuracao nao localizada! Eh preciso criar e persistir uma instancia do modelo Config')
+    end
+    Config.first
   end
 
-  def get(key)
-    return @configs[key]
+  def dev?
+    Config.first.dev
   end
 
-  def self.dev?
-    return Config.instance.get(:dev)
+  def inscricoes_abertas?
+    (Date.today >= self.data_abertura_inscricoes and Date.today <= self.data_encerramento_inscricoes)
   end
 
-  def self.inscricoes_abertas?
-    return (Date.today >= Config.instance.get(:data_abertura_inscricoes) and Date.today <= Config.instance.get(:data_encerramento_inscricoes))
+  def permitir_submissao_trabalhos?
+    (Date.today >= self.data_inicio_submissao_trabalhos and Date.today <= self.data_termino_submissao_trabalhos)
   end
 
-  def self.permitir_submissao_trabalhos?
-    return (Date.today >= Config.instance.get(:data_inicio_submissao_trabalhos) and Date.today <= Config.instance.get(:data_termino_submissao_trabalhos))
+  def permitir_submissao_minicursos?
+    (Date.today >= self.data_inicio_submissao_minicursos and Date.today <= self.data_termino_submissao_minicursos)
   end
 
-  def self.permitir_submissao_minicursos?
-    return (Date.today >= Config.instance.get(:data_inicio_submissao_minicursos) and Date.today <= Config.instance.get(:data_termino_submissao_minicursos))
+  def permitir_inscricao_minicursos?
+    (Date.today >= self.data_inicio_inscricoes_minicursos and Date.today <= self.data_termino_inscricoes_minicursos)
   end
 
-  def self.permitir_inscricao_minicursos?
-    return (Date.today >= Config.instance.get(:data_inicio_inscricoes_minicursos) and Date.today <= Config.instance.get(:data_termino_inscricoes_minicursos))
+  private
+
+  def garantir_singularidade
+    if Config.count > 0
+      raise Exception.new('Ja existe uma instancia de configuracao')
+    end
   end
 
 end

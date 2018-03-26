@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319175527) do
+ActiveRecord::Schema.define(version: 20180326151044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,25 @@ ActiveRecord::Schema.define(version: 20180319175527) do
   end
 
   add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
+
+  create_table "configs", force: :cascade do |t|
+    t.boolean  "dev"
+    t.date     "data_abertura_inscricoes"
+    t.date     "data_encerramento_inscricoes"
+    t.date     "data_inicio_submissao_trabalhos"
+    t.date     "data_termino_submissao_trabalhos"
+    t.date     "data_inicio_submissao_minicursos"
+    t.date     "data_termino_submissao_minicursos"
+    t.date     "data_inicio_inscricoes_minicursos"
+    t.date     "data_termino_inscricoes_minicursos"
+    t.integer  "prazo_redefinir_senha"
+    t.integer  "prazo_pagamento"
+    t.integer  "quantidade_maxima_inscricoes_minicursos"
+    t.text     "url_questionario_avaliacao"
+    t.text     "key_planilha_formulario_avaliacao"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
 
   create_table "estados", force: :cascade do |t|
     t.integer  "codigo"
