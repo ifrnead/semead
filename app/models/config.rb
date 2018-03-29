@@ -30,6 +30,10 @@ class Config < ActiveRecord::Base
     (Date.today >= self.data_inicio_inscricoes_minicursos and Date.today <= self.data_termino_inscricoes_minicursos)
   end
 
+  def exibir_certificados?
+    false
+  end
+
   private
 
   def garantir_singularidade

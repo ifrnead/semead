@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326151044) do
+ActiveRecord::Schema.define(version: 20180328132753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180326151044) do
     t.text     "key_planilha_formulario_avaliacao"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.boolean  "exibir_certificados"
   end
 
   create_table "estados", force: :cascade do |t|

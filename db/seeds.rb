@@ -10,7 +10,7 @@
 
 print 'Definindo configurações... '
 
-Config.create(
+config = Config.create(
   dev: true, # Alterar para false quando em produção
   data_abertura_inscricoes: Date.new(2018, 3, 1),
   data_encerramento_inscricoes: Date.new(2018, 12, 31),
@@ -23,6 +23,7 @@ Config.create(
   prazo_redefinir_senha: 1, # dia
   prazo_pagamento: 5, # dias
   quantidade_maxima_inscricoes_minicursos: 1 # minicurso
+  #exibir_certificados: 0 # Ao mudar para true, garantir que o arquivo 'config/google_api_secrets.json' existe
 )
 
 puts 'concluído!'
@@ -53,11 +54,13 @@ print "Criando usuários... "
 
 # Admin
 
-jalerson = Usuario.create(nome: 'Jalerson Lima', email: 'jalerson.lima@ifrn.edu.br', matricula: '2695213', perfil: admin)
-jalerson = Organizador.create(usuario: jalerson)
+jalerson = Usuario.new(nome: 'Jalerson Lima', email: 'jalerson.lima@ifrn.edu.br', matricula: '2695213', perfil: admin)
+jalerson.autenticavel = Organizador.create(usuario: jalerson)
+jalerson.save
 
-clauber = Usuario.create(nome: 'Clauber Bezerra', email: 'clauber.bezerra@ifrn.edu.br', matricula: '1722482', perfil: admin)
-clauber = Organizador.create(usuario: clauber)
+clauber = Usuario.new(nome: 'Clauber Bezerra', email: 'clauber.bezerra@ifrn.edu.br', matricula: '1722482', perfil: admin)
+clauber.autenticavel = Organizador.create(usuario: clauber)
+clauber.save
 
 puts "concluído!"
 

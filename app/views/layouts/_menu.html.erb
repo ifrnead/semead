@@ -52,7 +52,9 @@
           <li><a href="<%= admin_organizadores_path %>"><%= fa_icon 'user' %> Organizadores</a></li>
         <% end %>
 
-        <li><a href="<%= certificados_path %>"><%= fa_icon 'certificate' %> Certificados</a></li>
+        <% if Config.instance.exibir_certificados? %>
+          <li><a href="<%= certificados_path %>"><%= fa_icon 'certificate' %> Certificados</a></li>
+        <% end %>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">

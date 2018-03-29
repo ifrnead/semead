@@ -13,7 +13,7 @@ module GoogleDriveAPI
         return true
       end
     end
-    return false
+    false
   end
 
   def formatar_cpf(cpf)

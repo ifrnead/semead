@@ -10,15 +10,13 @@ class Usuario < ActiveRecord::Base
 
   validates :nome, presence: true
   validates :email, presence: true, uniqueness: true, email: true, on: :create
-  validates :password, length: { minimum: 4 }, confirmation: true, on: :create
+  validates :password, length: { minimum: 4 }, confirmation: true, on: :create, if: :participante?
 
   def self.autenticar(username, pass)
     if username.to_i != 0
-      usuario = self.autenticar_organizador(username, pass)
-    else
-      usuario = self.autenticar_participante(username, pass)
+      return self.autenticar_organizador(username, pass)
     end
-    usuario
+    self.autenticar_participante(username, pass)
   end
 
   def tem_perfil?(slug)
