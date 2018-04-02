@@ -12,11 +12,20 @@ class Usuario < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, email: true, on: :create
   validates :password, length: { minimum: 4 }, confirmation: true, on: :create, if: :participante?
 
-  def self.autenticar(username, pass)
-    if username.to_i != 0
-      return self.autenticar_organizador(username, pass)
+  def self.autenticar(email, senha)
+    usuario = Usuario.find_by_email(email)
+    if usuario
+      if usuario.participante?
+        return usuario if usuario.authenticate(senha)
+      else
+        begin # Organizador
+          SUAP::API.authenticate(username: usuario.matricula, password: senha)
+          return usuario
+        rescue RestClient::BadRequest
+        end
+      end
     end
-    self.autenticar_participante(username, pass)
+    false
   end
 
   def tem_perfil?(slug)
@@ -43,29 +52,6 @@ class Usuario < ActiveRecord::Base
     self.prazo_recuperacao_senha = DateTime.now + Config.instance.prazo_redefinir_senha
     self.save(validate: false)
     UsuarioMailer.recuperar_senha(self).deliver_now
-  end
-
-  private
-
-  def self.autenticar_organizador(matricula, senha)
-    usuario = self.find_by_matricula(matricula)
-    if usuario
-      begin
-        SUAP::API.authenticate(username: matricula, password: senha)
-        return usuario
-      rescue RestClient::BadRequest
-        nil
-      end
-    end
-    nil
-  end
-
-  def self.autenticar_participante(email, senha)
-    usuario = self.find_by_email(email)
-    if usuario && usuario.authenticate(senha)
-      return usuario
-    end
-    nil
   end
 
 end

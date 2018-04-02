@@ -20,9 +20,13 @@ class UsuariosController < ApplicationController
 
   def recuperacao_senha
     usuario = Usuario.find_by_email(params[:email])
-    if usuario.present?
-      usuario.gerar_codigo_recuperacao_senha
-      render 'recuperacao_senha', layout: 'publico'
+    if usuario
+      if usuario.participante?
+        usuario.gerar_codigo_recuperacao_senha
+        render 'recuperacao_senha', layout: 'publico'
+      else
+        redirect_to 'https://suap.ifrn.edu.br/comum/solicitar_trocar_senha/'
+      end
     else
       redirect_to recuperar_senha_path, alert: 'Nenhuma conta foi localizada com esse endereço de e-mail.'
     end
