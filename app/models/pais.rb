@@ -1,4 +1,4 @@
-class Pais < ActiveRecord::Base
+class Pais < ApplicationRecord
   include Selectable
   has_many :estados
 

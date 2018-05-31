@@ -1,4 +1,4 @@
-class CreatePagamentos < ActiveRecord::Migration
+class CreatePagamentos < ActiveRecord::Migration[4.2]
   def change
     create_table :pagamentos do |t|
       t.references :participante, index: true, foreign_key: true

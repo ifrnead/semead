@@ -1,4 +1,4 @@
-class CreateMinicursos < ActiveRecord::Migration
+class CreateMinicursos < ActiveRecord::Migration[4.2]
   def change
     create_table :minicursos do |t|
       t.text :titulo

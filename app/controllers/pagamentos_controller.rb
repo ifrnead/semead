@@ -2,7 +2,7 @@ require 'mercadopago.rb'
 
 class PagamentosController < ApplicationController
   layout 'publico'
-  skip_before_filter  :verify_authenticity_token
+  skip_before_action  :verify_authenticity_token
 
   def notificar
     mp = MercadoPago.new(Rails.application.secrets.mercado_pago_client_id, Rails.application.secrets.mercado_pago_client_secret)

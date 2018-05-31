@@ -1,6 +1,6 @@
 require 'mercadopago.rb'
 
-class Pagamento < ActiveRecord::Base
+class Pagamento < ApplicationRecord
   belongs_to :participante
 
   validates :participante, presence: true

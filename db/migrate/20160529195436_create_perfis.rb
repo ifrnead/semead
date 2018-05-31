@@ -1,4 +1,4 @@
-class CreatePerfis < ActiveRecord::Migration
+class CreatePerfis < ActiveRecord::Migration[4.2]
   def change
     create_table :perfis do |t|
       t.string :nome

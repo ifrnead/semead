@@ -1,4 +1,4 @@
-class TipoTrabalho < ActiveRecord::Base
+class TipoTrabalho < ApplicationRecord
   has_many :trabalhos
 
   include Selectable

@@ -1,4 +1,4 @@
-class CreateConfigs < ActiveRecord::Migration
+class CreateConfigs < ActiveRecord::Migration[4.2]
   def change
     create_table :configs do |t|
       t.boolean :dev

@@ -1,4 +1,4 @@
-class Certificado < ActiveRecord::Base
+class Certificado < ApplicationRecord
   belongs_to :usuario
 
   before_create :definir_texto, :processar_fragmentos

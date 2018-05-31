@@ -1,4 +1,4 @@
-class CreateInscricoes < ActiveRecord::Migration
+class CreateInscricoes < ActiveRecord::Migration[4.2]
   def change
     create_table :inscricoes do |t|
       t.references :participante, index: true, foreign_key: true

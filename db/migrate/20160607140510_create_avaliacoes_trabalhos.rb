@@ -1,4 +1,4 @@
-class CreateAvaliacoesTrabalhos < ActiveRecord::Migration
+class CreateAvaliacoesTrabalhos < ActiveRecord::Migration[4.2]
   def change
     create_table :avaliacoes_trabalhos do |t|
       t.integer :situacao

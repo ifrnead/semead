@@ -1,6 +1,6 @@
 class InscricoesController < ApplicationController
-  before_filter :auth_required
-  before_filter :inscricoes_abertas?, only: [ :new, :create ]
+  before_action :auth_required
+  before_action :inscricoes_abertas?, only: [ :new, :create ]
 
   def index
     authorize! :index, Inscricao

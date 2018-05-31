@@ -1,4 +1,4 @@
-class TipoParticipante < ActiveRecord::Base
+class TipoParticipante < ApplicationRecord
   include Selectable
   has_many :participantes
 end

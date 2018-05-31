@@ -1,4 +1,4 @@
-class CreateCertificados < ActiveRecord::Migration
+class CreateCertificados < ActiveRecord::Migration[4.2]
   def change
     create_table :certificados do |t|
       t.text :texto

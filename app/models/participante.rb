@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Participante < ActiveRecord::Base
+class Participante < ApplicationRecord
   include Selectable
   include GoogleDriveAPI
 
@@ -25,7 +25,7 @@ class Participante < ActiveRecord::Base
   validates :documento, uniqueness: true, on: :create
   validates :necessidades_especiais, presence: true, if: :possui_necessidades_especiais?
   validates_attachment :nota_empenho, presence: true, content_type: { content_type: "application/pdf" }, if: :pagamento_por_empenho?
-  validates :motivo_isencao, presence: true, if: "isento == 1"
+  validates :motivo_isencao, presence: true, if: :isento?
 
   accepts_nested_attributes_for :usuario
 

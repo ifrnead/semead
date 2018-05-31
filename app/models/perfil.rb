@@ -1,4 +1,4 @@
-class Perfil < ActiveRecord::Base
+class Perfil < ApplicationRecord
   has_many :usuarios
 
   include Selectable

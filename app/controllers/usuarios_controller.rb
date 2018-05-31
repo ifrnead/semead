@@ -1,5 +1,5 @@
 class UsuariosController < ApplicationController
-  before_filter :auth_required, :only => [ :conta ]
+  before_action :auth_required, :only => [ :conta ]
 
   def conta
     @usuario = current_user

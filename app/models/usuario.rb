@@ -1,6 +1,6 @@
 require 'suap'
 
-class Usuario < ActiveRecord::Base
+class Usuario < ApplicationRecord
   include Selectable
 
   has_secure_password validations: false

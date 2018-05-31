@@ -1,5 +1,5 @@
 class CertificadosController < ApplicationController
-  before_filter :auth_required
+  before_action :auth_required
 
   def index
     authorize! :index, Certificado

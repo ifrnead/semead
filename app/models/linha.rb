@@ -1,4 +1,4 @@
-class Linha < ActiveRecord::Base
+class Linha < ApplicationRecord
   has_many :membros
   has_many :organizadores, through: :membros
 

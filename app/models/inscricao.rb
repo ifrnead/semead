@@ -1,4 +1,4 @@
-class Inscricao < ActiveRecord::Base
+class Inscricao < ApplicationRecord
   belongs_to :participante
   belongs_to :minicurso
 

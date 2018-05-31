@@ -338,7 +338,7 @@ Pais.create(nome: "ZIMBABUÉ", name: "ZIMBABWE")
 
 puts "concluído!"
 
-brasil = Pais.find_by_nome('Brasil')
+brasil = Pais.find_by_nome('BRASIL')
 
 print "Criando estados... "
 

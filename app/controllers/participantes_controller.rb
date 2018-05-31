@@ -1,6 +1,6 @@
 class ParticipantesController < ApplicationController
-  before_filter :auth_required, :only => [ :participacao ]
-  before_filter :fix_isencao, :only => [ :create ]
+  before_action :auth_required, :only => [ :participacao ]
+  before_action :fix_isencao, :only => [ :create ]
 
   def participacao
     @participante = current_user.autenticavel

@@ -1,4 +1,4 @@
-class Trabalho < ActiveRecord::Base
+class Trabalho < ApplicationRecord
   belongs_to :linha
   belongs_to :participante
   belongs_to :tipo_trabalho

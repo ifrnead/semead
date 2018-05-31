@@ -1,4 +1,4 @@
-class Minicurso < ActiveRecord::Base
+class Minicurso < ApplicationRecord
   belongs_to :participante # Proponente/ministrante
   has_many :inscricoes
   has_many :participantes, through: :inscricoes

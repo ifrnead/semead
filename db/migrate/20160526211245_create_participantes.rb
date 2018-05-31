@@ -1,4 +1,4 @@
-class CreateParticipantes < ActiveRecord::Migration
+class CreateParticipantes < ActiveRecord::Migration[4.2]
   def change
     create_table :participantes do |t|
       t.string :documento

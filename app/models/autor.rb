@@ -1,3 +1,3 @@
-class Autor < ActiveRecord::Base
+class Autor < ApplicationRecord
   belongs_to :trabalho
 end

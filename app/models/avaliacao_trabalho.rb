@@ -1,4 +1,4 @@
-class AvaliacaoTrabalho < ActiveRecord::Base
+class AvaliacaoTrabalho < ApplicationRecord
   belongs_to :trabalho
   belongs_to :organizador
   belongs_to :linha

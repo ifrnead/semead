@@ -1,4 +1,4 @@
-class Cidade < ActiveRecord::Base
+class Cidade < ApplicationRecord
   include Selectable
   belongs_to :estado
 

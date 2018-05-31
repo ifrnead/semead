@@ -1,4 +1,4 @@
-class CreateTrabalhos < ActiveRecord::Migration
+class CreateTrabalhos < ActiveRecord::Migration[4.2]
   def change
     create_table :trabalhos do |t|
       t.text :titulo

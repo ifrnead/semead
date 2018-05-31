@@ -1,4 +1,4 @@
-class Organizador < ActiveRecord::Base
+class Organizador < ApplicationRecord
   has_one :usuario, as: :autenticavel
   has_many :membros
   has_many :linhas, through: :membros

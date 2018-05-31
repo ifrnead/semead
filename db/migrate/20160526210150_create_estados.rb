@@ -1,4 +1,4 @@
-class CreateEstados < ActiveRecord::Migration
+class CreateEstados < ActiveRecord::Migration[4.2]
   def change
     create_table :estados do |t|
       t.integer :codigo

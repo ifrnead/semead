@@ -1,4 +1,4 @@
-class CreateLinhas < ActiveRecord::Migration
+class CreateLinhas < ActiveRecord::Migration[4.2]
   def change
     create_table :linhas do |t|
       t.string :nome

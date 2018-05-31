@@ -1,11 +1,11 @@
-class Config < ActiveRecord::Base
+class Config < ApplicationRecord
   validates :dev, :data_abertura_inscricoes, :data_encerramento_inscricoes, :data_inicio_submissao_trabalhos, :data_termino_submissao_trabalhos, :data_inicio_submissao_minicursos, :data_termino_submissao_minicursos, :data_inicio_inscricoes_minicursos, :data_termino_inscricoes_minicursos, :prazo_redefinir_senha, :prazo_pagamento, :quantidade_maxima_inscricoes_minicursos, presence: true
 
   before_create :garantir_singularidade
 
   def self.instance
     if Config.first.nil?
-      raise ActiveRecord::RecordNotFound('Instancia de configuracao nao localizada! Eh preciso criar e persistir uma instancia do modelo Config')
+      raise ActiveRecord::RecordNotFound.new('Instancia de configuracao nao localizada! Eh preciso criar e persistir uma instancia do modelo Config')
     end
     Config.first
   end
